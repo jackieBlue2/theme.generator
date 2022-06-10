@@ -1,0 +1,685 @@
+                        /* DEFAULT CSS ATTRIBUTES */
+                /* OVERRIDDEN BY sys.root[] CUSTOMIZATIONS */
+
+
+        :root     { 
+
+                /* WARNING: Do not use color names as the color picker only accepts Hex values */
+
+                /* system                   */
+
+                    --sys-color:                   var(--sys-white);
+                    --sys-background-color:        var(--sys-greyBg);
+                    --sys-font-size:               18px;
+                    --sys-small:                   18px;
+                    
+                    --sys-font-style:              normal;
+                    --sys-font-family:             Candara;
+                    --sys-text-align:              left;
+                    --sys-text-indent:             0px;
+                    --sys-line-height:             1.10; /* space between lines, 1.1 default */
+
+                    --sys-fancy:                   Gabriola; 
+                    --sys-title:                   calibri; 
+                    --sys-desc:                    'Copperplate Gothic'; 
+                    --sys-text:                    Candara; 
+
+                    --sys-back:                    '◀';
+                    --sys-pointU:                  '🠝';     
+                    --sys-pointL:                  '🠜';
+                    --sys-pointR:                  '🠞';
+                    --sys-pointD:                  '🠟';
+
+                    --sys-white:                   silver; 
+                    --sys-black:                   black; 
+                    --sys-grey:                    ; 
+                    --sys-red:                     Crimson;  
+                    --sys-green:                   LightGreen;
+                    --sys-blue:                    DeepSkyBlue;
+                    --sys-yellow:                  goldenrod;
+                    --sys-purple:                  blueviolet;
+                    --sys-brown:                   #492222;
+
+                    --sys-redBg:                   darkred;  
+                    --sys-greenBg:                 olivedrab;
+                    --sys-blueBg:                  midnightblue;
+                    --sys-yellowBg:                goldenrod;
+                    --sys-purpleBg:                blueviolet;
+                    --sys-greyBg:                  #0D0D20; 
+                /* sys-title                */
+                    --sys-title-font-family   :  var(--sys-title); 
+                    --sys-title-font-size     :  36px;
+                    --sys-title-font-weight   :  400; 
+                    --sys-title-font-style    :  normal;
+                    --sys-title-color         :  var(--sys-color);
+                    --sys-title-background-color :  var(--sys-brown);
+                    --sys-title-text-align    :  left;
+                    --sys-title-margin-top    :  0;
+                    --sys-title-margin-bottom :  0;
+                    --sys-title-margin-left   :  0;
+                    --sys-title-margin-right  :  0;
+                    --sys-title-padding-top   :  0;   
+                    --sys-title-padding-bottom:  0;   
+                    --sys-title-padding-left  :  0;   
+                    --sys-title-padding-right :  0;
+                    --sys-title-line-height   :  1.1; 
+                /* sys-desc                 */
+                    --sys-desc-font-family    :  var(--sys-desc); 
+                    --sys-desc-font-size      :  20px;
+                    --sys-desc-font-weight    :  400; 
+                    --sys-desc-font-style     :  normal;
+                    --sys-desc-color          :  var(--sys-white);
+                    --sys-desc-background-color: transparent;
+                    --sys-desc-text-align     :  left;
+                    --sys-desc-margin-top     :  0;
+                    --sys-desc-margin-bottom  :  0;
+                    --sys-desc-margin-left    :  0;
+                    --sys-desc-margin-right   :  0;
+                    --sys-desc-padding-top    :  0;   
+                    --sys-desc-padding-bottom :  0;   
+                    --sys-desc-padding-left   :  0;   
+                    --sys-desc-padding-right  :  0;
+                    --sys-desc-line-height    :  1.1; 
+                /* sys-button               */
+                    --sys-button-font-family    :  var(--sys-desc); 
+                    --sys-button-font-size      :  18px;
+                    --sys-button-font-weight    :  400; 
+                    --sys-button-font-style     :  normal;
+                    --sys-button-color          :  var(--sys-white);
+                    --sys-button-background-color: transparent;
+                    --sys-button-text-align     :  left;
+                    --sys-button-margin-top     :  0;
+                    --sys-button-margin-bottom  :  0;
+                    --sys-button-margin-left    :  0;
+                    --sys-button-margin-right   :  3px;
+                    --sys-button-padding-top    :  3px;   
+                    --sys-button-padding-bottom :  3px;   
+                    --sys-button-padding-left   :  3px;   
+                    --sys-button-padding-right  :  3px;
+                    --sys-button-border-style   :  inset;
+                    --sys-button-line-height    :  1.1; 
+                /* sys-input                */
+                    --sys-input-font-family    :  var(--sys-desc); 
+                    --sys-input-font-size      :  14px;
+                    --sys-input-font-weight    :  400; 
+                    --sys-input-font-style     :  normal;
+                    --sys-input-color          :  var(--sys-white);
+                    --sys-input-borderColor    :  var(--sys-white);
+                    --sys-input-borderWidth    :  3px;
+                    --sys-input-background-color: transparent;
+                    --sys-input-text-align     :  left;
+                    --sys-input-margin-top     :  0;
+                    --sys-input-margin-bottom  :  0;
+                    --sys-input-margin-left    :  0;
+                    --sys-input-margin-right   :  0;
+                    --sys-input-padding-top    :  0;   
+                    --sys-input-padding-bottom :  0;   
+                    --sys-input-padding-left   :  0;   
+                    --sys-input-padding-right  :  0;
+                    --sys-input-line-height    :  1.1;
+                    --sys-input-border         :  none;
+                    --sys-input-padding        :  0;  
+                    --sys-header-background-color: #492222; 
+
+                /* container    still used? */
+
+                    --overflow:                    visable;
+                    --overflow-wrap:               normal;
+                    --overflow-x:                  visable;
+                    --overflow-y:                  visable;
+                    --text-overflow:               clip;
+                    --word-wrap:                   normal;
+                    --word-break:                  normal;
+                    --word-spacing:                normal;
+                    --writing-mode:                horizontal-tb;
+
+                /* user text                */
+
+                    --background-color:            black;        
+                    --color:                       #daa520; /* names not allowed for setting color picker */
+
+                    --font-family:                 Arial;  
+                    --font-weight:                 400;
+                    --font-style:                  normal; /* italic */
+                    --font-size:                   18px; 
+
+                    --text-align:                  left;
+                    --text-indent:                 50px;
+                    --line-height:                 1.10; /* space between lines, 1.1 default */
+                /* margin, padding defaults */
+
+                    --margin-top:                  0px;
+                    --margin-bottom:               0px;
+                    --margin-left:                 0px;
+                    --margin-right:                0px;
+
+                    --padding-top:                 0px;
+                    --padding-bottom:              0px;
+                    --padding-left:                0px;
+                    --padding-right:               0px;
+                /* text shadow defaults     */
+
+                    --shadow-color:                var(--color);                /* shadow 1 */
+                    --shadow-v:                    0px; /* off until changed*/
+                    --shadow-h:                    var(--text-shadow-v);
+                    --shadow-spread:               12px;
+                    --shadow-blur:                 5px;;
+                    --shadow-inset:                inset;
+
+                    --shadow2-color:               red;                      /* shadow 2 */
+                    --shadow2-v:                   0px; /* off until changed*/
+                    --shadow2-h:                   var(--text-shadow2-v);
+                    --shadow2-blur:                0px;
+                    --shadow2-spread:              12px;
+                    --shadow2-inset:               inset;
+
+                    --shadow3-color:               blue;                     /* shadow 3 */
+                    --shadow3-v:                   0px; /* off untile changed*/
+                    --shadow3-h:                   var(--text-shadow3-v);
+                    --shadow3-blur:                0px;
+                    --shadow3-spread:              12px;
+                    --shadow3-inset:               inset;
+
+                    --shadow4-color:               green;                    /* shadow 4 */
+                    --shadow4-v:                   0px; /* off until changed*/
+                    --shadow4-h:                   var(--text-shadow4-v);
+                    --shadow4-blur:                0px;
+                    --shadow4-spread:              12px;
+                    --shadow4-inset:               inset;
+                /* box  shadow defaults     */
+                    --box-shadow-color:            lightblue;
+                    --box-shadow-v:                10px;
+                    --box-shadow-h:                10px;
+                    --box-shadow-blur:             25px;
+                    --box-shadow-spread:           12px;
+                    --box-shadow-inset:            inset;
+                /* image defaults           */
+                    --img-width:                   100%;
+                    --img-height:                  100%;
+                /* border defaults          */
+                    --border-color:                currentcolor;
+                    --border-style:                solid;
+                    --border-top-width:            1;
+                    --border-bottom-width:         2; 
+                    --border-left-width:           1;
+                    --border-right-width:          2;
+                    --border-top-left-radius:      10%;
+                    --border-top-right-radius:     10%;
+                    --border-bottom-left-radius:   10%;
+                    --border-bottom-right-radius:  10%;
+
+                /* CSS ATTRs for SPECIFIC TAGs or CLASSes */
+
+                /*--------------------------- title      */
+                    --title-color:                 #16d0c3; 
+                    --title-background-color:      transparent; 
+                    --title-font-size:             38px;
+                    --title-font-family:           var(--font-family);
+                    --title-font-weight:           var(--font-weight);
+                    --title-font-style:            normal; /* italic */
+                    --title-text-align:            left;
+                    --title-line-height:           var(--line-height);
+
+                    --title-shadow-color:          var(--title-font-color);  /* shadow 1 */
+                    --title-shadow-v:              5px;
+                    --title-shadow-h:              var(--title-shadow-v);
+                    --title-shadow-spread:         var(--text-shadow-spread);
+                    --title-shadow-blur:           var(--text-shadow-blur);
+                    --title-shadow-inset:          var(--text-shadow-inset);
+
+                    --title-shadow2-color:         red;                      /* shadow 2 */
+                    --title-shadow2-v:             0px; /* off until changed*/
+                    --title-shadow2-h:             var(--title-shadow2-v);
+                    --title-shadow2-blur:          0px;
+                    --title-shadow2-spread:        var(--text-shadow-spread);
+                    --title-shadow2-inset:         var(--text-shadow-inset);
+
+                    --title-shadow3-color:         blue;                     /* shadow 3 */
+                    --title-shadow3-v:             0px; /* off untile changed*/
+                    --title-shadow3-h:             var(--title-shadow3-v);
+                    --title-shadow3-blur:          0px;
+                    --title-shadow3-spread:        var(--text-shadow-spread);
+                    --title-shadow3-inset:         var(--text-shadow-inset);
+
+                    --title-shadow4-color:         green;                    /* shadow 4 */
+                    --title-shadow4-v:             0px; /* off until changed*/
+                    --title-shadow4-h:             var(--title-shadow4-v);
+                    --title-shadow4-blur:          0px;
+                    --title-shadow4-spread:        var(--text-shadow-spread);
+                    --title-shadow4-inset:         var(--text-shadow-inset);
+
+                    --title-margin-top:            0px;
+                    --title-margin-bottom:         0px;
+                    --title-margin-left:           0px;
+                    --title-margin-right:          0px;
+
+                    --title-padding-top:           0px;
+                    --title-padding-bottom:        0px;
+                    --title-padding-left:          0px;
+                    --title-padding-right:         0px;
+                /*--------------------------- sub title  */
+
+                    --subtitle-txt-family:  var(--txt-font-family);   /*       sub title  */
+                    --subtitle-txt-weight:  var(--txt-font-weight);  
+                    --subtitle-txt-height:  var(--txt-font-height);
+                    --subtitle-txt-color:   var(--txt-font-color);
+                    --subtitle-sdow-color:  var(--txt-shadow-color);
+                    --subtitle-sdow-v:      var(--txt-shadow-v);
+                    --subtitle-sdow-h:      var(--txt-shadow-h);
+                    --subtitle-sdow-spread: var(--txt-shadow-spread);
+                    --subtitle-sdow-blur:   var(--txt-shadow-blur);
+                    --subtitle-sdow-inset:  var(--txt-shadow-inset);
+                /*--------------------------- descripton */
+
+                    --description-color:                 #11a4ee; 
+                    --description-font-size:             20px;
+                    --description-font-family:           'Copperplate Gothic';
+                    --description-font-weight:           var(--font-weight);
+                    --description-font-style:            normal; /* italic */
+                    --description-text-align:            left;
+                    --description-line-height:           var(--line-height);
+                    --description-margin-top:            0px;
+                    --description-margin-bottom:         0px;
+                    --description-margin-left:           0px;
+                    --description-margin-right:          0px;
+                    --description-padding-top:           0px;
+                    --description-padding-bottom:        0px;
+                    --description-padding-left:          0px;
+                    --description-padding-right:         0px;
+                /*--------------------------- button     */
+
+                    --button-font-family:                var(--button-font-family);   
+                    --button-font-weight:                400;  
+                    --button-font-size:                  calc( var(--font-size) - 4px ); /* spaces required for calc */
+                    --button-color:                      #3af8eb;
+                    --button-background-color:           #082530;
+                    --button-padding:                    3px;
+                    --button-margin:                     2px;
+
+                    --button-shadow-color:               currentcolor;
+                    --button-shadow-v:                   4px;
+                    --button-shadow-h:                   10px;
+                    --button-shadow-spread:              var(--but-shadow-spread);
+                    --button-shadow-blur:                var(--but-shadow-blur);
+                    --button-shadow-inset:               var(--but-shadow-inset);   
+
+                    --button-border-color:               grey;
+                    --button-border-style:               solid;     
+                    --button-border-top-width:           2px;
+                    --button-border-bottom-width:        2px;
+                    --button-border-left-width:          2px;
+                    --button-border-right-width:         2px;
+                    --button-border-top-left-radius:     15%;
+                    --button-border-top-right-radius:    15%;
+                    --button-border-bottom-left-radius:  15%;
+                    --button-border-bottom-right-radius: 15%;
+
+                    --button-box-shadow-color:           currentcolor;    
+                    --button-box-shadow-v:               4px;
+                    --button-box-shadow-h:               4px;
+                    --button-box-shadow-blur:            blur;
+                    --button-box-shadow-spread:          var(--bdr-shadow-spread);
+                    --button-box-shadow-inset:           var(--bdr-shadow-inset);               
+                /*--------------------------- input      */
+
+                    --ip-txt-family:        var(--font-family);   /*       input      */
+                    --ip-txt-weight:        var(--font-weight);  
+                    --ip-txt-height:        calc(var(--font-size) + 11px); 
+                    --ip-txt-color:         var(--color);
+                    --ip-bdr-color:         var(--bdr-color   );
+                    --ip-bdr-style:         var(--bdr-style   );
+                    --ip-bdr-t-width:       var(--bdr-t-width );
+                    --ip-bdr-b-width:       var(--bdr-b-width );
+                    --ip-bdr-l-width:       var(--bdr-l-width );
+                    --ip-bdr-r-width:       var(--bdr-r-width );
+                    --ip-bdr-tl-radius:     var(--bdr-tl-radius);
+                    --ip-bdr-tr-radius:     var(--bdr-tr-radius);
+                    --ip-bdr-bl-radius:     var(--bdr-bl-radius);
+                    --ip-bdr-br-radius:     var(--bdr-br-radius);
+                    --ip-sdow-color:        var(--bdr-shadow-color);
+                    --ip-sdow-v:            var(--bdr-shadow-v);
+                    --ip-sdow-h:            var(--bdr-shadow-h);
+                    --ip-sdow-spread:       var(--bdr-shadow-spread);
+                    --ip-sdow-blur:         var(--bdr-shadow-blur);
+                    --ip-sdow-inset:        var(--bdr-shadow-inset);
+                    --ip-txt-size:          25;  /* ? */
+                    --ip-min-length:        25;  /* ? */
+                /*--------------------------- note       */
+
+                    --note-txt-family:      var(--txt-font-family);   /*       note - textarea     */
+                    --note-txt-weight:      var(--txt-font-weight);  
+                    --note-txt-height:      var(--txt-font-height);
+                    --note-txt-color:       var(--txt-font-color);
+                    --note-bdr-color:       var(--bdr-color   );
+                    --note-bdr-style:       var(--bdr-style   );
+                    --note-bdr-t-width:     var(--bdr-t-width );
+                    --note-bdr-b-width:     var(--bdr-b-width );
+                    --note-bdr-l-width:     var(--bdr-l-width );
+                    --note-bdr-r-width:     var(--bdr-r-width );
+                    --note-bdr-tl-radius:   var(--bdr-tl-radius);
+                    --note-bdr-tr-radius:   var(--bdr-tr-radius);
+                    --note-bdr-bl-radius:   var(--bdr-bl-radius);
+                    --note-bdr-br-radius:   var(--bdr-br-radius);
+                    --note-sdow-color:      var(--bdr-shadow-color);
+                    --note-sdow-v:          var(--bdr-shadow-v);
+                    --note-sdow-h:          var(--bdr-shadow-h);
+                    --note-sdow-spread:     var(--bdr-shadow-spread);
+                    --note-sdow-blur:       var(--bdr-shadow-blur);
+                    --note-sdow-inset:      var(--bdr-shadow-inset);
+                /*--------------------------- image      */
+
+                    --image-txt-family:      var(--txt-font-family);   /*       image     */
+                    --image-txt-weight:      var(--txt-font-weight);  
+                    --image-txt-height:      var(--txt-font-height);
+                    --image-txt-color:       var(--txt-font-color);
+                    --image-bdr-color:       var(--bdr-color   );
+                    --image-bdr-style:       var(--bdr-style   );
+                    --image-bdr-t-width:     var(--bdr-t-width );
+                    --image-bdr-b-width:     var(--bdr-b-width );
+                    --image-bdr-l-width:     var(--bdr-l-width );
+                    --image-bdr-r-width:     var(--bdr-r-width );
+                    --image-bdr-tl-radius:   var(--bdr-tl-radius);
+                    --image-bdr-tr-radius:   var(--bdr-tr-radius);
+                    --image-bdr-bl-radius:   var(--bdr-bl-radius);
+                    --image-bdr-br-radius:   var(--bdr-br-radius);
+                    --image-sdow-color:      var(--bdr-shadow-color);
+                    --image-sdow-v:          var(--bdr-shadow-v);
+                    --image-sdow-h:          var(--bdr-shadow-h);
+                    --image-sdow-spread:     var(--bdr-shadow-spread);
+                    --image-sdow-blur:       var(--bdr-shadow-blur);
+                    --image-sdow-inset:      var(--bdr-shadow-inset);
+                  }
+
+/* ICONS        */
+
+    .pointU { content: '🠝'; }
+    .pointD { content: '🠟'; }
+    .pointL { content: '🠜'; }
+    .pointR { content: '🠞'; }
+    .pointBack { content: '◀'; }
+    /*
+    . { content: '⛯'; }
+    . { content: '❌'; }   
+    . { content: '∧'; }   
+    . { content: '∨'; }  
+    . { content: '⋀'; }
+    . { content: '⋁'; }
+    . { content: ''; }
+    . { content: '◀'; }
+    . { content: '▶'; }
+    . { content: '⛛'; }
+    . { content: '🗑'; }
+    . { content: '⟲'; }
+    . { content: '✏'; }
+    . { content: '♡'; }
+    . { content: '❤'; }
+    . { content: ''; }
+    . { content: ''; }
+    . { content: ''; }
+    . { content: ''; }
+    . { content: '◤'; }
+    . { content: '◣'; }
+    . { content: '◥'; }
+    . { content: '◢'; }
+    . { content: ''; }
+    */
+/* THEMEs       */
+
+        html[data-theme='light'] {
+
+                    --mColor-text:      black;  /* EXAMPLE - NEEDS CHANGED !! */
+                    --mColor-faint:     darkgrey;
+                    --mColor-tint:      darkblue;
+                    --mColor-oppo:      whitesmoke;
+                    --mColor-splash:    #ff66ff;
+                    --mColor-accent:    steelblue;
+                    --mColor-link:      steelblue;
+
+                    --mBg-body:         whitesmoke;
+                    --mBg-tint:         #eef2ee;
+                    --mBg-shadow:       wheat;
+                    --mBg-accent:       #330033;
+                    --mBg-splash:       yellow;
+                    --mBg-input:        #88f099;
+                    --mBg-select:       wheat;
+                  }
+        html[data-theme='dark'] {
+                    --bg-color:             black;        /* BACKGROUND       */
+                    --txt-color:            whitesmoke;   /* FONT             */
+
+                    --txt-font-family:      Arial;        /* FONT  text       */
+                    --txt-font-weight:      400;
+                    --txt-font-height:      24px;
+                    --txt-font-color:       whitesmoke;
+
+                    --mColor-text:      whitesmoke;
+                    --mColor-tint:      gold;
+                    --mColor-oppo:      black;
+                    --mColor-faint:     darkgrey;
+                    --mColor-accent:    ;
+                    --mColor-splash:    #ff66ff;
+                    --mColor-link:      steelblue;
+
+                    --mBg-body:         black;
+                    --mBg-tint:         #131313;
+                    --mBg-shadow:       #222222;
+                    --mBg-splash:       ;
+                    --mBg-accent:       #330033;
+                    --mBg-input:        #002222;
+                    --mBg-select:       ;
+                  }
+
+/* CLASS & TAGs*/
+
+
+/* USER THEME */
+body                    {
+                          color:                       var(--color           );
+                          background-color:            var(--background-color);    
+                          font-family:                 var(--font-family     );    
+                          font-weight:                 var(--font-weight     );  
+                          font-style:                  var(--font-style      );  
+                          font-size:                   var(--font-size       ); 
+                          text-align:                  var(--text-align      );
+                          margin-top:                  var(--margin-top      );
+                          margin-bottom:               var(--margin-bottom   );
+                          margin-left:                 var(--margin-left     );
+                          margin-right:                var(--margin-right    );
+                          padding-top:                 var(--padding-top     );
+                          padding-bottom:              var(--padding-bottom  );
+                          padding-left:                var(--padding-left    );
+                          padding-right:               var(--padding-right   );
+                          /*text-shadow:                 none;*/
+                          box-shadow:                  none;  
+                          overflow:                    var(--overflow        );
+                          overflow-wrap:               var(--overflow-wrap   );
+                          overflow-x:                  var(--overflow-x      );
+                          overflow-y:                  var(--overflow-y      );
+                          word-wrap:                   var(--word-wrap       );
+                          word-break:                  var(--word-break      );
+                          word-spacing:                var(--word-spacing    );
+                          writing-mode:                var(--writing-mode    );
+                          /*line-height:               var(--line-height);*/
+                        }
+.title, h1              {
+                          font-family:                 var(--title-font-family   ); 
+                          font-size:                   var(--title-font-size     );
+                          font-weight:                 var(--title-font-weight   ); 
+                          font-style:                  var(--title-font-style    );
+                          color:                       var(--title-color         );
+                          background-color:            var(--title-background-color);
+                          text-align:                  var(--title-text-align    );
+                          margin-top:                  var(--title-margin-top    );
+                          margin-bottom:               var(--title-margin-bottom );
+                          margin-left:                 var(--title-margin-left   );
+                          margin-right:                var(--title-margin-right  );
+                          padding-top:                 var(--title-padding-top   );   
+                          padding-bottom:              var(--title-padding-bottom);   
+                          padding-left:                var(--title-padding-left  );   
+                          padding-right:               var(--title-padding-right );
+                          line-height:                 var(--title-line-height   ); 
+                        }  
+input                   { height:                      var(--ip-txt-height); }
+h1                      { color:                       var(--color);         }
+div                     { background-color:            transparent;          }
+span                    { background-color:            transparent;          }
+select                  { background-color:            transparent; 
+                          color:                       var(--button-color);
+                          font-size:                   var(--desc-txt-height); }
+.desc, .description, h3 {
+                          font-family:                 var(--description-font-family   ); 
+                          font-size:                   var(--description-font-size     );
+                          font-weight:                 var(--description-font-weight   ); 
+                          font-style:                  var(--description-font-style    );
+                          color:                       var(--description-color         );
+                          text-align:                  var(--description-text-align    );
+                          margin-top:                  var(--description-margin-top    );
+                          margin-bottom:               var(--description-margin-bottom );
+                          margin-left:                 var(--description-margin-left   );
+                          margin-right:                var(--description-margin-right  );
+                          padding-top:                 var(--description-padding-top   );   
+                          padding-bottom:              var(--description-padding-bottom);   
+                          padding-left:                var(--description-padding-left  );   
+                          padding-right:               var(--description-padding-right );
+                          line-height:                 var(--description-line-height   ); 
+                          }  
+.button, .buttonBorder  {
+                          color:                       var(--button-color);
+                          background-color:            var(--button-background-color);
+                          font-family:                 var(--button-font-family);
+                          font-weight:                 var(--button-font-weight);  
+                          font-size:                   var(--button-font-size);
+                          padding:                     var(--button-padding);    
+                          margin:                      var(--button-margin); 
+                          }
+.buttonBorder           {
+                          border-color:                var(--button-bdr-color);       
+                          border-style:                var(--button-bdr-style);          
+                          border-top-width:            var(--button-bdr-t-width);   
+                          border-bottom-width:         var(--button-bdr-b-width);   
+                          border-left-width:           var(--button-bdr-l-width);   
+                          border-right-width:          var(--button-bdr-r-width);   
+                          border-top-left-radius:      var(--button-bdr-tl-radius);    
+                          border-top-right-radius:     var(--button-bdr-tr-radius);    
+                          border-bottom-left-radius:   var(--button-bdr-bl-radius);    
+                          border-bottom-right-radius:  var(--button-bdr-br-radius);
+                          }
+.shadow                 {
+                          text-shadow:                 var(--text-shadow-color)  var(--text-shadow-h)  var(--text-shadow-v)  var(--text-shadow-blur),
+                                                       var(--text-shadow2-color) var(--text-shadow2-h) var(--text-shadow2-v) var(--text-shadow2-blur),
+                                                       var(--text-shadow3-color) var(--text-shadow3-h) var(--text-shadow3-v) var(--text-shadow3-blur),
+                                                       var(--text-shadow4-color) var(--text-shadow4-h) var(--text-shadow4-v) var(--text-shadow4-blur)
+        }
+.boxShadow              {
+        box-shadow:                  var(--button-sdow-h) var(--button-sdow-v) var(--button-sdow-blur) var(--button-sdow-spread) var(--button-sdow-color);
+        }
+.noShadow               {
+        text-shadow:                 none;
+        box-shadow:                  none;
+        }
+.noSelect, body         {
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+        }
+.selectAll              {
+    user-select: all; /* supported by Chrome and Opera */
+   -webkit-user-select: all; /* Safari */
+   -khtml-user-select: all; /* Konqueror HTML */
+   -moz-user-select: all; /* Firefox */
+   -ms-user-select: all; /* Internet Explorer/Edge */
+        }
+.selectText             {
+    user-select: text; /* supported by Chrome and Opera */
+   -webkit-user-select: text; /* Safari */
+   -khtml-user-select: text; /* Konqueror HTML */
+   -moz-user-select: text; /* Firefox */
+   -ms-user-select: text; /* Internet Explorer/Edge */
+        }
+.center                 { text-align:    center;
+                          align-content: center;
+                          align-items:   center;
+                        }
+.full {width: 100%}
+
+
+.red,      .sysRed,      .sys-red,       red      { color:            var(--sys-red   ); }
+.green,    .sysGreen,    .sys-green,     green    { color:            var(--sys-green ); }
+.yellow,   .sysYellow,   .sys-yellow,    yellow   { color:            var(--sys-yellow); }
+.blue,     .sysBlue,     .sys-blue,      blue     { color:            var(--sys-blue  ); }
+.redBg,    .sysRedBg,    .sys-redBg,     redBg    { background-color: var(--sys-redBg   ); }
+.greenBg,  .sysGreenBg,  .sys-greenBg,   greenBg  { background-color: var(--sys-greenBg ); }
+.yellowBg, .sysYellowBg, .sys-yellowBg,  yellowBg { background-color: var(--sys-yellowBg); }
+.blueBg,   .sysBlueBg,   .sys-blueBg,    blueBg   { background-color: var(--sys-blueBg  ); }
+
+.sampleSpan {
+        color: ghostwhite;
+        width:  150px;
+        height: 50px;
+        border-style: solid;
+        border-color: var(--sys-green);
+        border-width: 3px;
+        border: none;
+        background-color: darkblue;
+        margin-bottom: 60px;
+        }
+.sampleDiv  {
+        color: ghostwhite;
+        width:  150px;
+        height: 50px;
+        border-style: solid;
+        border-color: var(--sys-blue);
+        border-width: 3px;
+        border: none;
+        background-color: darkblue;
+        margin-bottom: 40px;
+        }
+
+/* grid wrapper class */
+.grid1x2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+    }
+.grid1x3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+    }
+.grid1x4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+    }
+.grid1x5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+    }
+.grid1x6 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+    }
+.gridEdit{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+    }
+
+/* grid column class */
+.col1 { grid-row: 1; grid-column: 1 }
+.col2 { grid-row: 1; grid-column: 2 }
+.col3 { grid-row: 1; grid-column: 3 }
+.col4 { grid-row: 1; grid-column: 4 }
+.col5 { grid-row: 1; grid-column: 5 }
+.col6 { grid-row: 1; grid-column: 6 }
+
