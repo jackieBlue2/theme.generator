@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Themes</title>
@@ -45,6 +46,9 @@ Naming Convetions:
 
 Initial Theme and Classes: 
 
+    o Provided :root variables defined in themes.css are overridden by local storage user changes on page reload
+    o Output from the Theme Generator may be used to replace defauls in themes.css 
+
     o Themes and classes for shown system elements [labels, knobs, status] are stored in the style section of this html document
     o User area element themes and classes are stored in the themes.css file
     o User and system themes are separated to prevent user theme changes from affecting system elements
@@ -85,7 +89,7 @@ Main Parameters:
     <link  rel="stylesheet" href="themes.css">
     <style type="text/css" >
 
-    /* -----------------------------------------------------------
+    /* ----------------------------------------------------------- intro
 
         system elements are all elements displayed outside the users themed results area  
         see themes.css for user area classes and variables 
@@ -101,22 +105,161 @@ Main Parameters:
         The system class name format is     .sysElemName
         The system variable name format is  --sys-attribute-name or --sys-className-attribute-name 
 
-        */ 
+        ---------------------------------------------------------- */ 
 
+        /* SYSTEM THEME VARIABLES */
+        html[data-theme = 'system'] {
+            /* system                   */
 
-    /* SYSTEM EDIT GRID - UNDER CONSTRUCTION */
-        .edit-columns   { 
-            width:                  79%; 
+                    --sys-color:                   var(--sys-white);
+                    --sys-background-color:        var(--sys-greyBg);
+                    --sys-hover-color:             var(--sys-red);
+                    --sys-font-size:               18px;
+                    --sys-small:                   18px;
+                    
+                    --sys-font-style:              normal;
+                    --sys-font-family:             Candara;
+                    --sys-text-align:              left;
+                    --sys-text-indent:             0px;
+                    --sys-line-height:             1.10; /* space between lines, 1.1 default */
+
+                    --sys-fancy:                   Gabriola; 
+                    --sys-title:                   calibri; 
+                    --sys-desc:                    'Copperplate Gothic'; 
+                    --sys-text:                    Candara; 
+
+                    --sys-back:                    '◀';
+                    --sys-pointU:                  '🠝';     
+                    --sys-pointL:                  '🠜';
+                    --sys-pointR:                  '🠞';
+                    --sys-pointD:                  '🠟';
+
+                    --sys-white:                   #c0c0c0; 
+                    --sys-black:                   #000000; 
+                    --sys-grey:                    ; 
+                    --sys-red:                     #ed143d;  
+                    --sys-green:                   #90ee90;
+                    --sys-blue:                    #00bfff;
+                    --sys-yellow:                  #daa520;
+                    --sys-purple:                  #8a2be2;
+                    --sys-brown:                   #492222;
+
+                    --sys-redBg:                   #8b0000;  
+                    --sys-greenBg:                 #6b8e23;
+                    --sys-blueBg:                  #1f1f72;
+                    --sys-yellowBg:                #6a4520;
+                    --sys-purpleBg:                #8a2be2;
+                    --sys-greyBg:                  #0D0D20; 
+            /* sys-title                */
+                    --sys-title-font-family   :  var(--sys-title); 
+                    --sys-title-font-size     :  36px;
+                    --sys-title-font-weight   :  400; 
+                    --sys-title-font-style    :  normal;
+                    --sys-title-color         :  var(--sys-color);
+                    --sys-title-background-color :  var(--sys-brown);
+                    --sys-title-text-align    :  left;
+                    --sys-title-margin-top    :  0;
+                    --sys-title-margin-bottom :  0;
+                    --sys-title-margin-left   :  0;
+                    --sys-title-margin-right  :  0;
+                    --sys-title-padding-top   :  0;   
+                    --sys-title-padding-bottom:  0;   
+                    --sys-title-padding-left  :  0;   
+                    --sys-title-padding-right :  0;
+                    --sys-title-line-height   :  1.1; 
+            /* sys-header               */
+
+                    --sys-header-background-color: #492222; 
+            /* sys-desc                 */
+                    --sys-desc-font-family    :  var(--sys-desc); 
+                    --sys-desc-font-size      :  20px;
+                    --sys-desc-font-weight    :  400; 
+                    --sys-desc-font-style     :  normal;
+                    --sys-desc-color          :  var(--sys-yellow);
+                    --sys-desc-background-color: transparent;
+                    --sys-desc-text-align     :  left;
+                    --sys-desc-margin-top     :  0;
+                    --sys-desc-margin-bottom  :  0;
+                    --sys-desc-margin-left    :  0;
+                    --sys-desc-margin-right   :  0;
+                    --sys-desc-padding-top    :  0;   
+                    --sys-desc-padding-bottom :  0;   
+                    --sys-desc-padding-left   :  0;   
+                    --sys-desc-padding-right  :  0;
+                    --sys-desc-line-height    :  1.1; 
+            /* sys-button               */
+                    --sys-button-font-family    :  var(--sys-desc); 
+                    --sys-button-font-size      :  18px;
+                    --sys-button-font-weight    :  400; 
+                    --sys-button-font-style     :  normal;
+                    --sys-button-color          :  var(--sys-yellow);
+                    --sys-button-background-color: var(--sys-brown);
+                    --sys-button-text-align     :  left;
+                    --sys-button-margin-top     :  0;
+                    --sys-button-margin-bottom  :  0;
+                    --sys-button-margin-left    :  0;
+                    --sys-button-margin-right   :  3px;
+                    --sys-button-padding-top    :  3px;   
+                    --sys-button-padding-bottom :  3px;   
+                    --sys-button-padding-left   :  6px;   
+                    --sys-button-padding-right  :  6px;
+                    --sys-button-border-style   :  none;
+                    --sys-button-borderWidth    :  0px;
+                    --sys-button-line-height    :  1.1; 
+            /* sys-input                */
+                    --sys-input-font-family    :  var(--sys-desc); 
+                    --sys-input-font-size      :  14px;
+                    --sys-input-font-weight    :  400; 
+                    --sys-input-font-style     :  normal;
+                    --sys-input-color          :  var(--sys-white);
+                    --sys-input-borderColor    :  var(--sys-white);
+                    --sys-input-borderWidth    :  0px;
+                    --sys-input-background-color: transparent;
+                    --sys-input-text-align     :  left;
+                    --sys-input-margin-top     :  0;
+                    --sys-input-margin-bottom  :  0;
+                    --sys-input-margin-left    :  0;
+                    --sys-input-margin-right   :  0;
+                    --sys-input-padding-top    :  0;   
+                    --sys-input-padding-bottom :  0;   
+                    --sys-input-padding-left   :  0;   
+                    --sys-input-padding-right  :  0;
+                    --sys-input-line-height    :  1.1;
+                    --sys-input-border         :  none;
+                    --sys-input-padding        :  0;   
+            }
+
+        /* SYSTEM EDIT GRID - UNDER CONSTRUCTION */
+        .infoLinksGrid   { 
+            margin-bottom:          8px; 
+            display:                grid;
+            grid-template-rows:     1fr;
+            grid-template-columns:  1fr 1fr 1fr 1fr;
+            grid-gap:               8px;
+            justify-items:          stretch;
+            /*align-items:            stretch;*/
+            padding: 8px;
+            }
+        .infoDescGrid    { 
+            margin-bottom:          8px; 
+            display:                grid;
+            grid-template-rows:     1fr;
+            grid-template-columns:  1fr 1fr 2fr;
+            grid-gap:               8px;
+            justify-items:          stretch;
+            /*align-items:            stretch;*/
+            padding: 8px;
+            }
+        .edit-columns    { 
+            width:                  50%; 
             float:                  right;  /* change elements to span and remove float? */
             margin-bottom:          25px; 
-            vertical-align:         center; /* //? not woking */
+            vertical-align:         left; /* //? not woking */
+            justify-items:          safe left;
 
             display:                grid;
             grid-template-rows:     1fr;
-            /*grid-template-columns descr ctrls attr  chg   undo  */
-            /*grid-template-columns:  0.5fr 1.4fr 0.5fr 0.6fr 0.6fr;*/
-            /*grid-template-columns:  auto  auto  auto  auto  auto;*/
-            grid-template-columns:  auto auto  0.5fr 0.6fr 0.6fr;;
+            grid-template-columns:  auto auto  0.6fr;
             grid-gap:               8px;
             justify-items:          stretch;
             align-items:            stretch;
@@ -124,10 +267,10 @@ Main Parameters:
             }
         .userEditResult  { 
             float:                  left;
-            width:                  20%;
+            width:                  49%;
             padding:                3px; 
             }
-        .edit_themes    { 
+        .edit_themes     { 
             display:                grid;
             grid-template-rows:     1fr;
             /*grid-template-columns descr ctrls attr  chg   undo  */
@@ -135,7 +278,10 @@ Main Parameters:
             }
         /*  .edit-wrap > div  {} */
 
-    /* SYSTEM .CLASS */
+        /* SYSTEM .CLASS */
+        .attribute-popup        { position:                    relative;
+                                  z-index:                     4;
+                                }
         .sysFancy               { font-family:                 var(--sys-fancy); }
         .sysText                { font-family:                 var(--sys-font-family); } 
         .sysSmall               { font-size:                   var(--sys-small); }
@@ -154,8 +300,9 @@ Main Parameters:
                                   -webkit-appearance         : none;
                         }
         .sysHeader              { background-color:            var(--sys-header-background-color);
-
-                        }
+                                  font-family:                 var(--sys-desc-font-family);
+                                  width:                       100%;
+                                }
         .sysTitle, .sysBack     {
                                   font-family    :    var(--sys-title-font-family   ); 
                                   font-size      :    var(--sys-title-font-size     );
@@ -180,6 +327,7 @@ Main Parameters:
                                   font-weight    :    var(--sys-desc-font-weight   );
                                   font-style     :    var(--sys-desc-font-style    );
                                   color          :    var(--sys-desc-color         );
+                                  background-color:   var(--sys-desc-background-color);
                                   text-align     :    var(--sys-desc-text-align    );
                                   margin-top     :    var(--sys-desc-margin-top    );
                                   margin-bottom  :    var(--sys-desc-margin-bottom );
@@ -190,9 +338,13 @@ Main Parameters:
                                   padding-left   :    var(--sys-desc-padding-left  );   
                                   padding-right  :    var(--sys-desc-padding-right );
                                   line-height    :    var(--sys-desc-line-height   ); 
+                                  justify-items :     stretch;
                         }
         .sysButton              {
-                                  border-style:  var(--sys-button-border-style);
+                                  border-style   :  var(--sys-button-border-style);
+                                  background-color: var(--sys-button-background-color);
+                                  color:            var(--sys-button-color);
+                                  font-weight:      var(--sys-button-font-weight);
                                   margin-top     : 0px;
                                   margin-bottom  : 0px;
                                   margin-left    : var(--sys-button-margin-left   );
@@ -201,33 +353,84 @@ Main Parameters:
                                   padding-bottom : var(--sys-button-padding-bottom);  
                                   padding-left   : var(--sys-button-padding-left  );   
                                   padding-right  : var(--sys-button-padding-right );
-                                  border-radius: 40px;
+                                  border-radius  : 40px;
+                                  border-style   : var(--sys-button-border-style);
+                                  border-width   : var(--sys-button-borderWidth );
                         }
         .sysSelect              {
-                                  background-color: transparent;
-                                  color:            var(--button-color);
-                                  font-size:        var(--desc-txt-height); }
+                                  font-family    :  var(--sys-desc-font-family   );
+                                  color          :  var(--sys-button-color);
+                                  background-color: var(--sys-button-background-color);
+                                  font-weight    :  var(--sys-button-font-weight);
+                                  border-style   :  var(--sys-button-border-style);
+                                  border-width   :  var(--sys-button-borderWidth );
+                                  /*font-size:        var(--desc-txt-height); */
+                              }
         .sysBack                {
                                   content:            var(--sys-pointL);
                         }
         .sysMargin              { margin-bottom  :    25px;                          }
+        .sysHover:hover         { color:              var(--sys-hover-color)  ;              
+                                  transition:         0.3s;                          }
+        .sysCenter              { text-align:    center;
+                                  align-content: center;
+                                  align-items:   center;
+                                }
 
     </style>
 </head>
 <!-- ################################################################## -->
 <!--                                HTML                                -->
 <!-- ################################################################## -->
-<body onload="bodyLoaded()">
-
-<div id='edit-theme' class='center'>
+<body onload="bodyLoaded()" >
+    <div style='text-align: right;'><copyright> © 2022 Jackie.Blue </copyright></div>
 <!-- ------------------------------------------------------------------ -->
-<!--                               HEADER                               -->
+<!--                            ATTRIBUTE INFO POPUP                    -->
+    <!-- <div><span class='sysTitle sysDesc'> Attribute Info Popup</span></div> -->
+<div style="z-index: 1; position: absolute;">
+    <div id='attribute-popup' class='system' draggable='true' hidden> 
+        <!-- ATTRIBUTE NAMES -->
+        <div class='infoLinksGrid'>
+            <span class='sysTitle sysDesc' id='info_description'   ></span>
+            <span></span>
+            <span></span>
+            <span class='close sysRed' style="text-align: right;" onclick="hideId('attribute-popup')">close ❌</span></div>
+        <!-- VALUES -->
+        <p>
+            <div class='sysDesc sysCenter'>            Values   </div>
+            <div class='infoLinksGrid'><span> Undo     </span> <span id='info_undo'          class='sysRed'></span></div>
+            <div class='infoLinksGrid'><span> Default  </span> <span id='info_default'       class='sysRed'></span></div>
+            </p>
+        <!-- NAMES -->
+        <p>
+            <div class='sysDesc sysCenter'>            Attribute   </div>
+            <div class='infoDescGrid'><span> attribute </span> <span id='info_attribute_name' class='sysRed'></span>
+                                                               <span id='info-name-sample'>                  </span></div>
+            <div class='infoDescGrid'><span> var()     </span> <span id='info_variable_name'  class='sysRed'></span>
+                                                               <span id='info-var-sample'>                   </span></div>
+            <div class='infoDescGrid'><span> .style    </span> <span id='info_style_name'     class='sysRed'></span>
+                                                               <span id='info-style-sample'>                 </span></div>
+            </p>
+        <!-- SEARCH -->
+        <p>
+            <div class='sysDesc sysCenter'>            Help     </div>
+            <div class="infoLinksGrid">
+                <span   id='info_name'          class="sys-red"  >              </span>
+                <button id='info_documentation' class='sysButton'> Publications </button> <!-- bodyLoaded() sets onclicks --> 
+                <button id='info_samples'       class='sysButton'> Samples      </button> 
+                <button id='info_tutor'         class='sysButton'> Tutors       </button> </div> 
+            </p>
+        <!-- OPTIONS -->
+        <p>
+            <div class='sysDesc sysCenter'>            Options  </div>
+            <div id='info_options'></div>
+            </p>
+    </div></div>
 
-    <!-- <div id='edit-attrs' style='display: none'> -->
+<div id='edit-theme' class=''>
 <!-- ------------------------------------------------------------------ -->
-<!--                           RESULTS COLUMN - LEFT GUI SIDE           -->
+<!--                            RESULTS COLUMN - LEFT GUI SIDE          -->
     <div class='userEditResult'>
-        <div id='edit_title' class='sysHeader'>Current Context Title</div>
         <!-- <div  class='sysDesc'><- Back</div><br> --><br>
                                                                                         <!-- --EDIT--    -->
         <div  onclick="showEdit('title')"      class='title'>   Title       </div>      <!-- Title       -->
@@ -250,40 +453,28 @@ Main Parameters:
             </span>
         </div>
 <!-- ------------------------------------------------------------------ -->
-<!--                            KNOBS COLUMN - RIGHT CONTROLS SIDE      -->
-    <div id='edit-columns' class='system sysDesc edit-columns'></div>
+<!--                            KNOBS COLUMN   - RIGHT CONTROLS SIDE    -->
+    <div id='edit-columns' class='system edit-columns'></div>
     <!-- </div> edit-attrs -->
 </div> <!-- end edit-theme -->
-<!-- ------------------------------------------------------------------ -->
-<!--                            INFO POPUP                              -->
-<div id='attr-info' > 
-    <div><span class='sysTitle sysDesc'> Attribute Popup</span></div>
-
-    <div><span> Name     </span><span id='info_attr'    class=''></span></div>
-    <div><span> Variable </span><span id='info_var'     class=''></span></div>
-    <div><span> style    </span><span id='info_style'   class=''></span></div>
-
-    <div><span>undo      </span><span id='info_undo'    class=''></span></div>
-    <div><span>default   </span><span id='info_default' class=''></span></div>
-
-    <div id='info-options'></div>
-
-</div>
 
 <!-- ################################################################## -->
 <!--                             JAVASCRIPT                             -->
 <!-- ################################################################## -->
 <script type="text/javascript">
-    console.clear();
+    // console.clear();
 
-    class PAIR { name = ''; val = '' }                                          // generic name value pair
-    
+    // const info_description = document.getElementById('info_description');
+
+    const theme     = 'data-theme';
 // ==============================================================
-// save object - Save and restore settings and attributes on page repoad
+// save objects - Save and restore user settings and attributes on page repoad
 
-    var   sys   = { classNames:         [],         // GUI input created names
-                    root:               [],         // attribute change records (theme overrides)
-                    settings:           [] }        // custom settings
+    var   user   = {classNames:         [],         // GUI input created context names  --'context'-attribute-name
+                    root:               [],         // attribute change records (themes.css overrides)
+                    settings:           [] }        // site settings - TBD
+
+    class PAIR { name = ''; val = '' }              // generic name value pair
 
 // ==============================================================
 // function() PARAMETERS
@@ -297,9 +488,9 @@ Main Parameters:
 //             Use generate CSS theme option to display ALL current variables and values
 //             The generated theme can then be copied into your CSS.  
 
-    const contexts   = ['', 'title', 'description', 'subtitle', 'button', 'input'] // ==> --title-font-size, --desription-font-size
+    const contexts   = ['', 'title', 'description', 'subtitle', 'button', 'input']; // ==> --title-font-size, --desription-font-size
 
-    var   attr_ctrls = [         // attr_ctrl list
+    const old_attr_ctrls = [         // attr_ctrl list
 
         // attr_ctrl parameter table array                                                       
         // A table entry for each attribute providing needed information and controls for: 
@@ -312,7 +503,6 @@ Main Parameters:
         //              The future full attribute list will reference an appropriate 'attr_ctrl' below. 
         //              Defaults are unique to a browser and may differ between elements - future resolution
 
-        // CONSTANTS
         { attr: 'color',           description: 'Font Color',       default: 'not specified',  type: 'color' },
         { attr: 'background-color',description: 'Background Color', default: 'not specified',  type: 'color' },
         { attr: 'font-size',       description: 'Font Size',        default: '16px',   min: 4, max:200,  inc: 2, suffix: 'px' },  
@@ -330,8 +520,39 @@ Main Parameters:
                           'Angsana New', 'AngsanaUPC', 'fangsong' ] }, // fontFamily  
         { attr: 'font-style',      description: 'Font Style',       default: 'normal', options: ['italic', 'normal'] },
         { attr: 'font-weight',     description: 'Font Weight',      default: '400',    options: [ '100', '400', '700', '900', 'inherit' ] },
-        { attr: 'margin',          description: 'Margin',           default: '0px',    min: 0, max:1000,  inc: 2, suffix: 'px' },
+        { attr: 'margin',          description: 'Margin',           default: '0px',    min: 0, max:1000,  inc: 2, suffix: 'px' }
         ] // attr_ctrls
+
+
+    // attr         - HTML DOM object attribute name
+    // description  - Attribute description
+    // default      - browser or element atrribute default value
+    // style        - obj.style.attribute name for javascript reference
+    // type         - 'color', used to detect non-text options
+    // options      - attribute options list
+    // min,max,inc  - numeric option limits and change increments
+    // suffix       - attribute numeric value suffix like 'px'
+    // undo         - contains attribute undo value before change, temporary work value 
+
+    const attr_ctrls = [                                                                                               // unique controls 
+        { attr: 'color',           description: 'Font Color',       default: 'not specified',  style: 'color',            type: 'color' },
+        { attr: 'background-color',description: 'Background Color', default: 'not specified',  style: 'backgroundColor',  type: 'color' },
+        { attr: 'font-size',       description: 'Font Size',        default: '16px',           style: 'fontSize',         min: 4,  max:200,  inc: 2, suffix: 'px' },
+        { attr: 'font-family',     description: 'Font Family',      default: 'New Times Roman',style: 'fontFamily',       options: [ 'Arial', 'Microsoft Sans Serif', 
+                          'Lucida Console', 'Lucida Sans Unicode', 'monospace', 'system-ui', 
+                          'Segoe UI', 'Tahoma', 'Trebuchet MS', 'Comic Sans MS', 'cursive', 'Candara', 'Copperplate Gothic', 'Malgun Gothic', 
+                          'Helvetica', 'Corbel', 'Calibri', 'Bahnschrift', 'fantasy', 'Impact', 'Ink Free', 'Gabriola', 'Segoe Print', 
+                          'Segoe Script', 'Webdings', 'Wingdings', 'Symbol' ] },
+
+        { attr: 'font-style',      description: 'Font Style',       default: 'normal',         style: 'fontStyle',        options: ['italic', 'normal'] },
+        { attr: 'font-weight',     description: 'Font Weight',      default: '400',            style: 'fontWeight',       options: [ '100', '400', '700', '900', 'inherit' ] },
+        { attr: 'margin',          description: 'Margin',           default: '0px',            style: 'margin',           min: 0, max:1000,  inc: 2, suffix: 'px' }
+        // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
+        // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
+        // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
+        // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
+        // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
+        ]
 
     // OLD attr_ctrls Limits Parameters for reference
             // const lineHeight = { min:   1, max:999, inc:0.2,suffix: 'px' }  // sp btween lines [1.1->1.2 avg.]
@@ -354,19 +575,17 @@ Main Parameters:
 
     // GEN HEADER + LOOP
 
-    function genEdit(context) {                                  // create all edit controls and attributes for a specified element
+    function genEdit(context) {                                 // create all edit controls and attributes for a specified element
         p('\ngenEdit() element context: '+context);  // --font-size, OR --title-font-size, OR --footer-font-size
 
             // initialize new context title 
 
-        let title = document.getElementById('edit_title');                          // get context title element 
-        if (context == '')     {title.innerHTML = ' &nbsp; THEME DEFAULTS EDIT'; context = ''} // no unique css class or tag overide  --font-size 
-        else                   {title.innerHTML = ' &nbsp;'+context.toUpperCase()+' edit' } // display context {title, div, etc}   --title-font-size
-        setClass(title,'sysDesc', 'on');    // font
-        setClass(title,'sysMargin', 'on');  // margin-bottom
-        setClass(title,'sysHeader', 'on');  // background color
-        title.style.setProperty('color', 'var(--sys-white)', 'important');         // set title text color with important inheirit override
-        title.style.setProperty('background-color', 'var(--sys-brown)', 'important');
+        // let title = document.getElementById('edit_title');                          // get context title element 
+        // setClass(title,'sysDesc', 'on');    // font
+        // setClass(title,'sysMargin', 'on');  // margin-bottom
+        // setClass(title,'sysHeader', 'on');  // background color
+        // title.style.setProperty('color', 'var(--sys-white)', 'important');         // set title text color with important inheirit override
+        // title.style.setProperty('background-color', 'var(--sys-brown)', 'important');
 
             // initialize control columns to empty
 
@@ -377,36 +596,28 @@ Main Parameters:
             // initialize control area headers
 
         let header_column       = newDOM(columns,'SPAN');
-        setClass(header_column,'sysDesc', 'on');  // font
+        setClass(header_column,'sysDesc', 'on');    // font
+        setClass(header_column,'sysHeader', 'on');  // background color
+        header_column.style.setProperty('background-color', 'var(--sys-brown)', 'important');
+        header_column.innerHTML = 'Info';
+
+        header_column           = newDOM(columns,'SPAN');
+        setClass(header_column,'sysDesc', 'on');    // font
         setClass(header_column,'sysHeader', 'on');  // background color
         header_column.style.setProperty('background-color', 'var(--sys-brown)', 'important');
 
-        header_column           = newDOM(columns,'SPAN');
-        setClass(header_column,'sysDesc', 'on');  // font
-        setClass(header_column,'sysHeader', 'on');  // background color
-        header_column.style.setProperty('background-color', 'var(--sys-brown)', 'important');
+        let title               = newDOM(header_column,'SPAN');
+        title.id                = 'edit_title';
+        if (context == '')     {title.innerHTML = 'BODY edit'; context = ''}      // no unique css class or tag overide  --font-size 
+        else                   {title.innerHTML = context.toUpperCase()+' edit' } // display context {title, div, etc}   --title-font-size
+        title.style.setProperty('color', 'var(--sys-white)', 'important');        // set title text color with important inheirit override
+        title.style.setProperty('background-color', 'var(--sys-brown)', 'important');
 
         header_column           = newDOM(columns,'SPAN');
         setClass(header_column,'sysDesc', 'on');  // font
         setClass(header_column,'sysHeader', 'on');  // background color
         header_column.style.setProperty('background-color', 'var(--sys-brown)', 'important');
         header_column.innerHTML = 'Changes';
-
-        header_column           = newDOM(columns,'SPAN');
-        setClass(header_column,'sysDesc', 'on');  // font
-        setClass(header_column,'sysHeader', 'on');  // background color
-        header_column.style.setProperty('background-color', 'var(--sys-brown)', 'important');
-        header_column.id        = 'editPanel';
-        header_column.innerHTML = 'Undo ⟲';
-        header_column.onclick   = nextEditPanel;
-
-        header_column           = newDOM(columns,'SPAN');
-        setClass(header_column,'sysDesc', 'on');  // font
-        setClass(header_column,'sysHeader', 'on');  // background color
-        header_column.style.setProperty('background-color', 'var(--sys-brown)', 'important');
-        header_column.id        = 'editAttr';
-        header_column.innerHTML = 'Attribute ⟲'
-        header_column.onclick   = nextEditName;
 
             // loop - display all attributes for editing
 
@@ -424,7 +635,7 @@ Main Parameters:
 
     // ATTRIBUTE PROCESSOR
 
-    function genEditHTML(attr_ctrl, context) {                // create edit controls and results for one css attribute
+    function genEditHTML(attr_ctrl, context) {                  // create edit controls and results for one css attribute
         p('----------- loop\ngenEditAttrs('+attr_ctrl.attr+', '+context+')');
 
             // construct the attribute context root variable name
@@ -437,42 +648,36 @@ Main Parameters:
             // build HTML id's to display the attribute's :root --variable_name value
 
         let changeID  = 'change-' +var_name;                    // attribute's value html id in change  column
-        let defaultID = 'default-'+var_name;                    // attribute's value html id in default column
-
-            // create HTML grid columns wrapper element for displaying atribute edit controls, change results, & default values
-
-        // let controls_wrapper  = newDOM(controls_column,'DIV');  // newDOM( parent, dom type ) create HTML element as child of parent element        
-        // let changes_wrapper   = newDOM(changes_column, 'DIV');  // display attribute changes  column 
-        // let defaults_wrapper  = newDOM(defaults_column,'DIV');  // display attribute defaults column
-        // setClass(changes_wrapper,  'edit-wrap-pair');           // css grid: divide wrapper in half for ATTERBUTE DESCRIPTION | NEW VALUE
-        // setClass(controls_wrapper, 'edit-wrap-pair');           // css grid: divide wrapper in half for ATTERBUTE DESCRIPTION | CONTROL KNOBS 
-        // setClass(defaults_wrapper, 'edit-wrap-pair');           // css grid: divide wrapper in half for ATTERBUTE DESCRIPTION | DEFAULT VALUE  
+        let defaultID = 'default-'+var_name;                    // attribute's value html id in default column 
 
         let description, knobs, color_picker, values, output;
 
             // Create HTML edit control knobs, descriptions, & values 
 
         let columns = document.getElementById('edit-columns');
-        // --------------------
-        // | edit-wrap grid x2
-        // |  ------------------------------------------------------------------------------------
-        // |  | edit-columns grid x6                                      |
-        //    |         1            2         3       4       5      6   |         GUI
-        //    |  -------------------------------------------------------- | live change results
-        //    |  | description | controls | changed | val | default | val |
-        //         ----------------------   -------------   ------------- 
+
+        // attribute description column with popups  ('Color', 'Background Color', 'Border Color', etc.)                    col 1
+
+        description              =  newDOM(columns, 'DIV');   // create attribue descriptor as grid column 1  
+        description.innerHTML    =  attr_ctrl.description;    // display attributes description
+        description._attr_ctrl   =  attr_ctrl;
+        description._var_name    =  var_name;
+        description.style.setProperty('font-family', 'var(--sys-fancy)', 'important'); //  set font_family
+        setClass(description, 'sysHover', 'on');
+        description.onclick      =  function (e) {
+                                        let elem = e.currentTarget;
+                                        p('\nonClick() '+elem._var_name+' '+elem._attr_ctrl.attr); 
+                                        attribute_popup(elem._var_name, elem._attr_ctrl); // desc last
+                                        }
+
+        // attribute edit controls column                                                                                   col 2
 
         switch(attr_ctrl.type) {
             case 'color': 
-                    // Attribute description ('Color', 'Background Color', 'Border Color', etc.) 
-
-                    description             = newDOM(columns, 'DIV');   // left  side div - attribute descriptor            col 1
-                    description.innerHTML   = attr_ctrl.description;    // display attributes description
-                    description.style.setProperty('font-family', 'var(--sys-fancy)', 'important'); //?  important override design?
 
                     // Control Knobs column
 
-                    knobs                   = newDOM(columns, 'DIV');   // right side div - attribue edit buttons           col 2
+                    knobs                   = newDOM(columns, 'DIV');   // create attribue edit buttons as grid column 2
 
                     // Color Picker HTML
 
@@ -488,7 +693,6 @@ Main Parameters:
                     setClass( color_picker, 'sysInput' );                                      
                     color_picker.onchange   = function(e) { 
                                                 let colorPicker = e.currentTarget;
-                                                p('\nonChange() '+colorPicker._attr_ctrl.attr+': '+colorPicker.value);
                                                 chgAttr(colorPicker._var_name,colorPicker._attr_ctrl, 'save', colorPicker.value);  } 
                     // Undo button HTML
 
@@ -516,16 +720,13 @@ Main Parameters:
                     break;
 
             default:      
-                    description             = newDOM(columns, 'DIV');   // left  side div - attribute descriptor            col 1
-                    ctrl_knobs              = newDOM(columns, 'DIV');   // right side div - attribue edit buttons           col 2
-
-                    description.innerHTML   = attr_ctrl.description;    // display attributes description
+                    ctrl_knobs      = newDOM(columns, 'DIV');     // create attribue edit buttons as grid column 2
                     description.style.setProperty('font-family', 'var(--sys-fancy)', 'important'); // overide font family 
                     // setClass(description, 'sysFancy');
 
                     // NUMBER VALUE PASSED
-                    if (exist(attr_ctrl.min)) {                                  // number - create buttons & measurement suffix 
-                        let up_button       = newDOM(ctrl_knobs, 'SPAN');     //  for changing numeric attribute values
+                    if (exist(attr_ctrl.min)) {                   // number - create buttons & measurement suffix 
+                        let up_button       = newDOM(ctrl_knobs, 'SPAN');      //  for changing numeric attribute values
                         let down_button     = newDOM(ctrl_knobs, 'SPAN');
                         let undo_button     = newDOM(ctrl_knobs, 'SPAN');
                         let default_button  = newDOM(ctrl_knobs, 'SPAN');
@@ -554,7 +755,7 @@ Main Parameters:
                         p(' attr: '+attr_ctrl.attr+', undo: '+undo_button._prior_val+', default: '+default_button._default_val);
 
                         up_button.onclick   = 
-                            function(e) { // DOM.attr_ctrl & 
+                            function(e) {                                    // DOM.attr_ctrl & 
                                             let upButton      = (e.currentTarget); //? test using 'this' 
                                             chgAttr( upButton._var_name,      upButton._attr_ctrl,    'increment', upButton._context)      } 
                         down_button.onclick = 
@@ -576,40 +777,58 @@ Main Parameters:
                         // select unit measurement type <options>
                         let empty   = newDOM(unit, 'OPTION');            
                         empty.value = ''  ; empty.innerHTML = 'none';   //              no unit measure
+                        setClass(empty, 'sysSelect' ); 
                         let px      = newDOM(unit, 'OPTION');
                         px.value    = 'px'; px.innerHTML    = 'px';     // pixel
+                        setClass(px, 'sysSelect' ); 
                         let em      = newDOM(unit, 'OPTION');
                         em.value    = 'em'; em.innerHTML    = 'em';     // font size    parent font size                relative
+                        setClass(em, 'sysSelect' ); 
                         let rem     = newDOM(unit, 'OPTION');
-                        em.value    = 'em'; em.innerHTML    = 'rem';    // font size    root font size                  relative
+                        rem.value    = 'rem'; rem.innerHTML    = 'rem';    // font size    root font size                  relative
+                        setClass(rem, 'sysSelect' ); 
                         let ex      = newDOM(unit, 'OPTION');
-                        em.value    = 'em'; em.innerHTML    = 'ex';     // font size    element font size               relative
+                        ex.value    = 'ex'; ex.innerHTML    = 'ex';     // font size    element font size               relative
+                        setClass(ex, 'sysSelect' ); 
                         let vh      = newDOM(unit, 'OPTION');
                         vh.value    = 'vh'; vh.innerHTML    = 'vh';     // view height  1% viewport height              relative 
+                        setClass(vh, 'sysSelect' ); 
                         let vw      = newDOM(unit, 'OPTION');
-                        vw.value    = 'vw'; vh.innerHTML    = 'vw';     // view width   1% viewport width               relative 
+                        vw.value    = 'vw'; vw.innerHTML    = 'vw';     // view width   1% viewport width               relative 
+                        setClass(vw, 'sysSelect' ); 
                         let vmin    = newDOM(unit, 'OPTION');
                         vmin.value  = 'vmin'; vmin.innerHTML= 'vmin';   // view width   1% viewport smaller dimension   relative 
+                        setClass(vmin, 'sysSelect' ); 
                         let vmax    = newDOM(unit, 'OPTION');
                         vmax.value  = 'vmax'; vmax.innerHTML= 'vmax';   // view width   1% viewport larger  dimension   relative 
+                        setClass(vmax, 'sysSelect' ); 
                         let lh      = newDOM(unit, 'OPTION');
                         lh.value    = 'lh'; lh.innerHTML    = 'lh';     // line height
+                        setClass(lh, 'sysSelect' ); 
                         let pct     = newDOM(unit, 'OPTION');
                         pct.value   = '%' ; pct.innerHTML = '%';        // percent
+                        setClass(pct, 'sysSelect' ); 
                         let pt      = newDOM(unit, 'OPTION'); 
                         pt.value    = 'pt'; pt.innerHTML = 'pt';        // points       1/72 inch                       absolute
+                        setClass(pt, 'sysSelect' ); 
                         let pc      = newDOM(unit, 'OPTION');
                         pc.value    = 'pc'; pc.innerHTML = 'pc';        // picas        1/6 inch                        absolute
+                        setClass(pc, 'sysSelect' ); 
                         let cm      = newDOM(unit, 'OPTION');
                         cm.value    = 'cm'; cm.innerHTML = 'cm';        // centimeter   ~37.8 pixels, 25.2/64 inch      absolute
+                        setClass(cm, 'sysSelect' ); 
                         let mm      = newDOM(unit, 'OPTION');
                         mm.value    = 'mm'; mm.innerHTML = 'mm';        // millimeter   1/10 of cm                      absolute
+                        setClass(mm, 'sysSelect' ); 
                         let q       = newDOM(unit, 'OPTION');
                         q.value     = 'q' ; q.innerHTML = 'q';          // quater mm    1/40 cm                         absolute
+                        setClass(q, 'sysSelect' ); 
                         let inch    = newDOM(unit, 'OPTION');
                         inch.value  = 'in'; inch.innerHTML = 'in';      // inch         1/96 inch                       absolute
+                        setClass(inch, 'sysSelect' ); 
                         let fr      = newDOM(unit, 'OPTION');
                         fr.value    = 'fr'; fr.innerHTML = 'fr';
+                        setClass(fr, 'sysSelect' ); 
                         // set current value as the selected option
                         let unitValue = getRoot(var_name).toString().replace(/[0-9]/g,'');
                         p(' '+var_name+' current unit:                   '+unitValue)
@@ -618,17 +837,19 @@ Main Parameters:
                         } // if number
 
                     // OPTION LIST PASSED    
-                    if (exist(attr_ctrl.options)) {                              // list   - create attribute options selector   
+                    if (exist(attr_ctrl.options)) {               // list   - create attribute options selector   
                         let up_button       = newDOM(ctrl_knobs, 'SPAN');        // UP     - DOM object
                         let down_button     = newDOM(ctrl_knobs, 'SPAN');        // DOWN   - DOM object
                         let undo_button     = newDOM(ctrl_knobs, 'SPAN');        // UNDO   - DOM object
                         let default_button  = newDOM(ctrl_knobs, 'SPAN');        // DEFAULT- DOM object
 
                         let options_select  = newDOM(ctrl_knobs, 'SELECT');
+                        setClass(options_select, 'sysSelect');
 
                         for (option_ix=0; option_ix<attr_ctrl.options.length; option_ix++) {
-                        let option          = newDOM(options_select, 'OPTION');
-                            option.innerHTML= attr_ctrl.options[option_ix];
+                            let option          = newDOM(options_select, 'OPTION');
+                            option.innerHTML    = attr_ctrl.options[option_ix];
+                            setClass(option, 'sysSelect');
                             if (attr_ctrl.attr == 'font-family') { option.style.fontFamily = attr_ctrl.options[option_ix]}
                             }
 
@@ -670,41 +891,18 @@ Main Parameters:
                                                     let defaultButton = e.currentTarget; 
                                                     chgAttr( defaultButton._var_name, defaultButton._attr_ctrl, 'save', defaultButton._default_val) } 
                         } 
-
+  
             } // end specific cases switch 
 
-            // display '.' as placeholder for changed attribute values 
+        // changed attribute column - display '.' as placeholder for changed attribute values                               col 3
 
-            values               = newDOM(columns, 'DIV');            // right side div - attribue changed value    col 4
-            output               = newDOM(values,         'SPAN');    // attribute changed value on right
-            output.innerHTML     = '.';                               // empty character until changed
-            output.id            = attr_ctrl.attr+'_change';          // set id for javascript reference
-            setClass(output,'sysText');                               // style value as system text
-            setClass(output,'sys-red');                               // style value using system color
-            setClass(output,'selectText');                            // make value selectable for cut and paste     
-
-            // display and record attribute undo and default values for panal change (reuse column to save space)
-
-            values                  = newDOM(columns, 'DIV');           // right side div - attribue changed value column   col 5
-            output                  = newDOM(values,  'SPAN');          // color control button on right
-            output.innerHTML        = getRoot(var_name);                // get current attribute value for undo
-            output.name             = '_attrs';                         //? does not work, next setAttribute() does work
-            output.setAttribute("name",          '_attrs');             // set a collection name for javascript reference
-            output._default_value   = attr_ctrl.default;                // setAttribute() above does not work, but '.this =' now works 
-            output._undo_value      = getRoot(var_name);                // save alternate value for javascript reference (column reuse)
-
-            setClass(output,'sys-red');
-            setClass(output,'sysText');
-            setClass(output,'selectText');                            // make value selectable for cut and paste
-
-            // display attribute name
-
-            description          = newDOM(columns, 'DIV');            // create  attribute name container           col 3
-            description.innerHTML= attr_ctrl.attr;                    // display attribute name
-            description.setAttribute("name",  '_names'        );      // set a collection name for javascript reference
-            description.Variable_name = var_name;
-            description.Attribute_name = attr_ctrl.attr;
-            description.style.setProperty('font-family', 'var(--sys-fancy)', 'important'); 
+        values               = newDOM(columns, 'DIV');            // right side div - attribue changed value 
+        output               = newDOM(values,         'SPAN');    // attribute changed value on right
+        output.innerHTML     = '.';                               // empty character until changed
+        output.id            = attr_ctrl.attr+'_change';          // set id for javascript reference
+        // setClass(output,'sysText');                               // style value as system text
+        setClass(output,'sysRed');                                // style value using system color
+        setClass(output,'selectText');                            // make value selectable for cut and paste     
 
         return;
         }
@@ -753,7 +951,7 @@ Main Parameters:
             // INCREMENT OR DECREMENT NUMBER
             if         (command === 'increment')  {val = val + attr_ctrl.inc}
             else if    (command === 'decrement')  {val = val - attr_ctrl.inc}
-            else       {alert('chgAttr() invalid command '+command)}
+            else       {error('chgAttr() invalid command '+command)}
             if         (val < attr_ctrl.min) {val = attr_ctrl.max}
             if         (val > attr_ctrl.max) {val = attr_ctrl.min}
             // APPEND MEASUREMENT SUFFIX
@@ -762,13 +960,13 @@ Main Parameters:
             setRoot(contextAttr,nuVal);                                     
             document.getElementById(attr_ctrl.attr+'_change').innerHTML = nuVal; 
             }
-        else {alert('chgAttr() unknown request type')}
+        else    {error('chgAttr() unknown request type')}
         // SET ATTRRIBUTE & VALUE IN A LOCAL STORAGE ROOT REC FOR RELOAD
-        let rec =  sys.root.find(o => o.name.toString() === contextAttr.toString());  // find existing :root --variable change record
+        let rec =  user.root.find(o => o.name.toString() === contextAttr.toString()); // find existing :root --variable change record
         if (typeof rec === 'undefined') {                                             // create new    :root --variable change record
             rec          =  new PAIR;
             rec.name     =  contextAttr;
-            sys.root.push(rec)          
+            user.root.push(rec)          
             p('new change record for '+contextAttr)}
         rec.val = nuVal;
 
@@ -777,6 +975,85 @@ Main Parameters:
         p('rec:  '+rec.name+': '+rec.val);
         p('root: '+rec.name+': '+getRoot(contextAttr.toString()));
         
+        }
+
+// ==============================================================
+// attribute_info_popup() - 
+
+    function attribute_info_popup(attribute) {
+
+        }
+
+//===============================================================
+// attribute_popup() - display attribute information
+
+    // attribute_popup() info elements   
+    const infoDesc        = document.getElementById('info_description');      
+    const infoAttrName    = document.getElementById('info_attribute_name');  // get elements once on page load for performance
+    const infoVarName     = document.getElementById('info_variable_name');   //   instead of each time the function is called
+    const infoStyleName   = document.getElementById('info_style_name');
+    const infoUndo        = document.getElementById('info_undo');
+    const infoName        = document.getElementById('info_name');
+    const infoDefault     = document.getElementById('info_default');
+    const infoAttrOptions = document.getElementById('info_options');
+    const infoDocs        = document.getElementById('info_documentation');
+    const infoSamples     = document.getElementById('info_samples');
+    const infoTutors      = document.getElementById('info_tutor');
+    const infoNameSample  = document.getElementById('info-name-sample' );
+    const infoVarSample   = document.getElementById('info-var-sample'  );
+    const infoStyleSample = document.getElementById('info-style-sample');
+
+    // Update popup elements value and display the attribute information panel
+
+    function attribute_popup(var_name, attr_ctrl) {
+        p('attribute_popup('+var_name+', '+attr_ctrl.attr+')');
+
+        // UNDO DEFAULT VALUES
+        infoUndo.innerHTML          = getRoot(var_name);        // undo
+        infoDefault.innerHTML       = attr_ctrl.default;        // default
+
+        // ATTRIBUTE, VAR, STYLE NAMES & SAMPLE USE
+        infoDesc.innerHTML          = attr_ctrl.description;    // attribute description
+        infoAttrName.innerHTML      = attr_ctrl.attr;           // attribute name
+        infoVarName.innerHTML       = var_name;                 // attribute variable name
+        infoStyleName.innerHTML     = attr_ctrl.style;          // attribute style name for js reference
+        infoNameSample.innerHTML    = '.myClass { <red>'+attr_ctrl.attr+'</red>: '+attr_ctrl.default+' }'
+        infoVarSample.innerHTML     = '.myClass { '+attr_ctrl.attr+': var(<red>'+var_name+'</red>) }<br>:root { <red>'+var_name+'</red>: '+attr_ctrl.default+'; }'
+        infoStyleSample.innerHTML   = 'document.getElementById(id).style.<red>'+attr_ctrl.style+'</red> = "'+attr_ctrl.default+'";'
+
+        // ATTRIBUTE - SEARCH DOCS, SAMPLES, TUTOR WALKTHROUGHS
+        infoName.innerHTML          = attr_ctrl.attr;           // attribute name
+        infoDocs._attribute_name    = attr_ctrl.attr;           // documents search parameter for button event
+        infoSamples._attribute_name = attr_ctrl.attr;           // samples   search parameter for button event
+        infoTutors._attribute_name  = attr_ctrl.attr;           // tutors    search parameter for button event
+ 
+        // ATTRIBUTE OPTIONS - SEARCH DOCS, SAMPLES, TUTOR WALKTHROUGHS
+        infoAttrOptions.innerHTML   = ''; // clear prior attribute options before appending new options
+        let wrapperObj, optionObj, docObj, sampleObj, tutorObj; // LOOP - Display Attribute Options and their search buttons
+        if (exist(attr_ctrl.options)) {
+            for (let i=0; i<attr_ctrl.options.length; i++) {
+
+                wrapperObj          = newDOM(infoAttrOptions,'DIV');    // Wrapper
+                setClass(wrapperObj,'infoLinksGrid','on');
+    
+                optionObj           = newDOM(wrapperObj,'SPAN');        // Attribute Option Name 
+                optionObj.innerHTML = attr_ctrl.options[i];
+                setClass(optionObj,'sysRed','on');
+
+                docObj              = newDOM(wrapperObj,'button');      // Search Option documentation
+                docObj.innerHTML    = 'Publications';
+                setClass(docObj,'sysButton','on');
+    
+                sampleObj           = newDOM(wrapperObj,'button');      // Search Option samples
+                sampleObj.innerHTML = 'Samples';
+                setClass(sampleObj,'sysButton','on');
+    
+                tutorObj            = newDOM(wrapperObj,'button');      // Search Option tutorials
+                tutorObj.innerHTML  = 'Tutors';
+                setClass(tutorObj,'sysButton','on');
+                }
+            }
+        showId('attribute-popup');
         }
 
 //===============================================================
@@ -805,7 +1082,7 @@ Main Parameters:
         } 
 
 //===============================================================
-// nextEditPanel() - change attribute values column       
+// nextEditPanel() - change attribute values column           
 
     var   currPanel  = 0;
     const editPanels = ['Undo', 'Defaults' ];
@@ -827,12 +1104,53 @@ Main Parameters:
                 else                      { coll[element].innerHTML = coll[element]._default_value; }
                 }
             } 
-// =============================================================
-// popup() - display popup window
+// ==============================================================
+// popup() - display popup window - future TBD
 
-    function popup() {
+// ==============================================================
+// searchSites(arg, sites) - search  site:github.com OR site:gitlab.com OR site:bitbucket.org after:2018-01-01
 
-        }
+    const search_prefix =   'https://www.google.com/search?q=css ';
+
+    const info_sites    = [ 'developer.mozilla.org', 
+                            'www.w3.org',
+                            'caniuse.com',
+                            'cssreference.io',
+                            'css-tricks.com',
+                            'www.geeksforgeeks.org',
+                            'getdocs.org'
+                            ]; 
+    const tutor_sites   = [ 'stackoverflow.com',     
+                            'o7planning.org',
+                            'www.freecodecamp.org',
+                            'www.smashingmagazine.com',
+                            'www.tutorialscan.com',
+                            'css-tricks.com',
+                            'elad.medium.com',
+                            'www.youtube.com',
+                            'www.tutorialbrain.com'
+                            ];
+    const sample_sites  = [ 'www.codegrepper.com',   
+                            'css-tricks.com',
+                            'levelup.gitconnected.com',
+                            'docs.w3cub.com',
+                            'www.quackit.com',
+                            'www.w3docs.com',
+                            'www.tutorialrepublic.com',
+                            'help.dottoro.com',
+                            'www.w3schools.com',
+                            'codepen.io',
+                            'www.enjoytutorials.com'
+                            ]; 
+
+    function searchSites(argument, site_list) {
+        p('searchSites( '+argument+' )');
+        let sites = 'site:'+site_list[0];
+        for ( i=1; i<site_list.length; i++)        { sites += ' OR site:'+site_list[i] }
+        search_string = search_prefix+argument +' '+ sites +  ' after:2015-01-01';
+        p(search_string);
+        window.open(search_string);
+        } 
     
 // =============================================================
 // genCSS() - display all attribute variables in CSS theme format 
@@ -853,12 +1171,8 @@ Main Parameters:
                                 item == ''          ) { return false} // p('..exists('+item+') param type: '+typeof item+' does not exist');
                             else                      { return true } // p('..exists('+item+') does exist'    ); }
                             }
-
     function passed(item) { return exist(item) }
 
-    // onload test
-    if   (exist(document.getElementById('dumbLuck')) == false) {}   // passed test 
-    else {alert('exist() not working')}                             // failed test
 // ==============================================================
 // getRoot() setRoot() - :root variable access            
 
@@ -880,7 +1194,7 @@ Main Parameters:
         console.log('newDOM( '+parent+', '+tag+' )');
         if (typeof parent == 'string') {
             try   { parent = document.getElementById(parent) }
-            catch { alert('Parent: '+parent+' not found in newDOM()')}
+            catch { error('Parent: '+parent+' not found in newDOM()')}
             }
         let elem       = document.createElement(tag);
         // elem.id        = rec.id;
@@ -928,16 +1242,9 @@ Main Parameters:
 
     function showEdit(context) {
         p('\nshowEdit('+context+')');
-        // if (document.getElementById('edit-attrs').style.display == 'none')   {  // if hidden, show attr edit controls
-            // hideId('edit-menu');                                                // hide edit menu
-            // showId('edit-attrs');                                               // display edit attribute controls
-            genEdit(context);
-            // }
-        // HIDE ELEMENT
-        // else {                                                                  // else show edit menu
-            // hideId('edit-attrs');  // hide edit attribute controls
-            // showId('edit-menu');   // show edit menu
-            //  }
+
+        save();             // save current element changes stored in user object to local storage
+        genEdit(context);   // generate HTML controls for editing new context element attribute values
         }
 
     function hideBrothers(name)          {
@@ -946,11 +1253,11 @@ Main Parameters:
                 switch (name) {
                     case 'editRoot':     coll = document.querySelectorAll('[name = "editRoot"]'    ); break;
                     case 'editThemes':   coll = document.querySelectorAll('[name = "editThemes"]'  ); break;
-                    default:             alert('!! hideBrothers() '+name+' not found')                  }
+                    default:             warn('!! hideBrothers() '+name+' not found')                  }
                 p(coll.length+' '+typeof coll[0]+'(s) have the name of '+name);
                 for (let elem = 0; elem < coll.length; elem++) { coll[elem].style.display = 'none'; }
                 }
-            else {alert('HideBrothers('+name+') not found')}
+            else {warn('HideBrothers('+name+') not found')}
         }
     function showBrothers(name)          {
             p('showBrothers() '+name);
@@ -958,11 +1265,11 @@ Main Parameters:
                 switch (name) {
                     case 'editRoot':     coll = document.querySelectorAll('[name = editRoot'    ); break;
                     case 'editThemes':   coll = document.querySelectorAll('[name = editThemes'  ); break;
-                    default:             alert('!! hideBrothers() '+name+' not found')                  }
+                    default:             warn('!! hideBrothers() '+name+' not found')                  }
                 p(coll.length+' '+typeof coll[0]+'(s) have the name of '+name);
                 for (let elem = 0; elem < coll.length; elem++) { coll[elem].style.display = 'inline'; }
                 }
-            else {alert('HideBrothers('+name+') not found')}
+            else {warn('HideBrothers('+name+') not found')}
         }
                                                 //  name='editThemes' 
 // ==============================================================
@@ -970,11 +1277,54 @@ Main Parameters:
 
         function getByName  (name)   { return document.getElementsByName(name) }
 
+// =============================================================
+// save()  read()  - local storage
+
+    function save() {                       // SAVE user changes for page reloads
+        p(' save() - local storage');
+        console.table(user);
+        if (localStorage) { localStorage.setItem('user', JSON.stringify(user)); }
+        }
+
+    function read() {                       // READ user changes from storage on page load
+        if (localStorage) { 
+            p(' read() - local storage');
+            try { results = JSON.parse(localStorage.getItem('user')); }
+            catch                {  warn('read() - No stored user settings found'); return user } // return empty object
+            if (!exist(results)) {  warn('read() - No prior user settings found' ); return user } // return empty object
+            }
+        return results;                                                                // return read  object
+        }
+
 // ==============================================================
 // body onLoad                                            
 
     function bodyLoaded() {
-        showEdit("description");
+        console.clear();
+        p('bodyLoaded()')
+        user = read();
+        // Set Search Button event handlers
+        document.getElementById('info_documentation').onclick = function (e) { let obj = e.currentTarget; 
+                                                                               searchSites(obj._attribute_name, info_sites)   }
+        document.getElementById('info_samples').onclick       = function (e) { let obj = e.currentTarget; 
+                                                                               searchSites(obj._attribute_name, sample_sites)}
+        document.getElementById('info_tutor').onclick         = function (e) { let obj = e.currentTarget; 
+                                                                               searchSites(obj._attribute_name, tutor_sites) }
+        // Set System Theme
+        document.documentElement.setAttribute(theme,'system');  // add system theme variables to root
+
+        // Show Theme Editor Panel
+        showEdit('');
+        console.log('..BODY loaded');
+
+
+
+                // <button id='info_documentation' class='sysButton' >
+                //                         <!-- onclick="function (e) {let undoButton = e.currentTarget; searchSites(undoButton._attribute_name, 'doc_sites')   }"--> Publications   </button> -->
+                // <button id='info_samples'       class='sysButton' >
+                //                         <!-- onclick="function (e) {let undoButton = e.currentTarget; searchSites(undoButton._attribute_name, 'sample_sites')}"--> Samples </button> -->
+                // <button id='info_tutor'         class='sysButton' >
+                //                         <!-- onclick="function (e) {let undoButton = e.currentTarget; searchSites(undoButton._attribute_name, 'tutor_sites') }"--> 
         }
 // ==============================================================
 // p() - debug, consol.log                                                  
@@ -1006,100 +1356,3 @@ console.log('..HTML loaded');
 </script>
 </body>
 </html>
-    
-    
-<div hidden>
-EMOJIs<br>
-
-This section is past the end of /HTML and only for reference and copy if useful. 
-</div>
-                <div id='Desk'      name='icons' hidden class="sysIcon pad ">
-                        <p>Desk <br>
-                         🖨 📇 🖶 🔌 📡 🖱 🖰 💾 🖭 🖥 🗔 🖧 ↈ 📱 📲 📸 🎧 🎤 🔉 🔊 🔔 💡 🔍 🔎 👁 🔏 🔐 🔒 🔓 🔑 ⚿ ☒ ¡ ‼ ⁉ ⁈ ␦ ¿ ❓ 🛈 ⭐️ 🗸 🞪 ✔ ❌ ⛓ 🔗 🧷 📎 🛒 🗑 🚮 🔙 🔝 🔋 📌 📍 ✂️ ✀ ✄ ✁ ℻ 📵 📞 🕽 🖁 ☏ ☎️ 💁 🙋 👋 💬 💭 🗯 🗪 🗫  ☽ ☀ ⚙ 🔅 🔆 ⛯ ☼ 🔘 🚫 ⛔ 🚫 🔞 🚧 🚨 ⛑ 🗞 ⚚  ⟲ ⟳ ♻️ ♲ ⛗ ⛖ 🕩 🕬 📢 🎨 ☕ ♨ 💸 💰 💳 💲 ＄ ₤ € ⛁ ✈️ 🛪 🏫 🤙 🍔 🍲 ⏳ 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚 🕛 🕜 🕝 🕞 🕟 🕠 🕡 🕢 🕣 🕤 🕥 🕦 🕧 ⚑ 🏳️ 🏴 🏁 🚩 🎌 ⚔️ ☠ ☢ 💕 </p> <p> ℠ ™ ® © ℗ ℅ ℁ 🗳 🗃 💼 🗂 📁 📂 🗂 ¶ 📰 📝 📜 📃 📄 📑 🗄 📋 🧾 📊 📈 📉 🗠 📩 📨 📧 💌 📥 📤 📦 🏷 📮 📪 📫 📬 📭 🗒 🗓 📆 📅 🖊 🖋 ✒️ 🖌 🖍 ✏️ 📏 📐 🔖 📓 📔 📒 📕 📗 📘 📙 📚 📖 🧮 </p> <p> ▔ ▕ ⳼ ⛚ ⛶ 【 】 〖 〗 〚 〛 ⸢ ⸥ ⌞ ⌟ ⌜ ⌝ 「 ⎦ ⎡ ⎤ ○ • ⦂ ⁑ ∴ 𐎟 𒑰 𐏐 ⳿ ١ ⚞ ⚟ 🗦 🗧 🗥 🗤 💥 💢 ♡ 
-                        </p> </div>
-                <div id='Sound'     name='icons' hidden class="sysIcon pad ">
-                        <p>Sound <br>
-                        🔔 🕬 📢 📻 📼 🎧 🎤 🎙 🕩 🕪 🔉 🔊 🎶 ♪ ♩ ♫ ♬ ♭ ♮ ♯ 🎼  💬 💭 🗯 🗪 🗫
-                        </p></div>
-                <div id='Shapes'    name='icons' hidden class="sysIcon pad ">
-                    <p>Shapes <br>
-                    ◸ ◹ ◺ ◿ ◢ ◣ ◤ ◥ □ ■ ▢ ▣ ◻ ◼ ◾ ◽ ▪ ▫ ▴ ▵ ● ◘ ▬ ▭ ▮ ▯ ▤ ▥ ◍ ▦ ▧ ▨ ▩  ▰ ▱ ▲ △ ◯ ◎ ◐ ◑ ◓ ◓ ◔ ◕ ◖ ◗ ◰ ◱ ◲ ◳ ◴ ◵ ◶ ◷ 🔘 🔴 🟠 🟡 🟢 🔵 🟣 ⚫️ ⚪️ 🟤 🟥 🟧 🟨 🟩 🟦 🟪 🔳 🔲 🔸 🔹 🔶 🔷 ✢ ✣ ✤ ✥ ✦ ✧ ★ ☆ ✯ ✡︎ ✩ ✪ ✫ ✬ ✭ ✮ ✶ ✷ ✵ ✸ ✹ 🞿 
-                        </p></div>
-                <div id='Math'      name='icons' hidden class="sysIcon pad ">
-                        <p>Math <br>
-                        ❌ ✖️ ➕ ➖ ➗ ୵ ⅟ ½ ⅓ ¼ ⅕ ⅙ ⅐ ⅛ ⅑ ⅒ ⅔ ⅖ ¾ ⅗ ⅜ ⅘ ⅚ ⅝ ⅞ ± ♾ ∞ ∫ ∑ β Δ ∠ ∈ ≡ ⁓ ~ ≈ ≉ ≅ ≆ ≠ ⩵ ⩶ 𝄗 ≤ ≥ ≰ ≱ ≪ ≫ √ ∛ ∜ ² ³ ₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉ ₊ ₋ ₌ ₍ ₎ ₐ ₑ ₔ ₕ ₖ ₗ ₘ ₒ ₚ ₛ ₜ ₓ ⁽ ⁾ ⁺ ⁻ ⁼ ° ⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹ ⁱ ⁿ ‰ ― ☰ ꠰ ꠱ ꠲ ꠳ ꠴ ꠵ ⊤ 
-                        </p></div>
-                <div id='Weather'   name='icons' hidden class="sysIcon pad ">
-                        <p>Weather <br>
-                             ° ℃ ℉ 🌡 🔥 🌪 🌈 ☀️ 🌤 ⛅️ 🌥 ☁️ 🌦 🌧 ⛈ 🌩 🌨 ⛅ ❄️ ☃️ ⛄️ 🌬 💨 💧 💦 ☔️ ☂️ ⛆ 🌊 🌫 ⚡ ☿ ♁ ♀ ♂ ♃ ♄ ♅ ♆ ♇ ☉ ⚳ ⚴ ⚵ ⚶ ⚷ ⚸ ⚹ ⚺ ⚻ ⚼ ☽ ☾ ⛯ 🌞 🌝 🌛 🌜 🌚 🌕 🌖 🌗 🌘 🌑 🌒 🌓 🌔 🌙 🌎 🌍 🌏 🪐 💫 ⚝ ⭐️ 🌟 ✨ ☄️ ⚛ 
-                        </p> </div>
-                <div id='Pointers'  name='icons' hidden class="sysIcon pad ">
-                    <p>Pointers <br> 
-                    ⦑ ⦒ ⟔ ⟓ ⸅ ⸄ ⇲ ⇱ 🢝 🢜 ˄ ˅ ∧ ⋀ ∨ ⋁ ⟨ ⟩ ⟪ ⟫ ⦉ ⦊ ˂ ˃ ︿ ﹀ ⮝ ⮟ ⮜ ⮞ ◀️ ▶️ 🠝 🠟 🠜 🠞 🠴 🠵 🠶 🠷 🔺 🔻 🛆 ⌤ ︽ ︾ → ⇒ ⟹ ⇨ ⇾ ➾ ⇢ ☝ ☛ ➛ 𒐀 ➔ ➜ ➙ ➝ ⤳ ⬿ ↜ ↝ ➞ ⬅️ ⯬ ⯮ ⬆️ ⬇️ ↑ ↓ ⬀ ⬁ ⬂ ⬃ ⬄ ⭎ ⭏ ↗️ ↘️ ↙️ ↖️ ↕️ ↔️ 🡘 🡙 🡤 🡥 🡦 🡧 ⮨ ⮩ ⮪ ⮫ ⮬ ⮭ ⮮ ⮯ ↪️ ↩️ ⤾ ⤴️ ⤵️ ⤹ ⤸ ⮢ ⮣ ⮠ ⮡ ⮥ ⮤ ⮧ ⮦ ⬳ ⇽ ⇾ ￩ ￫ 🢤 🢥 ⥂ ⥃ ⥄ ↹ ⦬ ⦫ ⬱ ⇶ ⮎ ⮍ ⮌ ⮏ ⅏ ๑ ១ ෧ 𑇢  ౾ ౽ 𐒡 ೧ ⮈ ⮉ ⮊ ⮋ ⟲ ⟳</p> </div>
-                <div id='Objects'   name='icons' hidden class="sysIcon pad ">
-                        <p>Objects <br>
-                        ⌚️ 📱 📲 💻 ⌨️ 🖥 🖨 🖱 🖲 🕹 🗜 💽 💾 💿 📀 📼 📷 📸 📹 🎥 📽 🎞 📞 ☎️ 📟 📠 📺 📻 🎙 🎚 🎛 🧭 ⏱ ⏲ ⏰ 🕰 ⌛️ ⏳ 📡 🔋 🔌 💡 🔦 🕯 🪔 🧯 🛢 💸 💵 💴 💶 💷 💰 💳 💎 ⚖️ 🧰 🔧 🔨 ⚒ 🛠 ⛏ 🔩 ⚙️ 🧱 ⛓ 🧲 🔫 💣 🧨 🪓 🔪 🗡 ⚔️ 🛡 🚬 ⚰️ ⚱️ 🏺 🔮 📿 🧿 💈 ⚗️ 🔭 🔬 🕳 🩹 🩺 💊 💉 🩸 🧬 🦠 🧫 🧪 🌡 🧹 🧺 🧻 🚽 🚰 🚿 🛁 🛀 🚽 🧼 🪒 🧽 🧴 🛎 🔑 🗝 🚪 🪑 🛋 🛏 🛌 🧸 🖼 🛍 🛒 🎁 🎈 🎏 🎀 🎊 🎉 🎎 🏮 🎐 🧧 ✉️ 📩 📨 📧 💌 📥 📤 📦 🏷 📪 📫 📬 📭 📮 📯 📜 📃 📄 📑 🧾 📊 📈 📉 🗒 🗓 📆 📅 🗑 📇 🗃 🗳 🗄 📋 📁 📂 🗂 🗞 📰 📓 📔 📒 📕 📗 📘 📙 📚 📖 🔖 🧷 🔗 📎 🖇 📐 📏 🧮 📌 📍 ✂️ 🖊 🖋 ✒️ 🖌 🖍 📝 ✏️ 🔍 🔎 🔏 🔐 🔒 🔓 </p></div>
-                <div id='People'    name='icons' hidden class="sysIcon pad ">
-
-                        <p>Smileys <br> ☺️ 😀 😃 😄 😁 😆 😅 😂 🤣 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 😝 😜 🤪    🤨 🧐 🤓 😎 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 ☹️ 😣 😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🤗 🤔 🤭 🤫 🤥 😶 😐 😑 😬 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕 🤑 🤠 😈 👿 👹 👺 🤡 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 🎭 
-
-                        </p> <p>Gestures and Body Parts <br>
-                        👋 🤚 🖐 ✋ 🖖 👌 🤏 ✌️ 🤞 🤟 🤘 🤙 👈 👉 👆 🖕 👇 ☝️ 👍 👎 ✊ 👊 🤛 🤜 👏 🙌 👐 🤲 🤝 🙏 ✍️ 💅 🤳 💪 🦾 🦵 🦿 🦶 👣 👂 🦻 👃 🧠 🦷 🦴 👀 👁 👅 👄 💋 🩸 
-
-                        </p> <p>Clothing and Accessories <br>
-                        🧳 🌂 ☂️ 🧵 🧶 👓 🕶 🥽 🥼 🦺 👔 👕 👖 🧣 🧤 🧥 🧦 👗 👘 🥻 🩴 🩱 🩲 🩳 👙 👚 👛 👜 👝 🎒 👞 👟 🥾 🥿 👠 👡 🩰 👢 👑 👒 🎩 🎓 🧢 ⛑ 🪖 💄 💍 💼
-                        </p></div>
-                <div id='Food'      name='icons' hidden class="sysIcon pad ">
-                        <p>Food_&_Plants <br>
-                         🥫 🧃 🍏 🍎 🍐 🍊 🍋 🍌 🍉 🍇 🍓 🍈 🍒 🍑 🥭 🍍 🥥 🥝 🍅 🍆 🥑 🥦 🥬 🥒 🌶 🌽 🥕 🧄 🧅 🥔 🍠 🥐 🥯 🍞 🥖 🥨 🧀 🥚 🍳 🧈 🥞 🧇 🥓 🥩 🍗 🍖 🦴 🌭 🍔 🍟 🍕 🥪 🥙 🧆 🌮 🌯 🥘 🥫 🍝 🍜 🍲 🍛 🍣 🍱 🥟 🦪 🍤 🍙 🍚 🍘 🍥 🥠 🥮 🍢 🍡 🍧 🍨 🍦 🥧 🧁 🍰 🎂 🍮 🍭 🍬 🍫 🍿 🍩 🍪 🌰 🥜 🍯 🥛 🍼 ♨ ☕️ 🍵 🧃 🥤 🍶 🍺 🍻 🥂 🍷 🥃 🍸 🍹 🧉 🍾 🧊 🥄 🍴 🍽 🥣 🍲 🥗 🥡 🥢 🧂 <br> 🌵 🎄 🌲 🌳 🌴 🌱 🌿 ☘️ 🍀 🎍 🎋 🍃 🍂 🍁 🍄 🐚 🌾 💐 🌷 🌹 🥀 🌺 🌸 🌼 🌻 </div>
-                <div id='Animals'   name='icons' hidden class="sysIcon pad ">
-                        <p>Animals <br>
-                        🐶 🐱 🐭 🐹 🐰 🦊 🐻 🐼 🐻‍ 🐨 🐯 🦁 😺 😸 😹 😻 😼 😽 🙀 😿 😾 🐮 🐷 🐽 🐸 🐵 🙈 🙉 🙊 🐒 🐔 🐧 🐦 🐤 🐣 🐥 🦆 🦅 🦉 🦇 🐺 🐗 🐴 🦄 🐝 🐛 🦋 🐌 🐞 🐜 🦟 🦗 🕷 🕸 🦂 🐢 🐍 🦎 🦖 🦕 🐙 🦑 🦐 🦞 🦀 🐡 🐠 🐟 🐬 🐳 🐋 🦈 🐊 🐅 🐆 🦓 🦍 🦧 🐘 🦛 🦏 🐪 🐫 🦒 🦘 🐃 🐂 🐄 🐎 🐖 🐏 🐑 🦙 🐐 🦌 🐕 🐩 🦮 🐕‍ 🐈 🐈‍ 🐓 🦃 🦚 🦜 🦢 🦩 🕊 🐇 🦝 🦨 🦡 🦦 🦥 🐁 🐀 🐿 🦔 🐾 🐉 🐲
-                        </div>
-                <div id='Activities'name='icons' hidden class="sysIcon pad ">
-                        <p>Activities <br>
-                        ⚽️ 🏀 🏈 ⚾️ 🥎 🎾 🏐 🏉 🥏 🎱 🪀 🏓 🏸 🏒 🏑 🥍 🏏 🥅 🛵 ⛳️ 🪁 🏹 🎣  🚲 🤿 🥊 🥋 🎽 🛹 🛼 🛷 ⛸ 🥌 🎿 ⛷ 🏂 🪂 🏋️ 🤼   🤸  ⛹️ 🤺 🤾 🏌️ 🏇 🧘 🏄 🏊 🤽 🚣 🧗 🚵‍ 🚴 🎩 🏆 🥇 🥈 🥉 🏅 🎖 🏵 🎗 🎫 🎟 🎪 🤹 🎭 🩰 🎨 🎬 🎤 🎧 🎼 🎹 🥁 🎷 🎺 🎸 🪕 🎻 🎲 ♟ 🎯 🎳 🎮 🎰 🧩 ⚇ ⚉ 🟂 💥 💢 ♡ ♢  ♥ ♦ ♠ ♣ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚆ ⚈ ⚈ ⚉ 
-                        </div>
-                <div id='Travel'    name='icons' hidden class="sysIcon pad ">
-                        <p>Travel_&_Places <br>
-                        ⛽ 🚗 🚕 🚙 🚌 🚎 🏎 🚓 🚑 🚒 🚐 🚚 🚛 🚜 🚛 🦯 🦽 🦼 🛴 🚲 🏍 ⛺ 🛺 🚨 🚔 🚍 🚘 🚖 🚡 🚠 🚟 🚃 🚋 🚞 🚝 🚄 🚅 🚈 🚂 🚆 🚇 🚊 🚉 ✈️ 🛫 🛬 🛩 💺 🛰 🚀 🛸 🚁 🛶 ⛵️ 🚤 🛥 🛳 ⛴ 🚢 ⚓️ ⛲ ⛽️ 🚧 🚦 🚥 🚏 🗺 🗿 🗽 🗼 🏰 🏯 🏟 🎡 🎢 🎠 ⛲️ ⛱ 🏖 🏝 🏜 🌋 ⛰ 🏔 🗻 🏕 ⛺️ 🏠 🏡 🏘 🏚 🏗 🏭 🏢 🏬 🏣 🏤 🏥 🏦 🏨 🏪 🏫 🏩 💒 🏛 ⛪️ 🕌 🕍 🛕 🕋 ⛩ 🛤 🛣 🗾 🎑 🏞 🌅 🌄 ⛰ 🌠 🎇 🎆 🌇 🌆 🏙 🌃 🌌 🌉 🌁 ⛟ ⛍ ⛌ ⛔ ⛕ ⛙ ⛜ ⛗ ⛛ ⛐  </div>
-                <div id='Symbols'   name='icons' hidden class="sysIcon pad ">
-                        <p>Symbols <br>
-                        ❤️ 🧡 💛 💚 💙 💜 🖤 🤍 🤎 💔 ❣️ 💕 💞 💓 💗 💖 💘 💝 💟 ☮️ ✝️ ☪️ 🕉 ☸️ ✡️ 🔯 🕎 ☯️ ☦️ 🛐 ⛎ ♈️ ♉️ ♊️ ♋️ ♌️ ♍️ ♎️ ♏️ ♐️ ♑️ ♒️ ♓️ 🆔 ⚛️ 🉑 ☢️ ☣️ 📴 📳 🈶 🈚️ 🈸 🈺 🈷️ ✴️ 🆚 💮 🉐 ㊙️ ㊗️ 🈴 🈵 🈹 🈲 🅰️ 🅱️ 🆎 🆑 🅾️ 🆘 ❌ ⭕️ 🛑 ⛔️ 📛 🚫 💯 💢 ♨️ 🚷 🚯 🚳 🚱 🔞 📵 🚭 ❗️ ❕ ❓ ❔ ‼️ ⁉️ 🔅 🔆 〽️ ⚠️ 🚸 🔱 ⚜️ 🔰 ♻️ ✅ 🈯️ 💹 ❇️ ✳️ ❎ 🌐 💠 Ⓜ️ 🌀 💤 🏧 🚾 ♿️ 🅿️ 🈳 🈂️ 🛂 🛃 🛄 🛅 🚹 🚺 🚼 ⚧ 🚻 🚮 🎦 📶 🈁 🔣 ℹ️ 🔤 🔡 🔠 🆖 🆗 🆙 🆒 🆕 🆓 0️⃣ 1️⃣ 2️⃣ 3️⃣ 4️⃣ 5️⃣ 6️⃣ 7️⃣ 8️⃣ 9️⃣ 🔟 🔢 #️⃣ *️⃣ ⏏️ ▶️ ⏸ ⏯ ⏹ ⏺ ⏭ ⏮ ⏩ ⏪ ⏫ ⏬ ◀️ 🔼 🔽 ➡️ ⬅️ ⬆️ ⬇️ ↗️ ↘️ ↙️ ↖️ ↕️ ↔️ ↪️ ↩️ ⤴️ ⤵️ 🔀 🔁 🔂 🔄 🔃 🎵 🎶 ➕ ➖ ➗ ✖️ ♾ 💲 💱 ™️ ©️ ®️ 〰️ ➰ ➿ 🔚 🔙 🔛 🔝 🔜 ✔️ ☑️ 🔘 🔴 🟠 🟡 🟢 🔵 🟣 ⚫️ ⚪️ 🟤 🔺 🔻 🔸 🔹 🔶 🔷 🔳 🔲 ▪️ ▫️ ◾️ ◽️ ◼️ ◻️ 🟥 🟧 🟨 🟩 🟦 🟪 ⬛️ ⬜️ 🟫 🔈 🔇 🔉 🔊 🔔 🔕 📣 📢 👁 💬 💭 🗯 ♠️ ♣️ ♥️ ♦️ 🃏 🎴 🀄️ 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚 🕛 🕜 🕝 🕞 🕟 🕠 🕡 🕢 🕣 🕤 🕥 🕦 🕧 </p><p> ✢ ✣ ✤ ✥ ✦ ✧ ★ ☆ ✯ ✡︎ ✩ ✪ ✫ ✬ ✭ ✮ ✶ ✷ ✵ ✸ ✹ → ⇒ ⟹ ⇨ ⇾ ➾ ⇢ ☛ ☞ ➔ ➜ ➙ ➛ ➝ ➞ ♠︎ ♣︎ ♥︎ ♦︎ ♤ ♧ ♡ ♢ ♚ ♛ ♜ ♝ ♞ ♟ ♔ ♕ ♖ ♗ ♘ ♙ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ 🂠 ⚈ ⚉ ⚆ ⚇ 𓀀 𓀁 𓀂 𓀃 𓀄 𓀅 𓀆 𓀇 𓀈 𓀉 𓀊 𓀋 𓀌 𓀍 𓀎 𓀏 𓀐 𓀑 𓀒 𓀓 𓀔 𓀕 𓀖 𓀗 𓀘 𓀙 𓀚 𓀛 𓀜 𓀝 </div>
-                <div id='Flags'     name='icons' hidden class="sysIcon pad ">
-                        <p>Flags <br> 🎌 🏳️‍🌈 🏳️ 🏴 🏁 🚩 🇦🇫 🇦🇽 🇦🇱 🇩🇿 🇦🇸 🇦🇩 🇦🇴 🇦🇮 🇦🇶 🇦🇬 🇦🇷 🇦🇲 🇦🇼 🇦🇺 🇦🇹 🇦🇿 🇧🇸 🇧🇭 🇧🇩 🇧🇧 🇧🇾 🇧🇪 🇧🇿 🇧🇯 🇧🇲 🇧🇹 🇧🇴 🇧🇦 🇧🇼 🇧🇷 🇮🇴 🇻🇬 🇧🇳 🇧🇬 🇧🇫 🇧🇮 🇰🇭 🇨🇲 🇨🇦 🇮🇨 🇨🇻 🇧🇶 🇰🇾 🇨🇫 🇹🇩 🇨🇱 🇨🇳 🇨🇽 🇨🇨 🇨🇴 🇰🇲 🇨🇬 🇨🇩 🇨🇰 🇨🇷 🇨🇮 🇭🇷 🇨🇺 🇨🇼 🇨🇾 🇨🇿 🇩🇰 🇩🇯 🇩🇲 🇩🇴 🇪🇨 🇪🇬 🇸🇻 🇬🇶 🇪🇷 🇪🇪 🇪🇹 🇪🇺 🇫🇰 🇫🇴 🇫🇯 🇫🇮 🇫🇷 🇬🇫 🇵🇫 🇹🇫 🇬🇦 🇬🇲 🇬🇪 🇩🇪 🇬🇭 🇬🇮 🇬🇷 🇬🇱 🇬🇩 🇬🇵 🇬🇺 🇬🇹 🇬🇬 🇬🇳 🇬🇼 🇬🇾 🇭🇹 🇭🇳 🇭🇰 🇭🇺 🇮🇸 🇮🇳 🇮🇩 🇮🇷 🇮🇶 🇮🇪 🇮🇲 🇮🇱 🇮🇹 🇯🇲 🇯🇵 🎌 🇯🇪 🇯🇴 🇰🇿 🇰🇪 🇰🇮 🇽🇰 🇰🇼 🇰🇬 🇱🇦 🇱🇻 🇱🇧 🇱🇸 🇱🇷 🇱🇾 🇱🇮 🇱🇹 🇱🇺 🇲🇴 🇲🇰 🇲🇬 🇲🇼 🇲🇾 🇲🇻 🇲🇱 🇲🇹 🇲🇭 🇲🇶 🇲🇷 🇲🇺 🇾🇹 🇲🇽 🇫🇲 🇲🇩 🇲🇨 🇲🇳 🇲🇪 🇲🇸 🇲🇦 🇲🇿 🇲🇲 🇳🇦 🇳🇷 🇳🇵 🇳🇱 🇳🇨 🇳🇿 🇳🇮 🇳🇪 🇳🇬 🇳🇺 🇳🇫 🇰🇵 🇲🇵 🇳🇴 🇴🇲 🇵🇰 🇵🇼 🇵🇸 🇵🇦 🇵🇬 🇵🇾 🇵🇪 🇵🇭 🇵🇳 🇵🇱 🇵🇹 🇵🇷 🇶🇦 🇷🇪 🇷🇴 🇷🇺 🇷🇼 🇼🇸 🇸🇲 🇸🇦 🇸🇳 🇷🇸 🇸🇨 🇸🇱 🇸🇬 🇸🇽 🇸🇰 🇸🇮 🇬🇸 🇸🇧 🇸🇴 🇿🇦 🇰🇷 🇸🇸 🇪🇸 🇱🇰 🇧🇱 🇸🇭 🇰🇳 🇱🇨 🇵🇲 🇻🇨 🇸🇩 🇸🇷 🇸🇿 🇸🇪 🇨🇭 🇸🇾 🇹🇼 🇹🇯 🇹🇿 🇹🇭 🇹🇱 🇹🇬 🇹🇰 🇹🇴 🇹🇹 🇹🇳 🇹🇷 🇹🇲 🇹🇨 🇹🇻 🇻🇮 🇺🇬 🇺🇦 🇦🇪 🇬🇧 🇺🇳 🇺🇸 🇺🇾 🇺🇿 🇻🇺 🇻🇦 🇻🇪 🇻🇳 🇼🇫 🇪🇭 🇾🇪 🇿🇲 🇿🇼
-
-                        </p> </div>
-                <div id='More'      name='icons' hidden class="sysIcon pad ">
-                    <p>more icons.. <br> 
-                    <a href="https://unicode-table.com/en/search/?q=arrow">
-                        more arrows                  </a><br> 
-                    <a href="https://unicode-table.com/en/sets/mathematical-signs/">
-                        Math Signs                   </a><br>
-                    <a href="https://unicode-table.com/en/blocks/mathematical-alphanumeric-symbols/">
-                        Math Alpha-Numeric           </a><br>
-                    <a href="https://unicode-table.com/en/blocks/mathematical-operators/">
-                        Math Operators               </a><br>
-                    <a href="https://unicode-table.com/en/blocks/supplemental-mathematical-operators/">
-                        Math supplemental Operators  </a><br>
-                    <a href="https://unicode-table.com/en/blocks/miscellaneous-mathematical-symbols-a/">   Math miscellaneous Symbols-A </a><br>    
-                    <a href="https://unicode-table.com/en/blocks/miscellaneous-mathematical-symbols-b/">   Math miscellaneous Symbols-B </a></p></div>
-                <div id='People'    name='icons' hidden class="sysIcon pad ">
-                        <p>People <br> 
-                        👶 👧 🧒 👦 👩 🧑 👨 👩‍🦱 🧑‍🦱 👨‍🦱 👩‍🦰 🧑‍🦰 👨‍🦰 👱‍♀️ 👱 👱‍♂️ 👩‍🦳 🧑‍🦳 👨‍🦳 👩‍🦲 🧑‍🦲 👨‍🦲 🧔 👵 🧓 👴 👲 👳‍♀️ 👳 👳‍♂️ 🧕 👮‍♀️ 👮 👮‍♂️ 👷‍♀️ 👷 👷‍♂️ 💂‍♀️ 💂 💂‍♂️ 🕵️‍♀️ 🕵️ 🕵️‍♂️ 👩‍⚕️ 🧑‍⚕️ 👨‍⚕️ 👩‍🌾 🧑‍🌾 👨‍🌾 👩‍🍳 🧑‍🍳 👨‍🍳 👩‍🎓 🧑‍🎓 👨‍🎓 👩‍🎤 🧑‍🎤 👨‍🎤 👩‍🏫 🧑‍🏫 👨‍🏫 👩‍🏭 🧑‍🏭 👨‍🏭 👩‍💻 🧑‍💻 👨‍💻 👩‍💼 🧑‍💼 👨‍💼 👩‍🔧 🧑‍🔧 👨‍🔧 👩‍🔬 🧑‍🔬 👨‍🔬 👩‍🎨 🧑‍🎨 👨‍🎨 👩‍🚒 🧑‍🚒 👨‍🚒 👩‍✈️ 🧑‍✈️ 👨‍✈️ 👩‍🚀 🧑‍🚀 👨‍🚀 👩‍⚖️ 🧑‍⚖️ 👨‍⚖️ 👰‍♀️ 👰 👰‍♂️ 🤵‍♀️ 🤵 🤵‍♂️ 👸 🤴 🥷 🦸‍♀️ 🦸 🦸‍♂️ 🦹‍♀️ 🦹 🦹‍♂️ 🤶 🧑‍🎄 🎅 🧙‍♀️ 🧙 🧙‍♂️ 🧝‍♀️ 🧝 🧝‍♂️ 🧛‍♀️ 🧛 🧛‍♂️ 🧟‍♀️ 🧟 🧟‍♂️ 🧞‍♀️ 🧞 🧞‍♂️ 🧜‍♀️ 🧜 🧜‍♂️ 🧚‍♀️ 🧚 🧚‍♂️ 👼 🤰 🤱 👩‍🍼 🧑‍🍼 👨‍🍼 🙇‍♀️ 🙇 🙇‍♂️ 💁‍♀️ 💁 💁‍♂️ 🙅‍♀️ 🙅 🙅‍♂️ 🙆‍♀️ 🙆 🙆‍♂️ 🙋‍♀️ 🙋 🙋‍♂️ 🧏‍♀️ 🧏 🧏‍♂️ 🤦‍♀️ 🤦 🤦‍♂️ 🤷‍♀️ 🤷 🤷‍♂️ 🙎‍♀️ 🙎 🙎‍♂️ 🙍‍♀️ 🙍 🙍‍♂️ 💇‍♀️ 💇 💇‍♂️ 💆‍♀️ 💆 💆‍♂️ 🧖‍♀️ 🧖 🧖‍♂️ 💅 🤳 💃 🕺 👯‍♀️ 👯 👯‍♂️ 🕴 👩‍🦽 🧑‍🦽 👨‍🦽 👩‍🦼 🧑‍🦼 👨‍🦼 🚶‍♀️ 🚶 🚶‍♂️ 👩‍🦯 🧑‍🦯 👨‍🦯 🧎‍♀️ 🧎 🧎‍♂️ 🏃‍♀️ 🏃 🏃‍♂️ 🧍‍♀️ 🧍 🧍‍♂️ 👭 🧑‍🤝‍🧑 👬 👫 👩‍❤️‍👩 💑 👨‍❤️‍👨 👩‍❤️‍👨 👩‍❤️‍💋‍👩 💏 👨‍❤️‍💋‍👨 👩‍❤️‍💋‍👨 👪 👨‍👩‍👦 👨‍👩‍👧 👨‍👩‍👧‍👦 👨‍👩‍👦‍👦 👨‍👩‍👧‍👧 👨‍👨‍👦 👨‍👨‍👧 👨‍👨‍👧‍👦 👨‍👨‍👦‍👦 👨‍👨‍👧‍👧 👩‍👩‍👦 👩‍👩‍👧 👩‍👩‍👧‍👦 👩‍👩‍👦‍👦 👩‍👩‍👧‍👧 👨‍👦 👨‍👦‍👦 👨‍👧 👨‍👧‍👦 👨‍👧‍👧 👩‍👦 👩‍👦‍👦 👩‍👧 👩‍👧‍👦 👩‍👧‍👧 🗣 👤 👥
-
-                        </p> <p>Pale Emojis <br>
-                        👋🏻 🤚🏻 🖐🏻 ✋🏻 🖖🏻 👌🏻 🤌🏻 🤏🏻 ✌🏻 🤞🏻 🤟🏻 🤘🏻 🤙🏻 👈🏻 👉🏻 👆🏻 🖕🏻 👇🏻 ☝🏻 👍🏻 👎🏻 ✊🏻 👊🏻 🤛🏻 🤜🏻 👏🏻 🙌🏻 👐🏻 🤲🏻 🙏🏻 ✍🏻 💅🏻 🤳🏻 💪🏻 🦵🏻 🦶🏻 👂🏻 🦻🏻 👃🏻 👶🏻 👧🏻 🧒🏻 👦🏻 👩🏻 🧑🏻 👨🏻 👩🏻‍🦱 🧑🏻‍🦱 👨🏻‍🦱 👩🏻‍🦰 🧑🏻‍🦰 👨🏻‍🦰 👱🏻‍♀️ 👱🏻 👱🏻‍♂️ 👩🏻‍🦳 🧑🏻‍🦳 👨🏻‍🦳 👩🏻‍🦲 🧑🏻‍🦲 👨🏻‍🦲 🧔🏻 👵🏻 🧓🏻 👴🏻 👲🏻 👳🏻‍♀️ 👳🏻 👳🏻‍♂️ 🧕🏻 👮🏻‍♀️ 👮🏻 👮🏻‍♂️ 👷🏻‍♀️ 👷🏻 👷🏻‍♂️ 💂🏻‍♀️ 💂🏻 💂🏻‍♂️ 🕵🏻‍♀️ 🕵🏻 🕵🏻‍♂️ 👩🏻‍⚕️ 🧑🏻‍⚕️ 👨🏻‍⚕️ 👩🏻‍🌾 🧑🏻‍🌾 👨🏻‍🌾 👩🏻‍🍳 🧑🏻‍🍳 👨🏻‍🍳 👩🏻‍🎓 🧑🏻‍🎓 👨🏻‍🎓 👩🏻‍🎤 🧑🏻‍🎤 👨🏻‍🎤 👩🏻‍🏫 🧑🏻‍🏫 👨🏻‍🏫 👩🏻‍🏭 🧑🏻‍🏭 👨🏻‍🏭 👩🏻‍💻 🧑🏻‍💻 👨🏻‍💻 👩🏻‍💼 🧑🏻‍💼 👨🏻‍💼 👩🏻‍🔧 🧑🏻‍🔧 👨🏻‍🔧 👩🏻‍🔬 🧑🏻‍🔬 👨🏻‍🔬 👩🏻‍🎨 🧑🏻‍🎨 👨🏻‍🎨 👩🏻‍🚒 🧑🏻‍🚒 👨🏻‍🚒 👩🏻‍✈️ 🧑🏻‍✈️ 👨🏻‍✈️ 👩🏻‍🚀 🧑🏻‍🚀 👨🏻‍🚀 👩🏻‍⚖️ 🧑🏻‍⚖️ 👨🏻‍⚖️ 👰🏻‍♀️ 👰🏻 👰🏻‍♂️ 🤵🏻‍♀️ 🤵🏻 🤵🏻‍♂️ 👸🏻 🤴🏻 🥷🏻 🦸🏻‍♀️ 🦸🏻 🦸🏻‍♂️ 🦹🏻‍♀️ 🦹🏻 🦹🏻‍♂️ 🤶🏻 🧑🏻‍🎄 🎅🏻 🧙🏻‍♀️ 🧙🏻 🧙🏻‍♂️ 🧝🏻‍♀️ 🧝🏻 🧝🏻‍♂️ 🧛🏻‍♀️ 🧛🏻 🧛🏻‍♂️ 🧜🏻‍♀️ 🧜🏻 🧜🏻‍♂️ 🧚🏻‍♀️ 🧚🏻 🧚🏻‍♂️ 👼🏻 🤰🏻 🤱🏻 👩🏻‍🍼 🧑🏻‍🍼 👨🏻‍🍼 🙇🏻‍♀️ 🙇🏻 🙇🏻‍♂️ 💁🏻‍♀️ 💁🏻 💁🏻‍♂️ 🙅🏻‍♀️ 🙅🏻 🙅🏻‍♂️ 🙆🏻‍♀️ 🙆🏻 🙆🏻‍♂️ 🙋🏻‍♀️ 🙋🏻 🙋🏻‍♂️ 🧏🏻‍♀️ 🧏🏻 🧏🏻‍♂️ 🤦🏻‍♀️ 🤦🏻 🤦🏻‍♂️ 🤷🏻‍♀️ 🤷🏻 🤷🏻‍♂️ 🙎🏻‍♀️ 🙎🏻 🙎🏻‍♂️ 🙍🏻‍♀️ 🙍🏻 🙍🏻‍♂️ 💇🏻‍♀️ 💇🏻 💇🏻‍♂️ 💆🏻‍♀️ 💆🏻 💆🏻‍♂️ 🧖🏻‍♀️ 🧖🏻 🧖🏻‍♂️ 💃🏻 🕺🏻 🕴🏻 👩🏻‍🦽 🧑🏻‍🦽 👨🏻‍🦽 👩🏻‍🦼 🧑🏻‍🦼 👨🏻‍🦼 🚶🏻‍♀️ 🚶🏻 🚶🏻‍♂️ 👩🏻‍🦯 🧑🏻‍🦯 👨🏻‍🦯 🧎🏻‍♀️ 🧎🏻 🧎🏻‍♂️ 🏃🏻‍♀️ 🏃🏻 🏃🏻‍♂️ 🧍🏻‍♀️ 🧍🏻 🧍🏻‍♂️ 👭🏻 🧑🏻‍🤝‍🧑🏻 👬🏻 👫🏻 🧗🏻‍♀️ 🧗🏻 🧗🏻‍♂️ 🏇🏻 🏂🏻 🏌🏻‍♀️ 🏌🏻 🏌🏻‍♂️ 🏄🏻‍♀️ 🏄🏻 🏄🏻‍♂️ 🚣🏻‍♀️ 🚣🏻 🚣🏻‍♂️ 🏊🏻‍♀️ 🏊🏻 🏊🏻‍♂️ ⛹🏻‍♀️ ⛹🏻 ⛹🏻‍♂️ 🏋🏻‍♀️ 🏋🏻 🏋🏻‍♂️ 🚴🏻‍♀️ 🚴🏻 🚴🏻‍♂️ 🚵🏻‍♀️ 🚵🏻 🚵🏻‍♂️ 🤸🏻‍♀️ 🤸🏻 🤸🏻‍♂️ 🤽🏻‍♀️ 🤽🏻 🤽🏻‍♂️ 🤾🏻‍♀️ 🤾🏻 🤾🏻‍♂️ 🤹🏻‍♀️ 🤹🏻 🤹🏻‍♂️ 🧘🏻‍♀️ 🧘🏻 🧘🏻‍♂️ 🛀🏻 🛌🏻
-
-                        </p> <p>Cream White Emojis <br>
-                        👋🏼 🤚🏼 🖐🏼 ✋🏼 🖖🏼 👌🏼 🤌🏼 🤏🏼 ✌🏼 🤞🏼 🤟🏼 🤘🏼 🤙🏼 👈🏼 👉🏼 👆🏼 🖕🏼 👇🏼 ☝🏼 👍🏼 👎🏼 ✊🏼 👊🏼 🤛🏼 🤜🏼 👏🏼 🙌🏼 👐🏼 🤲🏼 🙏🏼 ✍🏼 💅🏼 🤳🏼 💪🏼 🦵🏼 🦶🏼 👂🏼 🦻🏼 👃🏼 👶🏼 👧🏼 🧒🏼 👦🏼 👩🏼 🧑🏼 👨🏼 👩🏼‍🦱 🧑🏼‍🦱 👨🏼‍🦱 👩🏼‍🦰 🧑🏼‍🦰 👨🏼‍🦰 👱🏼‍♀️ 👱🏼 👱🏼‍♂️ 👩🏼‍🦳 🧑🏼‍🦳 👨🏼‍🦳 👩🏼‍🦲 🧑🏼‍🦲 👨🏼‍🦲 🧔🏼 👵🏼 🧓🏼 👴🏼 👲🏼 👳🏼‍♀️ 👳🏼 👳🏼‍♂️ 🧕🏼 👮🏼‍♀️ 👮🏼 👮🏼‍♂️ 👷🏼‍♀️ 👷🏼 👷🏼‍♂️ 💂🏼‍♀️ 💂🏼 💂🏼‍♂️ 🕵🏼‍♀️ 🕵🏼 🕵🏼‍♂️ 👩🏼‍⚕️ 🧑🏼‍⚕️ 👨🏼‍⚕️ 👩🏼‍🌾 🧑🏼‍🌾 👨🏼‍🌾 👩🏼‍🍳 🧑🏼‍🍳 👨🏼‍🍳 👩🏼‍🎓 🧑🏼‍🎓 👨🏼‍🎓 👩🏼‍🎤 🧑🏼‍🎤 👨🏼‍🎤 👩🏼‍🏫 🧑🏼‍🏫 👨🏼‍🏫 👩🏼‍🏭 🧑🏼‍🏭 👨🏼‍🏭 👩🏼‍💻 🧑🏼‍💻 👨🏼‍💻 👩🏼‍💼 🧑🏼‍💼 👨🏼‍💼 👩🏼‍🔧 🧑🏼‍🔧 👨🏼‍🔧 👩🏼‍🔬 🧑🏼‍🔬 👨🏼‍🔬 👩🏼‍🎨 🧑🏼‍🎨 👨🏼‍🎨 👩🏼‍🚒 🧑🏼‍🚒 👨🏼‍🚒 👩🏼‍✈️ 🧑🏼‍✈️ 👨🏼‍✈️ 👩🏼‍🚀 🧑🏼‍🚀 👨🏼‍🚀 👩🏼‍⚖️ 🧑🏼‍⚖️ 👨🏼‍⚖️ 👰🏼‍♀️ 👰🏼 👰🏼‍♂️ 🤵🏼‍♀️ 🤵🏼 🤵🏼‍♂️ 👸🏼 🤴🏼 🥷🏼 🦸🏼‍♀️ 🦸🏼 🦸🏼‍♂️ 🦹🏼‍♀️ 🦹🏼 🦹🏼‍♂️ 🤶🏼 🧑🏼‍🎄 🎅🏼 🧙🏼‍♀️ 🧙🏼 🧙🏼‍♂️ 🧝🏼‍♀️ 🧝🏼 🧝🏼‍♂️ 🧛🏼‍♀️ 🧛🏼 🧛🏼‍♂️ 🧜🏼‍♀️ 🧜🏼 🧜🏼‍♂️ 🧚🏼‍♀️ 🧚🏼 🧚🏼‍♂️ 👼🏼 🤰🏼 🤱🏼 👩🏼‍🍼 🧑🏼‍🍼 👨🏼‍🍼 🙇🏼‍♀️ 🙇🏼 🙇🏼‍♂️ 💁🏼‍♀️ 💁🏼 💁🏼‍♂️ 🙅🏼‍♀️ 🙅🏼 🙅🏼‍♂️ 🙆🏼‍♀️ 🙆🏼 🙆🏼‍♂️ 🙋🏼‍♀️ 🙋🏼 🙋🏼‍♂️ 🧏🏼‍♀️ 🧏🏼 🧏🏼‍♂️ 🤦🏼‍♀️ 🤦🏼 🤦🏼‍♂️ 🤷🏼‍♀️ 🤷🏼 🤷🏼‍♂️ 🙎🏼‍♀️ 🙎🏼 🙎🏼‍♂️ 🙍🏼‍♀️ 🙍🏼 🙍🏼‍♂️ 💇🏼‍♀️ 💇🏼 💇🏼‍♂️ 💆🏼‍♀️ 💆🏼 💆🏼‍♂️ 🧖🏼‍♀️ 🧖🏼 🧖🏼‍♂️ 💃🏼 🕺🏼 🕴🏼 👩🏼‍🦽 🧑🏼‍🦽 👨🏼‍🦽 👩🏼‍🦼 🧑🏼‍🦼 👨🏼‍🦼 🚶🏼‍♀️ 🚶🏼 🚶🏼‍♂️ 👩🏼‍🦯 🧑🏼‍🦯 👨🏼‍🦯 🧎🏼‍♀️ 🧎🏼 🧎🏼‍♂️ 🏃🏼‍♀️ 🏃🏼 🏃🏼‍♂️ 🧍🏼‍♀️ 🧍🏼 🧍🏼‍♂️ 👭🏼 🧑🏼‍🤝‍🧑🏼 👬🏼 👫🏼 🧗🏼‍♀️ 🧗🏼 🧗🏼‍♂️ 🏇🏼 🏂🏼 🏌🏼‍♀️ 🏌🏼 🏌🏼‍♂️ 🏄🏼‍♀️ 🏄🏼 🏄🏼‍♂️ 🚣🏼‍♀️ 🚣🏼 🚣🏼‍♂️ 🏊🏼‍♀️ 🏊🏼 🏊🏼‍♂️ ⛹🏼‍♀️ ⛹🏼 ⛹🏼‍♂️ 🏋🏼‍♀️ 🏋🏼 🏋🏼‍♂️ 🚴🏼‍♀️ 🚴🏼 🚴🏼‍♂️ 🚵🏼‍♀️ 🚵🏼 🚵🏼‍♂️ 🤸🏼‍♀️ 🤸🏼 🤸🏼‍♂️ 🤽🏼‍♀️ 🤽🏼 🤽🏼‍♂️ 🤾🏼‍♀️ 🤾🏼 🤾🏼‍♂️ 🤹🏼‍♀️ 🤹🏼 🤹🏼‍♂️ 🧘🏼‍♀️ 🧘🏼 🧘🏼‍♂️ 🛀🏼 🛌🏼
-
-                        </p> <p>Brown Emojis <br>
-                        👋🏽 🤚🏽 🖐🏽 ✋🏽 🖖🏽 👌🏽 🤌🏽 🤏🏽 ✌🏽 🤞🏽 🤟🏽 🤘🏽 🤙🏽 👈🏽 👉🏽 👆🏽 🖕🏽 👇🏽 ☝🏽 👍🏽 👎🏽 ✊🏽 👊🏽 🤛🏽 🤜🏽 👏🏽 🙌🏽 👐🏽 🤲🏽 🙏🏽 ✍🏽 💅🏽 🤳🏽 💪🏽 🦵🏽 🦶🏽 👂🏽 🦻🏽 👃🏽 👶🏽 👧🏽 🧒🏽 👦🏽 👩🏽 🧑🏽 👨🏽 👩🏽‍🦱 🧑🏽‍🦱 👨🏽‍🦱 👩🏽‍🦰 🧑🏽‍🦰 👨🏽‍🦰 👱🏽‍♀️ 👱🏽 👱🏽‍♂️ 👩🏽‍🦳 🧑🏽‍🦳 👨🏽‍🦳 👩🏽‍🦲 🧑🏽‍🦲 👨🏽‍🦲 🧔🏽 👵🏽 🧓🏽 👴🏽 👲🏽 👳🏽‍♀️ 👳🏽 👳🏽‍♂️ 🧕🏽 👮🏽‍♀️ 👮🏽 👮🏽‍♂️ 👷🏽‍♀️ 👷🏽 👷🏽‍♂️ 💂🏽‍♀️ 💂🏽 💂🏽‍♂️ 🕵🏽‍♀️ 🕵🏽 🕵🏽‍♂️ 👩🏽‍⚕️ 🧑🏽‍⚕️ 👨🏽‍⚕️ 👩🏽‍🌾 🧑🏽‍🌾 👨🏽‍🌾 👩🏽‍🍳 🧑🏽‍🍳 👨🏽‍🍳 👩🏽‍🎓 🧑🏽‍🎓 👨🏽‍🎓 👩🏽‍🎤 🧑🏽‍🎤 👨🏽‍🎤 👩🏽‍🏫 🧑🏽‍🏫 👨🏽‍🏫 👩🏽‍🏭 🧑🏽‍🏭 👨🏽‍🏭 👩🏽‍💻 🧑🏽‍💻 👨🏽‍💻 👩🏽‍💼 🧑🏽‍💼 👨🏽‍💼 👩🏽‍🔧 🧑🏽‍🔧 👨🏽‍🔧 👩🏽‍🔬 🧑🏽‍🔬 👨🏽‍🔬 👩🏽‍🎨 🧑🏽‍🎨 👨🏽‍🎨 👩🏽‍🚒 🧑🏽‍🚒 👨🏽‍🚒 👩🏽‍✈️ 🧑🏽‍✈️ 👨🏽‍✈️ 👩🏽‍🚀 🧑🏽‍🚀 👨🏽‍🚀 👩🏽‍⚖️ 🧑🏽‍⚖️ 👨🏽‍⚖️ 👰🏽‍♀️ 👰🏽 👰🏽‍♂️ 🤵🏽‍♀️ 🤵🏽 🤵🏽‍♂️ 👸🏽 🤴🏽 🥷🏽 🦸🏽‍♀️ 🦸🏽 🦸🏽‍♂️ 🦹🏽‍♀️ 🦹🏽 🦹🏽‍♂️ 🤶🏽 🧑🏽‍🎄 🎅🏽 🧙🏽‍♀️ 🧙🏽 🧙🏽‍♂️ 🧝🏽‍♀️ 🧝🏽 🧝🏽‍♂️ 🧛🏽‍♀️ 🧛🏽 🧛🏽‍♂️ 🧜🏽‍♀️ 🧜🏽 🧜🏽‍♂️ 🧚🏽‍♀️ 🧚🏽 🧚🏽‍♂️ 👼🏽 🤰🏽 🤱🏽 👩🏽‍🍼 🧑🏽‍🍼 👨🏽‍🍼 🙇🏽‍♀️ 🙇🏽 🙇🏽‍♂️ 💁🏽‍♀️ 💁🏽 💁🏽‍♂️ 🙅🏽‍♀️ 🙅🏽 🙅🏽‍♂️ 🙆🏽‍♀️ 🙆🏽 🙆🏽‍♂️ 🙋🏽‍♀️ 🙋🏽 🙋🏽‍♂️ 🧏🏽‍♀️ 🧏🏽 🧏🏽‍♂️ 🤦🏽‍♀️ 🤦🏽 🤦🏽‍♂️ 🤷🏽‍♀️ 🤷🏽 🤷🏽‍♂️ 🙎🏽‍♀️ 🙎🏽 🙎🏽‍♂️ 🙍🏽‍♀️ 🙍🏽 🙍🏽‍♂️ 💇🏽‍♀️ 💇🏽 💇🏽‍♂️ 💆🏽‍♀️ 💆🏽 💆🏽‍♂️ 🧖🏽‍♀️ 🧖🏽 🧖🏽‍♂️ 💃🏽 🕺🏽 🕴🏽 👩🏽‍🦽 🧑🏽‍🦽 👨🏽‍🦽 👩🏽‍🦼 🧑🏽‍🦼 👨🏽‍🦼 🚶🏽‍♀️ 🚶🏽 🚶🏽‍♂️ 👩🏽‍🦯 🧑🏽‍🦯 👨🏽‍🦯 🧎🏽‍♀️ 🧎🏽 🧎🏽‍♂️ 🏃🏽‍♀️ 🏃🏽 🏃🏽‍♂️ 🧍🏽‍♀️ 🧍🏽 🧍🏽‍♂️ 👭🏽 🧑🏽‍🤝‍🧑🏽 👬🏽 👫🏽 🧗🏽‍♀️ 🧗🏽 🧗🏽‍♂️ 🏇🏽 🏂🏽 🏌🏽‍♀️ 🏌🏽 🏌🏽‍♂️ 🏄🏽‍♀️ 🏄🏽 🏄🏽‍♂️ 🚣🏽‍♀️ 🚣🏽 🚣🏽‍♂️ 🏊🏽‍♀️ 🏊🏽 🏊🏽‍♂️ ⛹🏽‍♀️ ⛹🏽 ⛹🏽‍♂️ 🏋🏽‍♀️ 🏋🏽 🏋🏽‍♂️ 🚴🏽‍♀️ 🚴🏽 🚴🏽‍♂️ 🚵🏽‍♀️ 🚵🏽 🚵🏽‍♂️ 🤸🏽‍♀️ 🤸🏽 🤸🏽‍♂️ 🤽🏽‍♀️ 🤽🏽 🤽🏽‍♂️ 🤾🏽‍♀️ 🤾🏽 🤾🏽‍♂️ 🤹🏽‍♀️ 🤹🏽 🤹🏽‍♂️ 🧘🏽‍♀️ 🧘🏽 🧘🏽‍♂️ 🛀🏽 🛌🏽
-
-                        </p> <p> Dark Brown Emojis <br>
-                        👋🏾 🤚🏾 🖐🏾 ✋🏾 🖖🏾 👌🏾 🤌🏾 🤏🏾 ✌🏾 🤞🏾 🤟🏾 🤘🏾 🤙🏾 👈🏾 👉🏾 👆🏾 🖕🏾 👇🏾 ☝🏾 👍🏾 👎🏾 ✊🏾 👊🏾 🤛🏾 🤜🏾 👏🏾 🙌🏾 👐🏾 🤲🏾 🙏🏾 ✍🏾 💅🏾 🤳🏾 💪🏾 🦵🏾 🦶🏾 👂🏾 🦻🏾 👃🏾 👶🏾 👧🏾 🧒🏾 👦🏾 👩🏾 🧑🏾 👨🏾 👩🏾‍🦱 🧑🏾‍🦱 👨🏾‍🦱 👩🏾‍🦰 🧑🏾‍🦰 👨🏾‍🦰 👱🏾‍♀️ 👱🏾 👱🏾‍♂️ 👩🏾‍🦳 🧑🏾‍🦳 👨🏾‍🦳 👩🏾‍🦲 🧑🏾‍🦲 👨🏾‍🦲 🧔🏾 👵🏾 🧓🏾 👴🏾 👲🏾 👳🏾‍♀️ 👳🏾 👳🏾‍♂️ 🧕🏾 👮🏾‍♀️ 👮🏾 👮🏾‍♂️ 👷🏾‍♀️ 👷🏾 👷🏾‍♂️ 💂🏾‍♀️ 💂🏾 💂🏾‍♂️ 🕵🏾‍♀️ 🕵🏾 🕵🏾‍♂️ 👩🏾‍⚕️ 🧑🏾‍⚕️ 👨🏾‍⚕️ 👩🏾‍🌾 🧑🏾‍🌾 👨🏾‍🌾 👩🏾‍🍳 🧑🏾‍🍳 👨🏾‍🍳 👩🏾‍🎓 🧑🏾‍🎓 👨🏾‍🎓 👩🏾‍🎤 🧑🏾‍🎤 👨🏾‍🎤 👩🏾‍🏫 🧑🏾‍🏫 👨🏾‍🏫 👩🏾‍🏭 🧑🏾‍🏭 👨🏾‍🏭 👩🏾‍💻 🧑🏾‍💻 👨🏾‍💻 👩🏾‍💼 🧑🏾‍💼 👨🏾‍💼 👩🏾‍🔧 🧑🏾‍🔧 👨🏾‍🔧 👩🏾‍🔬 🧑🏾‍🔬 👨🏾‍🔬 👩🏾‍🎨 🧑🏾‍🎨 👨🏾‍🎨 👩🏾‍🚒 🧑🏾‍🚒 👨🏾‍🚒 👩🏾‍✈️ 🧑🏾‍✈️ 👨🏾‍✈️ 👩🏾‍🚀 🧑🏾‍🚀 👨🏾‍🚀 👩🏾‍⚖️ 🧑🏾‍⚖️ 👨🏾‍⚖️ 👰🏾‍♀️ 👰🏾 👰🏾‍♂️ 🤵🏾‍♀️ 🤵🏾 🤵🏾‍♂️ 👸🏾 🤴🏾 🥷🏾 🦸🏾‍♀️ 🦸🏾 🦸🏾‍♂️ 🦹🏾‍♀️ 🦹🏾 🦹🏾‍♂️ 🤶🏾 🧑🏾‍🎄 🎅🏾 🧙🏾‍♀️ 🧙🏾 🧙🏾‍♂️ 🧝🏾‍♀️ 🧝🏾 🧝🏾‍♂️ 🧛🏾‍♀️ 🧛🏾 🧛🏾‍♂️ 🧜🏾‍♀️ 🧜🏾 🧜🏾‍♂️ 🧚🏾‍♀️ 🧚🏾 🧚🏾‍♂️ 👼🏾 🤰🏾 🤱🏾 👩🏾‍🍼 🧑🏾‍🍼 👨🏾‍🍼 🙇🏾‍♀️ 🙇🏾 🙇🏾‍♂️ 💁🏾‍♀️ 💁🏾 💁🏾‍♂️ 🙅🏾‍♀️ 🙅🏾 🙅🏾‍♂️ 🙆🏾‍♀️ 🙆🏾 🙆🏾‍♂️ 🙋🏾‍♀️ 🙋🏾 🙋🏾‍♂️ 🧏🏾‍♀️ 🧏🏾 🧏🏾‍♂️ 🤦🏾‍♀️ 🤦🏾 🤦🏾‍♂️ 🤷🏾‍♀️ 🤷🏾 🤷🏾‍♂️ 🙎🏾‍♀️ 🙎🏾 🙎🏾‍♂️ 🙍🏾‍♀️ 🙍🏾 🙍🏾‍♂️ 💇🏾‍♀️ 💇🏾 💇🏾‍♂️ 💆🏾‍♀️ 💆🏾 💆🏾‍♂️ 🧖🏾‍♀️ 🧖🏾 🧖🏾‍♂️ 💃🏾 🕺🏾 🕴🏿 👩🏾‍🦽 🧑🏾‍🦽 👨🏾‍🦽 👩🏾‍🦼 🧑🏾‍🦼 👨🏾‍🦼 🚶🏾‍♀️ 🚶🏾 🚶🏾‍♂️ 👩🏾‍🦯 🧑🏾‍🦯 👨🏾‍🦯 🧎🏾‍♀️ 🧎🏾 🧎🏾‍♂️ 🏃🏾‍♀️ 🏃🏾 🏃🏾‍♂️ 🧍🏾‍♀️ 🧍🏾 🧍🏾‍♂️ 👭🏾 🧑🏾‍🤝‍🧑🏾 👬🏾 👫🏾 🧗🏾‍♀️ 🧗🏾 🧗🏾‍♂️ 🏇🏾 🏂🏾 🏌🏾‍♀️ 🏌🏾 🏌🏾‍♂️ 🏄🏾‍♀️ 🏄🏾 🏄🏾‍♂️ 🚣🏾‍♀️ 🚣🏾 🚣🏾‍♂️ 🏊🏾‍♀️ 🏊🏾 🏊🏾‍♂️ ⛹🏾‍♀️ ⛹🏾 ⛹🏾‍♂️ 🏋🏾‍♀️ 🏋🏾 🏋🏾‍♂️ 🚴🏾‍♀️ 🚴🏾 🚴🏾‍♂️ 🚵🏾‍♀️ 🚵🏾 🚵🏾‍♂️ 🤸🏾‍♀️ 🤸🏾 🤸🏾‍♂️ 🤽🏾‍♀️ 🤽🏾 🤽🏾‍♂️ 🤾🏾‍♀️ 🤾🏾 🤾🏾‍♂️ 🤹🏾‍♀️ 🤹🏾 🤹🏾‍♂️ 🧘🏾‍♀️ 🧘🏾 🧘🏾‍♂️ 🛀🏾 🛌🏾
-
-                        </p> <p>Black Emojis <br>
-                        👋🏿 🤚🏿 🖐🏿 ✋🏿 🖖🏿 👌🏿 🤌🏿 🤏🏿 ✌🏿 🤞🏿 🤟🏿 🤘🏿 🤙🏿 👈🏿 👉🏿 👆🏿 🖕🏿 👇🏿 ☝🏿 👍🏿 👎🏿 ✊🏿 👊🏿 🤛🏿 🤜🏿 👏🏿 🙌🏿 👐🏿 🤲🏿 🙏🏿 ✍🏿 💅🏿 🤳🏿 💪🏿 🦵🏿 🦶🏿 👂🏿 🦻🏿 👃🏿 👶🏿 👧🏿 🧒🏿 👦🏿 👩🏿 🧑🏿 👨🏿 👩🏿‍🦱 🧑🏿‍🦱 👨🏿‍🦱 👩🏿‍🦰 🧑🏿‍🦰 👨🏿‍🦰 👱🏿‍♀️ 👱🏿 👱🏿‍♂️ 👩🏿‍🦳 🧑🏿‍🦳 👨🏿‍🦳 👩🏿‍🦲 🧑🏿‍🦲 👨🏿‍🦲 🧔🏿 👵🏿 🧓🏿 👴🏿 👲🏿 👳🏿‍♀️ 👳🏿 👳🏿‍♂️ 🧕🏿 👮🏿‍♀️ 👮🏿 👮🏿‍♂️ 👷🏿‍♀️ 👷🏿 👷🏿‍♂️ 💂🏿‍♀️ 💂🏿 💂🏿‍♂️ 🕵🏿‍♀️ 🕵🏿 🕵🏿‍♂️ 👩🏿‍⚕️ 🧑🏿‍⚕️ 👨🏿‍⚕️ 👩🏿‍🌾 🧑🏿‍🌾 👨🏿‍🌾 👩🏿‍🍳 🧑🏿‍🍳 👨🏿‍🍳 👩🏿‍🎓 🧑🏿‍🎓 👨🏿‍🎓 👩🏿‍🎤 🧑🏿‍🎤 👨🏿‍🎤 👩🏿‍🏫 🧑🏿‍🏫 👨🏿‍🏫 👩🏿‍🏭 🧑🏿‍🏭 👨🏿‍🏭 👩🏿‍💻 🧑🏿‍💻 👨🏿‍💻 👩🏿‍💼 🧑🏿‍💼 👨🏿‍💼 👩🏿‍🔧 🧑🏿‍🔧 👨🏿‍🔧 👩🏿‍🔬 🧑🏿‍🔬 👨🏿‍🔬 👩🏿‍🎨 🧑🏿‍🎨 👨🏿‍🎨 👩🏿‍🚒 🧑🏿‍🚒 👨🏿‍🚒 👩🏿‍✈️ 🧑🏿‍✈️ 👨🏿‍✈️ 👩🏿‍🚀 🧑🏿‍🚀 👨🏿‍🚀 👩🏿‍⚖️ 🧑🏿‍⚖️ 👨🏿‍⚖️ 👰🏿‍♀️ 👰🏿 👰🏿‍♂️ 🤵🏿‍♀️ 🤵🏿 🤵🏿‍♂️ 👸🏿 🤴🏿 🥷🏿 🦸🏿‍♀️ 🦸🏿 🦸🏿‍♂️ 🦹🏿‍♀️ 🦹🏿 🦹🏿‍♂️ 🤶🏿 🧑🏿‍🎄 🎅🏿 🧙🏿‍♀️ 🧙🏿 🧙🏿‍♂️ 🧝🏿‍♀️ 🧝🏿 🧝🏿‍♂️ 🧛🏿‍♀️ 🧛🏿 🧛🏿‍♂️ 🧜🏿‍♀️ 🧜🏿 🧜🏿‍♂️ 🧚🏿‍♀️ 🧚🏿 🧚🏿‍♂️ 👼🏿 🤰🏿 🤱🏿 👩🏿‍🍼 🧑🏿‍🍼 👨🏿‍🍼 🙇🏿‍♀️ 🙇🏿 🙇🏿‍♂️ 💁🏿‍♀️ 💁🏿 💁🏿‍♂️ 🙅🏿‍♀️ 🙅🏿 🙅🏿‍♂️ 🙆🏿‍♀️ 🙆🏿 🙆🏿‍♂️ 🙋🏿‍♀️ 🙋🏿 🙋🏿‍♂️ 🧏🏿‍♀️ 🧏🏿 🧏🏿‍♂️ 🤦🏿‍♀️ 🤦🏿 🤦🏿‍♂️ 🤷🏿‍♀️ 🤷🏿 🤷🏿‍♂️ 🙎🏿‍♀️ 🙎🏿 🙎🏿‍♂️ 🙍🏿‍♀️ 🙍🏿 🙍🏿‍♂️ 💇🏿‍♀️ 💇🏿 💇🏿‍♂️ 💆🏿‍♀️ 💆🏿 💆🏿‍♂️ 🧖🏿‍♀️ 🧖🏿 🧖🏿‍♂️ 💃🏿 🕺🏿 🕴🏿 👩🏿‍🦽 🧑🏿‍🦽 👨🏿‍🦽 👩🏿‍🦼 🧑🏿‍🦼 👨🏿‍🦼 🚶🏿‍♀️ 🚶🏿 🚶🏿‍♂️ 👩🏿‍🦯 🧑🏿‍🦯 👨🏿‍🦯 🧎🏿‍♀️ 🧎🏿 🧎🏿‍♂️ 🏃🏿‍♀️ 🏃🏿 🏃🏿‍♂️ 🧍🏿‍♀️ 🧍🏿 🧍🏿‍♂️ 👭🏿 🧑🏿‍🤝‍🧑🏿 👬🏿 👫🏿 🧗🏿‍♀️ 🧗🏿 🧗🏿‍♂️ 🏇🏿 🏂🏿 🏌🏿‍♀️ 🏌🏿 🏌🏿‍♂️ 🏄🏿‍♀️ 🏄🏿 🏄🏿‍♂️ 🚣🏿‍♀️ 🚣🏿 🚣🏿‍♂️ 🏊🏿‍♀️ 🏊🏿 🏊🏿‍♂️ ⛹🏿‍♀️ ⛹🏿 ⛹🏿‍♂️ 🏋🏿‍♀️ 🏋🏿 🏋🏿‍♂️ 🚴🏿‍♀️ 🚴🏿 🚴🏿‍♂️ 🚵🏿‍♀️ 🚵🏿 🚵🏿‍♂️ 🤸🏿‍♀️ 🤸🏿 🤸🏿‍♂️ 🤽🏿‍♀️ 🤽🏿 🤽🏿‍♂️ 🤾🏿‍♀️ 🤾🏿 🤾🏿‍♂️ 🤹🏿‍♀️ 🤹🏿 🤹🏿‍♂️ 🧘🏿‍♀️ 🧘🏿 🧘🏿‍♂️ 🛀🏿 🛌🏿
-                        </p> </div>
