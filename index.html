@@ -229,6 +229,14 @@ Main Parameters:
                     --sys-input-padding        :  0;   
             }
 
+        .userEditResult  { 
+            float:                  left;
+            width:                  49%;
+            padding:                3px; 
+            border-style:           solid;
+            border-color:           var(--sys-background-color);
+            }
+
         /* SYSTEM EDIT GRID - UNDER CONSTRUCTION */
         .infoLinksGrid   { 
             margin-bottom:          8px; 
@@ -250,7 +258,7 @@ Main Parameters:
             /*align-items:            stretch;*/
             padding: 8px;
             }
-        .edit-columns    { 
+        .editColumnsGrid { 
             width:                  50%; 
             float:                  right;  /* change elements to span and remove float? */
             margin-bottom:          25px; 
@@ -265,26 +273,16 @@ Main Parameters:
             align-items:            stretch;
 
             }
-        .userEditResult  { 
-            float:                  left;
-            width:                  49%;
-            padding:                3px; 
-            }
-        .edit_themes     { 
-            display:                grid;
-            grid-template-rows:     1fr;
-            /*grid-template-columns descr ctrls attr  chg   undo  */
-            grid-template-columns:  auto  auto  auto  auto  auto;
-            }
-        /*  .edit-wrap > div  {} */
 
         /* SYSTEM .CLASS */
-        .attribute-popup        { position:                    relative;
-                                  z-index:                     4;
+        .attribute-popup        { position:           relative;
+                                  z-index:            4;
                                 }
-        .sysFancy               { font-family:                 var(--sys-fancy); }
-        .sysText                { font-family:                 var(--sys-font-family); } 
-        .sysSmall               { font-size:                   var(--sys-small); }
+        .sysFancy               { font-family:        var(--sys-fancy); }       /* remove usage */
+        .sysSmall               { font-size:          var(--sys-small); }       /* used? */
+        .sysText                { font-family:        var(--sys-font-family);   /* needed? used?*/
+                                  font-size:          var(--sys-font-size); 
+                                  color:              var(--sys-color); } 
         .system, .sysText       {
                                   font-family:        var(--sys-font-family); 
                                   font-style:         var(--sys-font-style); 
@@ -294,12 +292,12 @@ Main Parameters:
                                   text-indent:        var(--sys-text-indent);
                                   line-height:        var(--sys-line-height);
                                   }
-        .sysInput               { border-width:                var(--sys-input-borderWidth);
-                                  border                     : var(--sys-input-border );
-                                  padding                    : var(--sys-input-padding);
-                                  -webkit-appearance         : none;
-                        }
-        .sysHeader              { background-color:            var(--sys-header-background-color);
+        .sysInput               { border-width:       var(--sys-input-borderWidth);
+                                  border            : var(--sys-input-border );
+                                  padding           : var(--sys-input-padding);
+                                  -webkit-appearance: none;
+                                }
+        .sysHeader              { background-color:   var(--sys-header-background-color);
                                   font-family:                 var(--sys-desc-font-family);
                                   width:                       100%;
                                 }
@@ -340,7 +338,8 @@ Main Parameters:
                                   line-height    :    var(--sys-desc-line-height   ); 
                                   justify-items :     stretch;
                         }
-        .sysButton              {
+        .sysLargeButton         { font-size: 32px; }
+        .sysButton, .sysLargeButton               {
                                   border-style   :  var(--sys-button-border-style);
                                   background-color: var(--sys-button-background-color);
                                   color:            var(--sys-button-color);
@@ -366,12 +365,13 @@ Main Parameters:
                                   border-width   :  var(--sys-button-borderWidth );
                                   /*font-size:        var(--desc-txt-height); */
                               }
-        .sysBack                {
-                                  content:            var(--sys-pointL);
-                        }
-        .sysMargin              { margin-bottom  :    25px;                          }
+        .sysBack                {                                                        /* used? */
+                                  content:            var(--sys-pointL);  
+                                }
+        .sysMargin              { margin-bottom  :    25px;                          }   /* used? */
         .sysHover:hover         { color:              var(--sys-hover-color)  ;              
-                                  transition:         0.3s;                          }
+                                  transition:         0.3s;                          
+                                }
         .sysCenter              { text-align:    center;
                                   align-content: center;
                                   align-items:   center;
@@ -383,10 +383,35 @@ Main Parameters:
 <!--                                HTML                                -->
 <!-- ################################################################## -->
 <body onload="bodyLoaded()" >
-    <div style='text-align: right;'><copyright> © 2022 Jackie.Blue </copyright></div>
+<div class="system">
+<!-- ------------------------------------------------------------------ -->
+<!--                            SYSTEM MENU - top left                  -->
+    <span id='sysMenu' onclick="showId('displayCSS')" hidden>Generate CSS</span>
+<!-- ------------------------------------------------------------------ -->
+<!--                            COPYWRITE   - top right                 -->
+    <copyright style='position: absolute; right: 0px;'> © 2022 Jackie.Blue </copyright>
+    </div>
+<!-- ------------------------------------------------------------------ -->
+<!--                            WAIT                                    -->
+<div id="wait">                                                         waiting
+    <div class="center">
+        <div style="font-size: 60px;">                                  WORKING INDICATOR...</div>
+        <button class='sysLargeButton' onclick="hideId('wait'); 
+                                                showId('splashScreen')">Show Splashscreen</button>
+        </div>
+    </div>
+<!-- ------------------------------------------------------------------ -->
+<!--                            SPLASH SCREEN                           -->
+
+<div id="splashScreen" hidden>                                          splash screen
+    <div class="sysBlue sysFancy center">
+        <em style="font-size: 60px;">                                   Jackie.Blue logo</em>
+        <br><button class='sysLargeButton' onclick="hideId('splashScreen'); 
+                                                showEdit('');">  Show Editor</button></p>
+        </div>
+    </div>
 <!-- ------------------------------------------------------------------ -->
 <!--                            ATTRIBUTE INFO POPUP                    -->
-    <!-- <div><span class='sysTitle sysDesc'> Attribute Info Popup</span></div> -->
 <div style="z-index: 1; position: absolute;">
     <div id='attribute-popup' class='system' draggable='true' hidden> 
         <!-- ATTRIBUTE NAMES -->
@@ -425,14 +450,67 @@ Main Parameters:
             <div class='sysDesc sysCenter'>            Options  </div>
             <div id='info_options'></div>
             </p>
-    </div></div>
-
-<div id='edit-theme' class=''>
+    </div> </div>
 <!-- ------------------------------------------------------------------ -->
-<!--                            RESULTS COLUMN - LEFT GUI SIDE          -->
-    <div class='userEditResult'>
-        <!-- <div  class='sysDesc'><- Back</div><br> --><br>
-                                                                                        <!-- --EDIT--    -->
+<!--                            DISPLAY CSS AS POPUP(?)                 -->
+<div id="displayCSS"  style="z-index: 6; position: absolute; width: 50%; background-color: black; color: wheat;" hidden>
+    <span class="sysTitle">CSS</span>
+    <span class='close sysRed' style="text-align: right;" onclick="hideId('displayCSS')">close ❌</span>
+    <div class="sysHeader">Description</div>
+    <div><p>Providing the current layout and theme settings in CSS format for saving as a file or cut and paste.</p></div>
+    <div class="sysHeader">Instructions</div>
+    <div>
+        <ol>
+            <li>Optionally select Root</li>
+            <li>Optionally select Theme and provide a Theme name</li>
+            <li>Optionally select to also include .class statements</li>
+            <li>Optionally edit the reults. Edits will only apply to your copy or save.</li>
+            <li>Select Copy to the clipboard or Save as file</li>
+        </ol>
+        </div>
+    <div>
+        <span style="display: inline-block;">
+            <input    type="radio"    id='rootSelect'  name="themeNameSelect" checked><label for="rootSelect" > Root theme    </label><br>
+            <input    type="radio"    id='themeSelect' name="themeNameSelect"        ><label for="themeSelect"> Named theme    </label><input type="text" name="" class="sysSelect"><br>
+            </span>
+        <span style="display: inline-block;">
+            <input    type="checkbox" id='includeClass' name="includeClasses"  checked><label for="includeClass"> Include .class</label><br>
+            <input    type="checkbox" id='includSystem' name="includeClasses"         ><label for="includSystem"> Include separate system theme</label><p>
+            </span>
+        </div>
+    <p>
+        <button   class='sysButton sysDesc'>Copy</button>
+        <button   class='sysButton sysDesc'>Save</button>
+        </p>
+    <textarea style="font-family: monospace; width: 100%; height: 50vh; padding: 8px">
+Sample of Future Textarea Generated Results
+
+:root   {
+--font-size:            24px;
+--font-weight:          400;
+--title-font-size:      24px;
+--title-font-weight:    400;
+}
+.body {
+    font-size:          var(--font-size);
+    font-weight:        var(--font-weight);
+}
+.title {
+    font-size:          var(--title-font-size);
+    font-weight:        var(--title-font-weight);
+}
+    </textarea>
+
+    </div>
+<!-- ------------------------------------------------------------------ -->
+<!--                            USER GUI FEEDBACK PANEL                 -->
+<div id='edit-theme' hidden class=''>
+
+    <!-- USER EDITABLE ELEMENTS AND RESULTS -->
+
+    <div id='userEditResult' class='userEditResult'>
+        <!-- <div  class='sysDesc'><- Back</div><br> -->
+                                                                                        <!-- EDITABLE ELEMENTS   -->
         <div  onclick="showEdit('title')"      class='title'>   Title       </div>      <!-- Title       -->
         <div  onclick="showEdit('description')"class='desc'  >  Description </div>      <!-- Description -->
         <span onclick="showEdit('')">                                                   <!-- Defaults    -->
@@ -453,10 +531,10 @@ Main Parameters:
             </span>
         </div>
 <!-- ------------------------------------------------------------------ -->
-<!--                            KNOBS COLUMN   - RIGHT CONTROLS SIDE    -->
-    <div id='edit-columns' class='system edit-columns'></div>
-    <!-- </div> edit-attrs -->
-</div> <!-- end edit-theme -->
+<!--                            KNOBS AND CONTROLS PANEL                -->
+    <div id='edit-columns' class='system editColumnsGrid'></div>
+
+</div> <!-- end edit-theme (User GUI & Edit Panel-->
 
 <!-- ################################################################## -->
 <!--                             JAVASCRIPT                             -->
@@ -537,13 +615,12 @@ Main Parameters:
     const attr_ctrls = [                                                                                               // unique controls 
         { attr: 'color',           description: 'Font Color',       default: 'not specified',  style: 'color',            type: 'color' },
         { attr: 'background-color',description: 'Background Color', default: 'not specified',  style: 'backgroundColor',  type: 'color' },
-        { attr: 'font-size',       description: 'Font Size',        default: '16px',           style: 'fontSize',         min: 4,  max:200,  inc: 2, suffix: 'px' },
+        { attr: 'font-size',       description: 'Font Size',        default: '16px',           style: 'fontSize',         min: 4,  max:200,  inc: 2, suffix: ['', 'px', 'em', 'rem', 'ex', 'vh', 'vw', 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'] },
         { attr: 'font-family',     description: 'Font Family',      default: 'New Times Roman',style: 'fontFamily',       options: [ 'Arial', 'Microsoft Sans Serif', 
                           'Lucida Console', 'Lucida Sans Unicode', 'monospace', 'system-ui', 
                           'Segoe UI', 'Tahoma', 'Trebuchet MS', 'Comic Sans MS', 'cursive', 'Candara', 'Copperplate Gothic', 'Malgun Gothic', 
                           'Helvetica', 'Corbel', 'Calibri', 'Bahnschrift', 'fantasy', 'Impact', 'Ink Free', 'Gabriola', 'Segoe Print', 
                           'Segoe Script', 'Webdings', 'Wingdings', 'Symbol' ] },
-
         { attr: 'font-style',      description: 'Font Style',       default: 'normal',         style: 'fontStyle',        options: ['italic', 'normal'] },
         { attr: 'font-weight',     description: 'Font Weight',      default: '400',            style: 'fontWeight',       options: [ '100', '400', '700', '900', 'inherit' ] },
         { attr: 'margin',          description: 'Margin',           default: '0px',            style: 'margin',           min: 0, max:1000,  inc: 2, suffix: 'px' }
@@ -553,6 +630,8 @@ Main Parameters:
         // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
         // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
         ]
+
+    const numberSuffix = ['', 'px', 'em', 'rem', 'ex', 'vh', 'vw', 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'];
 
     // OLD attr_ctrls Limits Parameters for reference
             // const lineHeight = { min:   1, max:999, inc:0.2,suffix: 'px' }  // sp btween lines [1.1->1.2 avg.]
@@ -576,16 +655,7 @@ Main Parameters:
     // GEN HEADER + LOOP
 
     function genEdit(context) {                                 // create all edit controls and attributes for a specified element
-        p('\ngenEdit() element context: '+context);  // --font-size, OR --title-font-size, OR --footer-font-size
-
-            // initialize new context title 
-
-        // let title = document.getElementById('edit_title');                          // get context title element 
-        // setClass(title,'sysDesc', 'on');    // font
-        // setClass(title,'sysMargin', 'on');  // margin-bottom
-        // setClass(title,'sysHeader', 'on');  // background color
-        // title.style.setProperty('color', 'var(--sys-white)', 'important');         // set title text color with important inheirit override
-        // title.style.setProperty('background-color', 'var(--sys-brown)', 'important');
+        p('\ngenEdit() element context: '+context);  // --font-size, OR --title-font-size, OR --footer-font-size 
 
             // initialize control columns to empty
 
@@ -623,15 +693,10 @@ Main Parameters:
 
         for (let attr = 0; attr < attr_ctrls.length; attr++) {     
             genEditHTML(attr_ctrls[attr], context);         }      // call genEditAttrs for each css attribute found in attr_ctrls table
-        }
 
-            // <span></span>   <!-- attribute description  -->
-            // <span></span>   <!-- controls               -->
-            // <span>                                                 Changes     </span>
-            // <span id='editPanel' onclick="nextEditPanel()">        Undo ⟲      </span>
-            // <span id='editAttr'  onclick="nextEditName()">         Attribute ⟲ </span>   <!-- attribute name         -->
-            // <!-- <span>                                                 Defaults    </span> -->
-            // </span>
+        hideId('wait');
+        showId('edit-theme');
+        }
 
     // ATTRIBUTE PROCESSOR
 
@@ -771,69 +836,21 @@ Main Parameters:
                                             let defaultButton = e.currentTarget; 
                                             chgAttr( defaultButton._var_name, defaultButton._attr_ctrl,'save', defaultButton._default_val) }
 
-                        // select
-                        let unit    = newDOM(ctrl_knobs, 'SELECT');
-                        setClass(unit, 'sysSelect' ); 
-                        // select unit measurement type <options>
-                        let empty   = newDOM(unit, 'OPTION');            
-                        empty.value = ''  ; empty.innerHTML = 'none';   //              no unit measure
-                        setClass(empty, 'sysSelect' ); 
-                        let px      = newDOM(unit, 'OPTION');
-                        px.value    = 'px'; px.innerHTML    = 'px';     // pixel
-                        setClass(px, 'sysSelect' ); 
-                        let em      = newDOM(unit, 'OPTION');
-                        em.value    = 'em'; em.innerHTML    = 'em';     // font size    parent font size                relative
-                        setClass(em, 'sysSelect' ); 
-                        let rem     = newDOM(unit, 'OPTION');
-                        rem.value    = 'rem'; rem.innerHTML    = 'rem';    // font size    root font size                  relative
-                        setClass(rem, 'sysSelect' ); 
-                        let ex      = newDOM(unit, 'OPTION');
-                        ex.value    = 'ex'; ex.innerHTML    = 'ex';     // font size    element font size               relative
-                        setClass(ex, 'sysSelect' ); 
-                        let vh      = newDOM(unit, 'OPTION');
-                        vh.value    = 'vh'; vh.innerHTML    = 'vh';     // view height  1% viewport height              relative 
-                        setClass(vh, 'sysSelect' ); 
-                        let vw      = newDOM(unit, 'OPTION');
-                        vw.value    = 'vw'; vw.innerHTML    = 'vw';     // view width   1% viewport width               relative 
-                        setClass(vw, 'sysSelect' ); 
-                        let vmin    = newDOM(unit, 'OPTION');
-                        vmin.value  = 'vmin'; vmin.innerHTML= 'vmin';   // view width   1% viewport smaller dimension   relative 
-                        setClass(vmin, 'sysSelect' ); 
-                        let vmax    = newDOM(unit, 'OPTION');
-                        vmax.value  = 'vmax'; vmax.innerHTML= 'vmax';   // view width   1% viewport larger  dimension   relative 
-                        setClass(vmax, 'sysSelect' ); 
-                        let lh      = newDOM(unit, 'OPTION');
-                        lh.value    = 'lh'; lh.innerHTML    = 'lh';     // line height
-                        setClass(lh, 'sysSelect' ); 
-                        let pct     = newDOM(unit, 'OPTION');
-                        pct.value   = '%' ; pct.innerHTML = '%';        // percent
-                        setClass(pct, 'sysSelect' ); 
-                        let pt      = newDOM(unit, 'OPTION'); 
-                        pt.value    = 'pt'; pt.innerHTML = 'pt';        // points       1/72 inch                       absolute
-                        setClass(pt, 'sysSelect' ); 
-                        let pc      = newDOM(unit, 'OPTION');
-                        pc.value    = 'pc'; pc.innerHTML = 'pc';        // picas        1/6 inch                        absolute
-                        setClass(pc, 'sysSelect' ); 
-                        let cm      = newDOM(unit, 'OPTION');
-                        cm.value    = 'cm'; cm.innerHTML = 'cm';        // centimeter   ~37.8 pixels, 25.2/64 inch      absolute
-                        setClass(cm, 'sysSelect' ); 
-                        let mm      = newDOM(unit, 'OPTION');
-                        mm.value    = 'mm'; mm.innerHTML = 'mm';        // millimeter   1/10 of cm                      absolute
-                        setClass(mm, 'sysSelect' ); 
-                        let q       = newDOM(unit, 'OPTION');
-                        q.value     = 'q' ; q.innerHTML = 'q';          // quater mm    1/40 cm                         absolute
-                        setClass(q, 'sysSelect' ); 
-                        let inch    = newDOM(unit, 'OPTION');
-                        inch.value  = 'in'; inch.innerHTML = 'in';      // inch         1/96 inch                       absolute
-                        setClass(inch, 'sysSelect' ); 
-                        let fr      = newDOM(unit, 'OPTION');
-                        fr.value    = 'fr'; fr.innerHTML = 'fr';
-                        setClass(fr, 'sysSelect' ); 
-                        // set current value as the selected option
-                        let unitValue = getRoot(var_name).toString().replace(/[0-9]/g,'');
-                        p(' '+var_name+' current unit:                   '+unitValue)
-                        if (exist(unitValue)) { eval(unitValue).selected = true}
+                        // get current numeric suffix in use
+                        let currentValue = getRoot(var_name).toString().replace(/[0-9,\s]/g,'');
+                        p(' current '+var_name+' suffix: ['+currentValue+']');
 
+                        // select
+                        let suffixElem  = newDOM(ctrl_knobs, 'SELECT');
+                        setClass(suffixElem, 'sysSelect' );
+                        let optionElement; 
+                        for (let suffixValue of attr_ctrl.suffix) {
+                            p('create suffix option: ['+suffixValue+']');
+                            optionElement = newDOM(suffixElem, 'OPTION');
+                            optionElement.innerHTML = suffixValue;
+                            setClass(optionElement, 'sysSelect'); 
+                            if (suffixValue == currentValue) { optionElement.selected = true; p(suffixValue+' < selected')}
+                            }
                         } // if number
 
                     // OPTION LIST PASSED    
@@ -1056,54 +1073,6 @@ Main Parameters:
         showId('attribute-popup');
         }
 
-//===============================================================
-// nextEditName() - change attribute name column display      
-
-    var   currName  = 0;
-    const editNames = [ 'Attribute', 'Variable' ];
-
-    function nextEditName() {                                                                //  console.clear();
-        p('\nnextEditName()');
-
-        currName++;
-        if ( currName == editNames.length ) { currName = 0 }
-
-        let  panel_name = editNames[currName];             // [][] multi-dimetional array syntax
-
-        document.getElementById('editAttr').innerHTML = panel_name+' ⟲ '; // update header title
-
-        let coll = getByName('_names');                    // get HTML collection to display attribute values
-        p(coll.length+' names found');
-        for (element=0; element < coll.length; element++) {
-            p(coll[element]._attribute_value+' '+coll[element]._variable_value);
-            if (panel_name == 'Attribute') { coll[element].innerHTML = coll[element].Attribute_name; }
-            else                           { coll[element].innerHTML = coll[element].Variable_name;  }
-            }
-        } 
-
-//===============================================================
-// nextEditPanel() - change attribute values column           
-
-    var   currPanel  = 0;
-    const editPanels = ['Undo', 'Defaults' ];
-
-    function nextEditPanel() {                                                                //  console.clear();
-            p('\nnextEditPanel()');
-
-            currPanel++;
-            if ( currPanel == editPanels.length ) { currPanel = 0 }
-
-            let  panel_name = editPanels[currPanel];             // [][] multi-dimetional array syntax
-
-            document.getElementById('editPanel').innerHTML = panel_name+' ⟲ '; // update header title
-
-            let coll = getByName('_attrs');                    // get HTML collection to display attribute values
-            for (element=0; element < coll.length; element++) {
-                // p('updating '        + panal_name+' obj value '+reference);
-                if (panel_name == 'Undo') { coll[element].innerHTML = coll[element]._undo_value;    }
-                else                      { coll[element].innerHTML = coll[element]._default_value; }
-                }
-            } 
 // ==============================================================
 // popup() - display popup window - future TBD
 
@@ -1113,24 +1082,17 @@ Main Parameters:
     const search_prefix =   'https://www.google.com/search?q=css ';
 
     const info_sites    = [ 'developer.mozilla.org', 
-                            'www.w3.org',
                             'caniuse.com',
                             'cssreference.io',
+                            'getdocs.org',
+                            'github.com/JaniRefsnes/w3css/blob/master/w3.css'
+                            ]; 
+    const sample_sites  = [ 'github.com/w3dotdev',
                             'css-tricks.com',
                             'www.geeksforgeeks.org',
-                            'getdocs.org'
-                            ]; 
-    const tutor_sites   = [ 'stackoverflow.com',     
-                            'o7planning.org',
-                            'www.freecodecamp.org',
-                            'www.smashingmagazine.com',
-                            'www.tutorialscan.com',
-                            'css-tricks.com',
-                            'elad.medium.com',
-                            'www.youtube.com',
-                            'www.tutorialbrain.com'
-                            ];
-    const sample_sites  = [ 'www.codegrepper.com',   
+                            'stackoverflow.com',   
+                            'www.w3.org',  
+                            'www.codegrepper.com',   
                             'css-tricks.com',
                             'levelup.gitconnected.com',
                             'docs.w3cub.com',
@@ -1139,9 +1101,26 @@ Main Parameters:
                             'www.tutorialrepublic.com',
                             'help.dottoro.com',
                             'www.w3schools.com',
-                            'codepen.io',
-                            'www.enjoytutorials.com'
+                            'www.w3programmers.com',
+                            'codepen.io'
                             ]; 
+    const tutor_sites   = [ 'www.csstutorial.net',
+                            'w3cx.org',
+                            'htmldog.com',
+                            'www.w3.org',
+                            'www.w3resource.com/css',
+                            'o7planning.org',
+                            'www.learn-html.org',
+                            'www.freecodecamp.org',
+                            'www.smashingmagazine.com',
+                            'www.tutorialscan.com',
+                            'css-tricks.com',
+                            'elad.medium.com',
+                            'www.youtube.com',
+                            'www.tutorialbrain.com',
+                            'developer.mozilla.org/en-US/docs/Learn/',
+                            'www.enjoytutorials.com'
+                            ];
 
     function searchSites(argument, site_list) {
         p('searchSites( '+argument+' )');
@@ -1226,11 +1205,12 @@ Main Parameters:
         else if (action == 'on' && !obj.classList.contains(class_name)) {
             obj.classList.toggle(class_name);         status = 'on';
             }
-        p(obj.tagName+' object id: '+obj.id+' <- set class '+class_name+' ['+action+'] is now '+status);
+        // p(obj.tagName+' optional object id: '+obj.id+' <- set class '+class_name+' optional action['+action+'] is now '+status);
         // TBD - update obj rec
         }
 // ==============================================================
-// show..() hide..() elements and named groups            
+// show..() hide..() elements and named groups  
+
     function showId(id) {p('show('+id+')');
             let obj; 
             try { obj = document.getElementById(id) } catch {error('!!  showId() id: '+id+' not found')}
@@ -1241,9 +1221,14 @@ Main Parameters:
     function hideId(id) {p('hide('+id+')'); document.getElementById(id).style.display = 'none' }
 
     function showEdit(context) {
+
+        hideId('edit-theme');
+        showId('wait');
+
         p('\nshowEdit('+context+')');
 
         save();             // save current element changes stored in user object to local storage
+        showId('sysMenu');
         genEdit(context);   // generate HTML controls for editing new context element attribute values
         }
 
@@ -1314,7 +1299,6 @@ Main Parameters:
         document.documentElement.setAttribute(theme,'system');  // add system theme variables to root
 
         // Show Theme Editor Panel
-        showEdit('');
         console.log('..BODY loaded');
 
 
@@ -1337,20 +1321,6 @@ Main Parameters:
     function error(txt) {console.error(txt)}
     function warn(txt)  {console.warn(txt)}
 
-// =============================================================
-// setAttribute() - not used - set DOM attribute tries 2 methods
-
-    // function setAttribute (obj, attr_name, value) {
-    //     p('setAttribute()')
-    //     if (typeof obj == 'string') {obj = document.getElementById(obj) }
-    //     obj.attr_name = value;       // set a collection name for javascript reference
-    //     p(obj.attr_name)
-    //     if (obj.attr_name != value) {
-    //             p('          setAttribue() obj.setAttribute( '+attr_name+', '+value+') failed trying alternative')
-    //             obj.setAttribute(attr_name, value);         // save alternate value for javascript reference (column reuse)
-    //             if (obj.name != value) {p('      !!! setAttribue() obj.setAttribute('+attr_name+', '+value+') failed alternative')}
-    //             }
-    // }
 
 console.log('..HTML loaded');
 </script>
