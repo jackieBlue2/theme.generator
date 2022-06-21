@@ -10,6 +10,11 @@
 <!--                           READ ME FIRST                            -->
 <!-- ################################################################## --> <!--
 
+Copyright:                 
+
+    o Copyright: © 2022 Jackie.Blue
+    o Full copyright privledges until Open Source license is established
+
 Purpose:                   
 
     o Provide user controls to create and change CSS attributes :root --variable-names and values
@@ -33,16 +38,16 @@ Naming Convetions:
 
     myVar               : javascript function or variable name
     var_name            : javascript function or variable name for readability
-    _field_name         : DOM object field for storing parameters used by event handelers
-    myElement           : css class, id, or tag name         i.e. .myTitle { }
-    --font-size         : default :root variable name        i.e. --color
-    --myElem-font-size  : class :root variable name          i.e. --button-font-size
-    --sysElem-font-size : class :root system variable name   i.e. --sysButton-font-size
-    attr-names above    : also used in the associated attributes html element id= or a collection name= for js reference
-                          setting id= as the associated variable name removes the need for element lookups
-                          assigns predetermined suffixs to denote different system elements for the same attribute  
-                          i.e. <..id='font-size-default-value'>  <..id='font-size-undo-value'>
-                          i.e. <..id='font-size-default-value'>  <..id='font-size-undo-value'>
+    _field_name         : DOM object field for storing parameters passed to or used by event handelers
+    myElement           : css class, id, or tag name        i.e. .myTitle { }
+    --font-size         : default :root variable name       i.e. --color
+    --myElem-font-size  : class :root variable name         i.e. --button-font-size
+    --sys-elem-font-size: system theme :root variable name  i.e. --sys-button-font-size
+    --myElem-color_id   : used in associated html elementa id= or a collection name= for js reference
+                          attribute and variable names are used to generate unique id= names like id='--title-color'
+                          suffixs are also added to denote different system elements for the same attribute  
+                                                            i.e. <..id='font-size_default_value'>  
+                                                                 <..id='font-size_undo_value'>
 
 Initial Theme and Classes: 
 
@@ -61,25 +66,23 @@ Initial Theme and Classes:
     o Each element contains variables for only one shadow, transform, etc.  Optionaly create multiple shadows
         in its own class and assign both the element and appropriate shadow classes to the HTML element 
 
-Event Handlers:            
+Main Event Handlers:       
 
     genEdit()       - generate HTML for all system attribute edit panels with associated attributes for 
                          a selected user element event
-    gen....()       - like above, generate HTML for popups and displaying current CSS theme for cut and paste
+    gen....()       - like above, generate HTML and/or fill in values for popups
     chgAttr()       - change the value of a single themed attribute variable in css :root and display the results 
-    nextEditPanel() - Toggle between displaying attribute 'Default' and 'Undo' values
-    nextEditName()  - Toggle between displaying 'Attribute' and associated 'Variable' names
 
     o See the console.log for event function() calls, parameters, and flow
     o See 'function() PARAMETERS' description at the beginning of the javascript section
-    o See comments before each function() for function design notes and specifications
+    o See comments before each function() for function design notes, specifications, and flow
 
 Main Parameters:           
 
-    context         - a string denoting a specific class, id, or tag name i.e. .button{}, #title{} and the
-                        associated attribute variable names prefix i.e. --button-background-color, --title-font-size
-                    - only one context element at a time, such as a title or button, is displayed for user changes 
+    context         - a string denoting a specific class, id, or tag name i.e. button, title, innerGrid
+                    - only one context at a time.  Edit a title or a button, not both at the same time. 
     attr_ctrl       - object containg an attributes associated attribute options list or numerical limits
+    var_name        - associated attribute variable names prefix i.e. --button-background-color, --title-font-size
                                                                         -->
 
 <!-- ################################################################## -->
@@ -87,8 +90,8 @@ Main Parameters:
 <!-- ################################################################## -->
 
     <link  rel="stylesheet" href="themes.css">
-    <style type="text/css" >
 
+    <style type="text/css" >
     /* ----------------------------------------------------------- intro
 
         system elements are all elements displayed outside the users themed results area  
@@ -156,7 +159,7 @@ Main Parameters:
                     --sys-title-font-weight   :  400; 
                     --sys-title-font-style    :  normal;
                     --sys-title-color         :  var(--sys-color);
-                    --sys-title-background-color :  var(--sys-brown);
+                    --sys-title-background-color :  transparent;
                     --sys-title-text-align    :  left;
                     --sys-title-margin-top    :  0;
                     --sys-title-margin-bottom :  0;
@@ -229,61 +232,51 @@ Main Parameters:
                     --sys-input-padding        :  0;   
             }
 
-        .userEditResult  { 
-            float:                  left;
-            width:                  49%;
-            padding:                3px; 
-            border-style:           solid;
-            border-color:           var(--sys-background-color);
-            }
 
-        /* SYSTEM EDIT GRID - UNDER CONSTRUCTION */
-        .infoLinksGrid   { 
-            margin-bottom:          8px; 
-            display:                grid;
-            grid-template-rows:     1fr;
-            grid-template-columns:  1fr 1fr 1fr 1fr;
-            grid-gap:               8px;
-            justify-items:          stretch;
-            /*align-items:            stretch;*/
-            padding: 8px;
-            }
-        .infoDescGrid    { 
-            margin-bottom:          8px; 
-            display:                grid;
-            grid-template-rows:     1fr;
-            grid-template-columns:  1fr 1fr 2fr;
-            grid-gap:               8px;
-            justify-items:          stretch;
-            /*align-items:            stretch;*/
-            padding: 8px;
-            }
-        .editColumnsGrid { 
-            width:                  50%; 
-            float:                  right;  /* change elements to span and remove float? */
-            margin-bottom:          25px; 
-            vertical-align:         left; /* //? not woking */
-            justify-items:          safe left;
-
-            display:                grid;
-            grid-template-rows:     1fr;
-            grid-template-columns:  auto auto  0.6fr;
-            grid-gap:               8px;
-            justify-items:          stretch;
-            align-items:            stretch;
-
-            }
+        /* SYSTEM GRIDs  */
+            .infoLinksGrid   { 
+                margin-bottom:          8px; 
+                padding:                8px;
+                display:                grid;
+                grid-template-rows:     1fr;
+                grid-template-columns:  1fr 1fr 1fr 1fr;
+                grid-gap:               8px;
+                justify-items:          stretch;
+                }
+            .infoDescGrid    { 
+                margin-bottom:          8px; 
+                padding:                8px;
+                display:                grid;
+                grid-template-rows:     1fr;
+                grid-template-columns:  1fr 1fr 2fr;
+                grid-gap:               8px;
+                justify-items:          stretch;
+                }
+            .editColumnsGrid { 
+                margin-bottom:          25px; 
+                padding:                8px;
+                display:                grid;
+                grid-template-rows:     1fr;
+                grid-template-columns:  auto auto  0.6fr;
+                grid-gap:               8px;
+                justify-items:          stretch;
+                align-items:            stretch;
+                }
+            .splitGrid       { 
+                width:                  100%; 
+                display:                grid;
+                grid-template-rows:     1fr;
+                grid-template-columns:  1fr 1fr;
+                grid-gap:               8px;
+                }
 
         /* SYSTEM .CLASS */
-        .attribute-popup        { position:           relative;
-                                  z-index:            4;
-                                }
-        .sysFancy               { font-family:        var(--sys-fancy); }       /* remove usage */
-        .sysSmall               { font-size:          var(--sys-small); }       /* used? */
-        .sysText                { font-family:        var(--sys-font-family);   /* needed? used?*/
+            .sysFancy               { font-family:        var(--sys-fancy); }       /* remove usage */
+            .sysSmall               { font-size:          var(--sys-small); }       /* used? */
+            .sysText                { font-family:        var(--sys-font-family);   /* needed? used?*/
                                   font-size:          var(--sys-font-size); 
                                   color:              var(--sys-color); } 
-        .system, .sysText       {
+            .system, .sysText       {
                                   font-family:        var(--sys-font-family); 
                                   font-style:         var(--sys-font-style); 
                                   font-size:          var(--sys-font-size);
@@ -292,16 +285,16 @@ Main Parameters:
                                   text-indent:        var(--sys-text-indent);
                                   line-height:        var(--sys-line-height);
                                   }
-        .sysInput               { border-width:       var(--sys-input-borderWidth);
+            .sysInput               { border-width:       var(--sys-input-borderWidth);
                                   border            : var(--sys-input-border );
                                   padding           : var(--sys-input-padding);
                                   -webkit-appearance: none;
                                 }
-        .sysHeader              { background-color:   var(--sys-header-background-color);
-                                  font-family:                 var(--sys-desc-font-family);
-                                  width:                       100%;
-                                }
-        .sysTitle, .sysBack     {
+            .sysHeader              { background-color:   var(--sys-header-background-color);
+                                      font-family:        var(--sys-desc-font-family);
+                                      width:              100%;
+                                    }
+            .sysTitle, .sysBack     {
                                   font-family    :    var(--sys-title-font-family   ); 
                                   font-size      :    var(--sys-title-font-size     );
                                   font-weight    :    var(--sys-title-font-weight   );
@@ -317,9 +310,9 @@ Main Parameters:
                                   padding-left   :    var(--sys-title-padding-left  );   
                                   padding-right  :    var(--sys-title-padding-right );
                                   line-height    :    var(--sys-title-line-height   ); 
-                                  background-color:   var(--sys-title-background-color    );
+                                  background-color:   var(--sys-title-background-color);
                         }
-        .sysDesc                {
+            .sysDesc                {
                                   font-family    :    var(--sys-desc-font-family   ); 
                                   font-size      :    var(--sys-desc-font-size     );
                                   font-weight    :    var(--sys-desc-font-weight   );
@@ -338,8 +331,8 @@ Main Parameters:
                                   line-height    :    var(--sys-desc-line-height   ); 
                                   justify-items :     stretch;
                         }
-        .sysLargeButton         { font-size: 32px; }
-        .sysButton, .sysLargeButton               {
+            .sysLargeButton         { font-size: 32px; }
+            .sysButton, .sysLargeButton               {
                                   border-style   :  var(--sys-button-border-style);
                                   background-color: var(--sys-button-background-color);
                                   color:            var(--sys-button-color);
@@ -356,7 +349,7 @@ Main Parameters:
                                   border-style   : var(--sys-button-border-style);
                                   border-width   : var(--sys-button-borderWidth );
                         }
-        .sysSelect              {
+            .sysSelect              {
                                   font-family    :  var(--sys-desc-font-family   );
                                   color          :  var(--sys-button-color);
                                   background-color: var(--sys-button-background-color);
@@ -365,176 +358,216 @@ Main Parameters:
                                   border-width   :  var(--sys-button-borderWidth );
                                   /*font-size:        var(--desc-txt-height); */
                               }
-        .sysBack                {                                                        /* used? */
+            .sysBack                {                                                        /* used? */
                                   content:            var(--sys-pointL);  
                                 }
-        .sysMargin              { margin-bottom  :    25px;                          }   /* used? */
-        .sysHover:hover         { color:              var(--sys-hover-color)  ;              
+            .sysMargin              { margin-bottom  :    25px;                          }   /* used? */
+            .sysHover:hover         { color:              var(--sys-hover-color)  ;              
                                   transition:         0.3s;                          
                                 }
-        .sysCenter              { text-align:    center;
+            .sysCenter              { text-align:         center;
                                   align-content: center;
                                   align-items:   center;
                                 }
-
+            .sysTabBorder           { padding-left:       3px;
+                                  margin-left:       3px;
+                                  border-style:       solid none none solid;
+                                  border-width:       1px;
+                                  border-top-color:   var(--sys-yellow);
+                                  border-left-color:  var(--sys-yellow);
+                                }
+            .sticky                 { position: fixed;
+                                  top: 0;
+                                  width: 100%;
+                                }
+            .sticky + .content      { padding-top: 60px; } /* jerk prevention */
+            .userEditResult  { 
+                float:                  left;
+                width:                  100vw;
+                padding:                3px; 
+                border-style:           solid;
+                border-color:           var(--sys-background-color);
+                }
     </style>
+
 </head>
 <!-- ################################################################## -->
 <!--                                HTML                                -->
 <!-- ################################################################## -->
-<body onload="bodyLoaded()" >
-<div class="system">
-<!-- ------------------------------------------------------------------ -->
-<!--                            SYSTEM MENU - top left                  -->
-    <span id='sysMenu' onclick="showId('displayCSS')" hidden>Generate CSS</span>
-<!-- ------------------------------------------------------------------ -->
-<!--                            COPYWRITE   - top right                 -->
-    <copyright style='position: absolute; right: 0px;'> © 2022 Jackie.Blue </copyright>
-    </div>
-<!-- ------------------------------------------------------------------ -->
-<!--                            WAIT                                    -->
-<div id="wait">                                                         waiting
-    <div class="center">
-        <div style="font-size: 60px;">                                  WORKING INDICATOR...</div>
-        <button class='sysLargeButton' onclick="hideId('wait'); 
-                                                showId('splashScreen')">Show Splashscreen</button>
-        </div>
-    </div>
+<body onload="bodyLoaded()">
 <!-- ------------------------------------------------------------------ -->
 <!--                            SPLASH SCREEN                           -->
-
+<!-- ------------------------------------------------------------------ -->
 <div id="splashScreen" hidden>                                          splash screen
     <div class="sysBlue sysFancy center">
         <em style="font-size: 60px;">                                   Jackie.Blue logo</em>
         <br><button class='sysLargeButton' onclick="hideId('splashScreen'); 
-                                                showEdit('');">  Show Editor</button></p>
+                                                   showEdit('');">      Show Editor</button>
         </div>
     </div>
 <!-- ------------------------------------------------------------------ -->
-<!--                            ATTRIBUTE INFO POPUP                    -->
-<div style="z-index: 1; position: absolute;">
-    <div id='attribute-popup' class='system' draggable='true' hidden> 
-        <!-- ATTRIBUTE NAMES -->
-        <div class='infoLinksGrid'>
-            <span class='sysTitle sysDesc' id='info_description'   ></span>
-            <span></span>
-            <span></span>
-            <span class='close sysRed' style="text-align: right;" onclick="hideId('attribute-popup')">close ❌</span></div>
-        <!-- VALUES -->
-        <p>
-            <div class='sysDesc sysCenter'>            Values   </div>
+<!--                            WAIT - WORKING ON IT ANIMATION          -->
+<!-- ------------------------------------------------------------------ -->
+<div id="wait">                                                         waiting
+    <div class="center">
+        <div style="font-size: 60px;">                                  WORKING INDICATOR...</div>
+        <button class='sysLargeButton' onclick="p('-'); hideId('wait'); showId('splashScreen')">Show Splashscreen</button>
+        </div>
+    </div>
+<!-- ------------------------------------------------------------------ -->
+<!--                            SYSTEM EDIT MENU      - top left        -->
+<!-- ------------------------------------------------------------------ -->
+<div id='sysMenu' class="system" hidden>
+    <span style='width: 97vw;'>
+        <span onclick="showId('')"              class='sysTabBorder sysRed '>                Color Palette      </span> 
+        <span onclick="showId('')"              class='sysTabBorder sysRed '>                New Element        </span> 
+        <span onclick="showId('displayCSS')"    class='sysTabBorder sysRed '>                Generate CSS       </span>
+        <span onclick="showId('')"              class='sysTabBorder sysBlue'>                Course             </span> 
+        <span onclick="showId('')"              class='sysTabBorder sysBlue'>                About              </span> 
+        </span>
+    <copyright style='position: absolute; right: 10px;'class='sysFancy sysBlue' 
+             onclick="hideId('gui-panel');hideId('sysMenu');showId('splashScreen')">    © 2022 <em>Jackie.Blue </em></copyright>
+    </div>
+<!-- ------------------------------------------------------------------ -->
+<!--                            EDITOR SECTION & DROP ZONE              -->
+<!-- ------------------------------------------------------------------ -->
+<div id='gui-panel' hidden class='userEditResult' ondragover="dropZone(event)" ondrop="dropElement(event)"
+                           style='position: absolute; top: 25px; left: 0; width: 50vw; height: 100vh;  z-index: 0;'>  
+    <!-- -------------------------------------------------------------- -->
+    <!--                        POPUPS                                  -->
+    <!-- -------------------------------------------------------------- -->
+    <div id='attribute-popup' class='system' draggable='true' ondragstart='dragElement(event)' hidden
+                             style=" z-index: 6; position: relative; top: 20px; left: 4vw; width: 50vw">
+                              <!-- style="z-index: 6; position: relative; width:1000px; padding:8px" >  -->
+        <div class='splitGrid'>
+            <span class='sysTitle' id='info_description'>Attribute Description</span>
+            <span class='close sysHover' style="text-align: right; padding-top: 12px;" onclick="hideId('attribute-popup')"> close ❌ </span>
+            </div>
+        <!-- VALUES -->  <p>
+            <div class='sysHeader'>           Values   </div>
             <div class='infoLinksGrid'><span> Undo     </span> <span id='info_undo'          class='sysRed'></span></div>
             <div class='infoLinksGrid'><span> Default  </span> <span id='info_default'       class='sysRed'></span></div>
             </p>
-        <!-- NAMES -->
-        <p>
-            <div class='sysDesc sysCenter'>            Attribute   </div>
-            <div class='infoDescGrid'><span> attribute </span> <span id='info_attribute_name' class='sysRed'></span>
+        <!-- NAMES -->   <p>
+            <div class='sysHeader'>          Attribute   </div>
+            <div class='infoDescGrid'><span> name      </span> <span id='info_attribute_name' class='sysRed'></span>
                                                                <span id='info-name-sample'>                  </span></div>
-            <div class='infoDescGrid'><span> var()     </span> <span id='info_variable_name'  class='sysRed'></span>
-                                                               <span id='info-var-sample'>                   </span></div>
             <div class='infoDescGrid'><span> .style    </span> <span id='info_style_name'     class='sysRed'></span>
                                                                <span id='info-style-sample'>                 </span></div>
+            <div class='infoDescGrid'><span> var()     </span> <span id='info_variable_name'  class='sysRed'></span>
+                                                               <span id='info-var-sample'>                   </span></div>
             </p>
-        <!-- SEARCH -->
-        <p>
-            <div class='sysDesc sysCenter'>            Help     </div>
+        <!-- SEARCH -->  <p>
+            <div class='sysHeader'>          Help     </div>    <!-- search buttons title -->
             <div class="infoLinksGrid">
                 <span   id='info_name'          class="sys-red"  >              </span>
                 <button id='info_documentation' class='sysButton'> Publications </button> <!-- bodyLoaded() sets onclicks --> 
                 <button id='info_samples'       class='sysButton'> Samples      </button> 
-                <button id='info_tutor'         class='sysButton'> Tutors       </button> </div> 
+                <button id='info_tutor'         class='sysButton'> Tutorials    </button> </div> 
             </p>
-        <!-- OPTIONS -->
-        <p>
-            <div class='sysDesc sysCenter'>            Options  </div>
+        <!-- OPTIONS --> <p>
+            <div class='sysHeader'>          Options  </div>    <!-- attribute options search area -->
             <div id='info_options'></div>
             </p>
-    </div> </div>
-<!-- ------------------------------------------------------------------ -->
-<!--                            DISPLAY CSS AS POPUP(?)                 -->
-<div id="displayCSS"  style="z-index: 6; position: absolute; width: 50%; background-color: black; color: wheat;" hidden>
-    <span class="sysTitle">CSS</span>
-    <span class='close sysRed' style="text-align: right;" onclick="hideId('displayCSS')">close ❌</span>
-    <div class="sysHeader">Description</div>
-    <div><p>Providing the current layout and theme settings in CSS format for saving as a file or cut and paste.</p></div>
-    <div class="sysHeader">Instructions</div>
-    <div>
-        <ol>
-            <li>Optionally select Root</li>
-            <li>Optionally select Theme and provide a Theme name</li>
-            <li>Optionally select to also include .class statements</li>
-            <li>Optionally edit the reults. Edits will only apply to your copy or save.</li>
-            <li>Select Copy to the clipboard or Save as file</li>
-        </ol>
         </div>
-    <div>
-        <span style="display: inline-block;">
-            <input    type="radio"    id='rootSelect'  name="themeNameSelect" checked><label for="rootSelect" > Root theme    </label><br>
-            <input    type="radio"    id='themeSelect' name="themeNameSelect"        ><label for="themeSelect"> Named theme    </label><input type="text" name="" class="sysSelect"><br>
-            </span>
-        <span style="display: inline-block;">
-            <input    type="checkbox" id='includeClass' name="includeClasses"  checked><label for="includeClass"> Include .class</label><br>
-            <input    type="checkbox" id='includSystem' name="includeClasses"         ><label for="includSystem"> Include separate system theme</label><p>
-            </span>
+    <!-- -------------------------------------------------------------- -->
+    <div id='editStyle'      class='system' draggable="true" ondragstart='dragElement(event)' hidden
+                             style=" z-index: 4; position: relative; top: 20px; left: 48vw; width: 50vw">
+        <div class='splitGrid'>
+            <span class='sysTitle' id='stylize_element'>Stylize Element</span>
+            <span class='close sysHover' style="text-align: right; padding-top: 12px;" onclick="hideId('editStyle')"> close ❌ </span>
+            </div>
+        <div id='edit-columns' class='editColumnsGrid'></div>
         </div>
-    <p>
-        <button   class='sysButton sysDesc'>Copy</button>
-        <button   class='sysButton sysDesc'>Save</button>
-        </p>
-    <textarea style="font-family: monospace; width: 100%; height: 50vh; padding: 8px">
-Sample of Future Textarea Generated Results
 
-:root   {
---font-size:            24px;
---font-weight:          400;
---title-font-size:      24px;
---title-font-weight:    400;
-}
-.body {
-    font-size:          var(--font-size);
-    font-weight:        var(--font-weight);
-}
-.title {
-    font-size:          var(--title-font-size);
-    font-weight:        var(--title-font-weight);
-}
-    </textarea>
 
-    </div>
-<!-- ------------------------------------------------------------------ -->
-<!--                            USER GUI FEEDBACK PANEL                 -->
-<div id='edit-theme' hidden class=''>
-
-    <!-- USER EDITABLE ELEMENTS AND RESULTS -->
-
-    <div id='userEditResult' class='userEditResult'>
-        <!-- <div  class='sysDesc'><- Back</div><br> -->
-                                                                                        <!-- EDITABLE ELEMENTS   -->
-        <div  onclick="showEdit('title')"      class='title'>   Title       </div>      <!-- Title       -->
-        <div  onclick="showEdit('description')"class='desc'  >  Description </div>      <!-- Description -->
-        <span onclick="showEdit('')">                                                   <!-- Defaults    -->
-            <hr>
-            <p>Click on an element such as 'Title' to edit its attributes</p>
-            <p>The undo column and button describe the current values before changes.
-            Changed values become permenent when another element is edited.
-            Changed values will become the new undo values when the element is edited again. </p>
-            <ul>
-                <li>ALL CAP FONT EXAMPLE                    </li>
-                <li>all lowercase font example: qbdpgy      </li>
-                <li>Number &gt; 0O  &lt; letter compare     </li>
-                <li>Number &gt; 1lL &lt; letters compare    </li>
-                <li>HEX Sample: #b6a0f5                     </li>
-            </ul>
-            <p>Let's create something nice today.  Even nicer than yesterday.  
-            Brighter, with a softer contrast.</p>
-            </span>
+    <!-- -------------------------------------------------------------- -->
+    <div id="displayCSS"      class='system' draggable='true' ondragstart='dragElement(event)' hidden
+                             style=" z-index: 8; position: relative; top: 20px; left: 4vw; width: 50vw">
+                              <!-- style='z-index: 8; position: relative; color: wheat; top:20px; left:0'>  -->
+        <div class='splitGrid'>
+            <span class="sysTitle">CSS</span>
+            <span class='close sysHover' style="text-align: right; padding-top: 12px;" onclick="hideId('displayCSS')">    close ❌ </span>
         </div>
-<!-- ------------------------------------------------------------------ -->
-<!--                            KNOBS AND CONTROLS PANEL                -->
-    <div id='edit-columns' class='system editColumnsGrid'></div>
+        <div class="sysHeader">Description</div>
+        <div><p>Providing the current layout and theme settings in CSS format for saving as a file or cut and paste.</p></div>
+        <div class="sysHeader">Instructions</div>
+        <div>
+            <ol>
+                <li>Optionally select Root</li>
+                <li>Or optionally select theme only and provide a Theme name</li>
+                <li>Optionally select to also include .class statements</li>
+                <li>Optionally edit the reults. Edits will only apply to your copy or save.</li>
+                <li>Select Create to see any chnges</li>
+                <li>Optionally edit the CSS results as needed</li>
+                <li>Select Copy to the clipboard or Save as file</li>
+            </ol>
+            </div>
+        <div>
+            <span style="display: inline-block;">
+                <input type="radio"    id='rootSelect'    name="themeNameSelect" checked>
+                <label                for='rootSelect'>                             Root theme    </label><br>
+                <input type="radio"    id='themeSelect'   name="themeNameSelect">
+                <label                for='themeSelect'>                            Named theme    </label>
+                <input type="text"  class='sysSelect'     name="themeNameSelect"><br>
+                </span>
+            <span style="display: inline-block;">
+                <input type="checkbox" id='includeClass'  name="includeClasses"  checked>
+                <label                for='includeClass'>                           Include .class</label><br>
+                <input type="checkbox" id='includSystem'  name="includeClasses" >
+                <label                for='includSystem'>                           Include separate system theme</label><p>
+                </span>
+            </div>
+        <p>
+            <button   class='sysButton sysDesc'>                                    Copy</button>
+            <button   class='sysButton sysDesc'>                                    Save</button>
+            </p>
+        <textarea style="font-family: monospace; width: 100%; height: 50vh; padding: 8px">
+        Sample of Future Generated Results
+        
+            :root   {
+            --font-size:            24px;
+            --font-weight:          400;
+            --title-font-size:      24px;
+            --title-font-weight:    400;
+            }
+            .body {
+                font-size:          var(--font-size);
+                font-weight:        var(--font-weight);
+            }
+            .title {
+                font-size:          var(--title-font-size);
+                font-weight:        var(--title-font-weight);
+            }
+            </textarea>
+    
+        </div>
+    <!-- -------------------------------------------------------------- -->
+    <!--                       USER EDITABLE GUI ELEMENTS               -->
+    <!-- -------------------------------------------------------------- -->
+    <div style='position: absolute; top: 25px; left: 0; width:  97vw; height: 100vh; z-index: 1;'>
+                                                                                            <!-- EDITABLE ELEMENTS   -->
+            <div  onclick="showEdit('title')"      class='title'>   Title       </div>      <!-- Title       -->
+            <div  onclick="showEdit('description')"class='desc'  >  Description </div>      <!-- Description -->
+            <span onclick="showEdit('')">                                                   <!-- Defaults    -->
+                <hr>
+                <p>Click on an element such as 'Title' or here to edit its style.</p>
+                <p>The undo column and button describe the current values before changes.
+                Changed values become permenent when another element is edited.
+                Changed values will become the new undo values when the element is edited again. </p>
+                <ul>
+                    <li>ALL CAP FONT EXAMPLE                    </li>
+                    <li>all lowercase font example: qpdbgytif   </li>
+                    <li>Number &gt; 0O  &lt; letter compare     </li>
+                    <li>Number &gt; 1lL &lt; letters compare    </li>
+                    <li>HEX Sample: #b6a0f5                     </li>
+                </ul>
+                <p>Let's create something nice today.  Even nicer than yesterday.  
+                Brighter, with a softer contrast.</p>
+                </span>
+                </div>
 
-</div> <!-- end edit-theme (User GUI & Edit Panel-->
+</div> <!-- end gui-panel & Popup drop zone -->
 
 <!-- ################################################################## -->
 <!--                             JAVASCRIPT                             -->
@@ -548,11 +581,10 @@ Sample of Future Textarea Generated Results
 // ==============================================================
 // save objects - Save and restore user settings and attributes on page repoad
 
-    var   user   = {classNames:         [],         // GUI input created context names  --'context'-attribute-name
-                    root:               [],         // attribute change records (themes.css overrides)
-                    settings:           [] }        // site settings - TBD
-
-    class PAIR { name = ''; val = '' }              // generic name value pair
+    var   user   = { classNames: [],         // GUI input created context names  --'context'-attribute-name
+                     root:       [],         // attribute change records (themes.css overrides)
+                     settings:   [] }        // site settings - TBD
+    class PAIR     { name = '';  val = '' }  // generic name value pair for root records
 
 // ==============================================================
 // function() PARAMETERS
@@ -560,13 +592,14 @@ Sample of Future Textarea Generated Results
 // attr_ctrl - Object having an attribute description, limits, attribute values, default value..
 // context   - Current attribute variable name prefix like 'myTitle' to represent a unique CSS .class, tag name, etc. 
 //             i.e. .title { font-size: var(--title-font-size) } | unspecified context = var(--font-size)
+// var_name  - full :root variable name composed of passed context and attribute name.  i.e. --title-font-size
 //
 // Modify    - Optionally add a unique name to contexts[array] to generate --uniqueName-attribute-name variables in CSS :root
-//             Class names created using the GUI input are saved in users local storage and restored on page reload 
-//             Use generate CSS theme option to display ALL current variables and values
-//             The generated theme can then be copied into your CSS.  
+//           - Class names created using the GUI input are saved in users local storage and restored on page reload 
+//           - Use generate CSS theme option to display ALL current variables and values
+//           - The generated theme can then be copied into your CSS.  
 
-    const contexts   = ['', 'title', 'description', 'subtitle', 'button', 'input']; // ==> --title-font-size, --desription-font-size
+    const contexts   = ['', 'title', 'description', 'subtitle', 'button', 'input', 'radio', 'checkbox', 'textarea', 'div', 'span', 'hr' ]; // ==> --title-font-size, --desription-font-size
 
     const old_attr_ctrls = [         // attr_ctrl list
 
@@ -606,24 +639,25 @@ Sample of Future Textarea Generated Results
     // description  - Attribute description
     // default      - browser or element atrribute default value
     // style        - obj.style.attribute name for javascript reference
-    // type         - 'color', used to detect non-text options
-    // options      - attribute options list
-    // min,max,inc  - numeric option limits and change increments
-    // suffix       - attribute numeric value suffix like 'px'
-    // undo         - contains attribute undo value before change, temporary work value 
+    // type         - used to detect no option processing such as a color picker instead
+    // options      - attribute options list, what the attribute can be set to
+    // min,max,inc  - numeric limits and increment amount
+    // suffix       - numeric suffix options like 'px' 'fr'
 
     const attr_ctrls = [                                                                                               // unique controls 
         { attr: 'color',           description: 'Font Color',       default: 'not specified',  style: 'color',            type: 'color' },
         { attr: 'background-color',description: 'Background Color', default: 'not specified',  style: 'backgroundColor',  type: 'color' },
-        { attr: 'font-size',       description: 'Font Size',        default: '16px',           style: 'fontSize',         min: 4,  max:200,  inc: 2, suffix: ['', 'px', 'em', 'rem', 'ex', 'vh', 'vw', 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'] },
-        { attr: 'font-family',     description: 'Font Family',      default: 'New Times Roman',style: 'fontFamily',       options: [ 'Arial', 'Microsoft Sans Serif', 
-                          'Lucida Console', 'Lucida Sans Unicode', 'monospace', 'system-ui', 
-                          'Segoe UI', 'Tahoma', 'Trebuchet MS', 'Comic Sans MS', 'cursive', 'Candara', 'Copperplate Gothic', 'Malgun Gothic', 
-                          'Helvetica', 'Corbel', 'Calibri', 'Bahnschrift', 'fantasy', 'Impact', 'Ink Free', 'Gabriola', 'Segoe Print', 
-                          'Segoe Script', 'Webdings', 'Wingdings', 'Symbol' ] },
+        { attr: 'font-size',       description: 'Font Size',        default: '16px',           style: 'fontSize',         min: 4,  max:200,  inc: 2, 
+                                   suffix: ['', 'px', 'em', 'rem', 'ex', 'vh', 'vw', 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'] },
+        { attr: 'font-family',     description: 'Font Family',      default: 'New Times Roman',style: 'fontFamily',       options: [ 'monospace', 'Lucida Console', 'Lucida Sans Unicode', 
+                          'Microsoft Sans Serif','Segoe UI', 'Arial', 'Tahoma',   
+                          'Candara', 'Copperplate Gothic', 'Malgun Gothic', 'system-ui', 
+                          'Trebuchet MS', 'Helvetica', 'Corbel', 'Calibri', 'Bahnschrift',
+                          'Gabriola', 'Segoe Print', 'Segoe Script',
+                          'Comic Sans MS', 'cursive', 'Ink Free', 'Impact', 'fantasy', 'Webdings', 'Wingdings', 'Symbol' ] },
         { attr: 'font-style',      description: 'Font Style',       default: 'normal',         style: 'fontStyle',        options: ['italic', 'normal'] },
         { attr: 'font-weight',     description: 'Font Weight',      default: '400',            style: 'fontWeight',       options: [ '100', '400', '700', '900', 'inherit' ] },
-        { attr: 'margin',          description: 'Margin',           default: '0px',            style: 'margin',           min: 0, max:1000,  inc: 2, suffix: 'px' }
+        { attr: 'margin',          description: 'Margin',           default: '0px',            style: 'margin',           min: 0, max:1000,  inc: 2, suffix: ['px'] }
         // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
         // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
         // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
@@ -649,10 +683,48 @@ Sample of Future Textarea Generated Results
  
 
 // ==============================================================
-// genEdit() - Create HTML edit controls and attribute values for a given tag or class context
-//           - Sample element onclick() -> showEdit( context ) -> genEdit( context ) loop: -> genEditHTML( an attribute )
+// genEdit() - Create and display attribute edit control knobs for changing the current style attribute values of a clicked HTML element
 
-    // GEN HEADER + LOOP
+    // PURPOSE: Create and display attribute edit controls and values for a clicked HTML element. id='edit_controls'
+    // 
+    // 
+    // FLOW :   ,----------------------------------------------------------------------------------
+    //          | onclick() - click  an editable user HTML element like 'Title' was clicked
+    //          |           - calls  showEdit() event handler
+    //          | ,--------------------------------------------------------------------------------
+    //          | | showEdit() - event handler
+    //          | |            - show  edit controls popup HTML element id='edit_controls' previously hidden
+    //          | |            - save  any prior element changes recorded in the 'user' object by chgAttr()
+    //          | |            -       to local stroage in event of page refresh that will restore saved changes
+    //          | |            - call  genEdit()
+    //          | | ,------------------------------------------------------------------------------
+    //          | | | genEdit() - generate  column header html DOM elements for the browser to display
+    //          | | |           - loop      on all attr_ctrl's in the attr_ctrls array :
+    //          | | |           -           call genEditHTML() for each attr_ctrl (attribute) 
+    //          | | | ,---------------------------------------------------------------------------- 
+    //          | | | | genEditHTML() - generate  
+    //          | | | |               -
+    //          | | | |               -
+    //          | | | |               -
+    //          | | | |               -
+    //          | | | |               -
+
+    // ONCLICK EVENT HANDLER
+
+    function showEdit(context) {
+
+        // hideId('gui-panel');
+        // showId('wait');
+
+        p('\nshowEdit('+context+')');
+
+        save();             // save any prior element changes to local storage in the event of page refreash and restore changes
+        showId('sysMenu');  // show system menu on top
+        genEdit(context);   // generate HTML controls for editing new context element attribute values
+        showId('editStyle');
+        }
+
+    // GEN HEADER + LOOP ALL ATTRIBUTES
 
     function genEdit(context) {                                 // create all edit controls and attributes for a specified element
         p('\ngenEdit() element context: '+context);  // --font-size, OR --title-font-size, OR --footer-font-size 
@@ -695,7 +767,7 @@ Sample of Future Textarea Generated Results
             genEditHTML(attr_ctrls[attr], context);         }      // call genEditAttrs for each css attribute found in attr_ctrls table
 
         hideId('wait');
-        showId('edit-theme');
+        showId('gui-panel');
         }
 
     // ATTRIBUTE PROCESSOR
@@ -710,18 +782,13 @@ Sample of Future Textarea Generated Results
         p(' root variable name: '+var_name);
         p(attr_ctrl);
 
-            // build HTML id's to display the attribute's :root --variable_name value
-
-        let changeID  = 'change-' +var_name;                    // attribute's value html id in change  column
-        let defaultID = 'default-'+var_name;                    // attribute's value html id in default column 
+        // Create HTML edit control knobs, descriptions, & values 
 
         let description, knobs, color_picker, values, output;
 
-            // Create HTML edit control knobs, descriptions, & values 
-
         let columns = document.getElementById('edit-columns');
 
-        // attribute description column with popups  ('Color', 'Background Color', 'Border Color', etc.)                    col 1
+        // attribute description column with info popups  ('Color', 'Background Color', 'Border Color', etc.)               col 1 INFO
 
         description              =  newDOM(columns, 'DIV');   // create attribue descriptor as grid column 1  
         description.innerHTML    =  attr_ctrl.description;    // display attributes description
@@ -732,10 +799,10 @@ Sample of Future Textarea Generated Results
         description.onclick      =  function (e) {
                                         let elem = e.currentTarget;
                                         p('\nonClick() '+elem._var_name+' '+elem._attr_ctrl.attr); 
-                                        attribute_popup(elem._var_name, elem._attr_ctrl); // desc last
+                                        attribute_info_popup(elem._var_name, elem._attr_ctrl); // desc last
                                         }
 
-        // attribute edit controls column                                                                                   col 2
+        // attribute edit controls column                                                                                   col 2 CONTROL KNOBS
 
         switch(attr_ctrl.type) {
             case 'color': 
@@ -784,13 +851,14 @@ Sample of Future Textarea Generated Results
                                                 chgAttr( transButton._var_name,    transButton._attr_ctrl,      'save', 'transparent')  } 
                     break;
 
-            default:      
-                    ctrl_knobs      = newDOM(columns, 'DIV');     // create attribue edit buttons as grid column 2
+            default:      p('default');
+                    ctrl_knobs      = newDOM(columns, 'DIV');     
                     description.style.setProperty('font-family', 'var(--sys-fancy)', 'important'); // overide font family 
                     // setClass(description, 'sysFancy');
 
                     // NUMBER VALUE PASSED
                     if (exist(attr_ctrl.min)) {                   // number - create buttons & measurement suffix 
+                        p('numeric values');
                         let up_button       = newDOM(ctrl_knobs, 'SPAN');      //  for changing numeric attribute values
                         let down_button     = newDOM(ctrl_knobs, 'SPAN');
                         let undo_button     = newDOM(ctrl_knobs, 'SPAN');
@@ -859,17 +927,9 @@ Sample of Future Textarea Generated Results
                         let down_button     = newDOM(ctrl_knobs, 'SPAN');        // DOWN   - DOM object
                         let undo_button     = newDOM(ctrl_knobs, 'SPAN');        // UNDO   - DOM object
                         let default_button  = newDOM(ctrl_knobs, 'SPAN');        // DEFAULT- DOM object
-
                         let options_select  = newDOM(ctrl_knobs, 'SELECT');
-                        setClass(options_select, 'sysSelect');
 
-                        for (option_ix=0; option_ix<attr_ctrl.options.length; option_ix++) {
-                            let option          = newDOM(options_select, 'OPTION');
-                            option.innerHTML    = attr_ctrl.options[option_ix];
-                            setClass(option, 'sysSelect');
-                            if (attr_ctrl.attr == 'font-family') { option.style.fontFamily = attr_ctrl.options[option_ix]}
-                            }
-
+                        // set new control knobs attributes and values
                         setClass(     up_button,    'sysButton' );               // set classes in system element
                         setClass(   down_button,    'sysButton' );                    
                         setClass(   undo_button,    'sysButton' );
@@ -879,7 +939,7 @@ Sample of Future Textarea Generated Results
                            undo_button.innerHTML    = 'undo'; 
                         default_button.innerHTML    = 'default';
                              up_button._attr_ctrl   = attr_ctrl;                 // store attributes parameters for event functions
-                           down_button._attr_ctrl   = attr_ctrl;                 //?  better way to pass vars?
+                           down_button._attr_ctrl   = attr_ctrl;                 
                            undo_button._attr_ctrl   = attr_ctrl;
                         default_button._attr_ctrl   = attr_ctrl;
                              up_button._context     = context;                   
@@ -892,26 +952,37 @@ Sample of Future Textarea Generated Results
                         default_button._var_name    = var_name;
                            undo_button._prior_val   = getRoot(var_name).toString(); // make prior & default values accessable
                         default_button._default_val = attr_ctrl.default;
+
                         p(' attr: '+attr_ctrl.attr+', undo: '+undo_button._prior_val+', default: '+default_button._default_val);
 
+                        // set button to call chgAttr() to change an attritute value
                         up_button.onclick      = function(e) { // DOM.attr_ctrl & 
                                                     let upButton      = (e.currentTarget); //? test using 'this' as ref to currentTarget 
                                                     p('onchange() upButton')
-                                                    chgAttr( upButton._var_name, upButton._attr_ctrl,      'increment', upButton._context)   } 
+                                                    chgAttr( upButton._var_name,      upButton._attr_ctrl,      'increment', upButton._context)   } 
                         down_button.onclick    = function(e) { 
                                                     let downButton    = e.currentTarget; 
-                                                    chgAttr( downButton._var_name, downButton._attr_ctrl,  'decrement', downButton._context) } 
+                                                    chgAttr( downButton._var_name,    downButton._attr_ctrl,    'decrement', downButton._context) } 
                         undo_button.onclick    = function(e) { 
                                                     let undoButton    = e.currentTarget; 
-                                                    chgAttr( undoButton._var_name,    undoButton._attr_ctrl,    'save', undoButton._prior_val) } 
+                                                    chgAttr( undoButton._var_name,    undoButton._attr_ctrl,    'save',      undoButton._prior_val) } 
                         default_button.onclick = function(e) { 
                                                     let defaultButton = e.currentTarget; 
-                                                    chgAttr( defaultButton._var_name, defaultButton._attr_ctrl, 'save', defaultButton._default_val) } 
+                                                    chgAttr( defaultButton._var_name, defaultButton._attr_ctrl, 'save',      defaultButton._default_val) } 
+
+                        // generate all attribute options
+                        setClass(options_select, 'sysSelect');
+                        for (option_ix=0; option_ix<attr_ctrl.options.length; option_ix++) {
+                            let option          = newDOM(options_select, 'OPTION');
+                            option.innerHTML    = attr_ctrl.options[option_ix];
+                            setClass(option, 'sysSelect');
+                            if (attr_ctrl.attr == 'font-family') { option.style.fontFamily = attr_ctrl.options[option_ix]}
+                            }
                         } 
   
             } // end specific cases switch 
 
-        // changed attribute column - display '.' as placeholder for changed attribute values                               col 3
+        // changed attribute column - display '.' as placeholder for changed attribute values                               col 3 CHANGES
 
         values               = newDOM(columns, 'DIV');            // right side div - attribue changed value 
         output               = newDOM(values,         'SPAN');    // attribute changed value on right
@@ -936,7 +1007,7 @@ Sample of Future Textarea Generated Results
         let val, nuVal, ix;
 
         // SAVE PASSED VALUE FOR RELOADs
-        if (command == 'save')   { // SET PASSED VALUE,
+        if (command == 'save')   { // SAVE PASSED VALUE,
             nuVal = multiParm;     // save value was passed in multiParm    
             setRoot(contextAttr,nuVal);     
             document.getElementById(attr_ctrl.attr+'_change').innerHTML = nuVal;                 
@@ -994,17 +1065,11 @@ Sample of Future Textarea Generated Results
         
         }
 
-// ==============================================================
-// attribute_info_popup() - 
-
-    function attribute_info_popup(attribute) {
-
-        }
-
 //===============================================================
-// attribute_popup() - display attribute information
+// attribute_info_popup() - display attribute information
 
-    // attribute_popup() info elements   
+    // get attribute_info_popup() elements needing to be fill in ( elements obtained once on page load )
+
     const infoDesc        = document.getElementById('info_description');      
     const infoAttrName    = document.getElementById('info_attribute_name');  // get elements once on page load for performance
     const infoVarName     = document.getElementById('info_variable_name');   //   instead of each time the function is called
@@ -1020,72 +1085,76 @@ Sample of Future Textarea Generated Results
     const infoVarSample   = document.getElementById('info-var-sample'  );
     const infoStyleSample = document.getElementById('info-style-sample');
 
-    // Update popup elements value and display the attribute information panel
+    // Update attribute valus in the popup elements and display the popup
 
-    function attribute_popup(var_name, attr_ctrl) {
-        p('attribute_popup('+var_name+', '+attr_ctrl.attr+')');
+    function attribute_info_popup(var_name, attr_ctrl) {
+        p('attribute_info_popup('+var_name+', '+attr_ctrl.attr+')');
 
-        // UNDO DEFAULT VALUES
-        infoUndo.innerHTML          = getRoot(var_name);        // undo
-        infoDefault.innerHTML       = attr_ctrl.default;        // default
+        // FILL IN UNDO & DEFAULT VALUES
+        infoUndo.innerHTML          = getRoot(var_name);        // set undo    value in html element
+        infoDefault.innerHTML       = attr_ctrl.default;        // set default value in html element
 
-        // ATTRIBUTE, VAR, STYLE NAMES & SAMPLE USE
-        infoDesc.innerHTML          = attr_ctrl.description;    // attribute description
-        infoAttrName.innerHTML      = attr_ctrl.attr;           // attribute name
-        infoVarName.innerHTML       = var_name;                 // attribute variable name
-        infoStyleName.innerHTML     = attr_ctrl.style;          // attribute style name for js reference
+        // FILL IN ATTRIBUTE, VAR, STYLE NAMES & SAMPLE USE
+        infoDesc.innerHTML          = attr_ctrl.description;    // set attribute description
+        infoAttrName.innerHTML      = attr_ctrl.attr;           // set attribute name
+        infoVarName.innerHTML       = var_name;                 // set attribute variable name
+        infoStyleName.innerHTML     = attr_ctrl.style;          // set attribute style name for js reference
         infoNameSample.innerHTML    = '.myClass { <red>'+attr_ctrl.attr+'</red>: '+attr_ctrl.default+' }'
         infoVarSample.innerHTML     = '.myClass { '+attr_ctrl.attr+': var(<red>'+var_name+'</red>) }<br>:root { <red>'+var_name+'</red>: '+attr_ctrl.default+'; }'
         infoStyleSample.innerHTML   = 'document.getElementById(id).style.<red>'+attr_ctrl.style+'</red> = "'+attr_ctrl.default+'";'
 
-        // ATTRIBUTE - SEARCH DOCS, SAMPLES, TUTOR WALKTHROUGHS
-        infoName.innerHTML          = attr_ctrl.attr;           // attribute name
-        infoDocs._attribute_name    = attr_ctrl.attr;           // documents search parameter for button event
-        infoSamples._attribute_name = attr_ctrl.attr;           // samples   search parameter for button event
-        infoTutors._attribute_name  = attr_ctrl.attr;           // tutors    search parameter for button event
+        // FILL IN ATTRIBUTE SEARCH DOCS, SAMPLES, TUTOR WALKTHROUGH BUTTONS
+        infoName.innerHTML          = attr_ctrl.attr;           // set attribute name
+        infoDocs._attribute_name    = attr_ctrl.attr;           // set documents search button parameter to the attribute name
+        infoSamples._attribute_name = attr_ctrl.attr;           // set samples   search button parameter to the attribute name
+        infoTutors._attribute_name  = attr_ctrl.attr;           // set tutors    search button parameter to the attribute name
  
-        // ATTRIBUTE OPTIONS - SEARCH DOCS, SAMPLES, TUTOR WALKTHROUGHS
+        // ATTRIBUTE OPTIONS LOOP - CREATE SEARCH DOCS, SAMPLES, TUTOR WALKTHROUGH BUTTONS
         infoAttrOptions.innerHTML   = ''; // clear prior attribute options before appending new options
         let wrapperObj, optionObj, docObj, sampleObj, tutorObj; // LOOP - Display Attribute Options and their search buttons
-        if (exist(attr_ctrl.options)) {
-            for (let i=0; i<attr_ctrl.options.length; i++) {
+        if (exist(attr_ctrl.options)) {                         // if the attribute has a option list
+            for (let i=0; i<attr_ctrl.options.length; i++) {    //    then loop through its options
 
-                wrapperObj          = newDOM(infoAttrOptions,'DIV');    // Wrapper
-                setClass(wrapperObj,'infoLinksGrid','on');
+                wrapperObj          = newDOM(infoAttrOptions,'DIV');    // Create a Option container
+                setClass(wrapperObj,'infoLinksGrid','on');              // assign a column grid for the wrapper contents below
     
-                optionObj           = newDOM(wrapperObj,'SPAN');        // Attribute Option Name 
-                optionObj.innerHTML = attr_ctrl.options[i];
-                setClass(optionObj,'sysRed','on');
+                optionObj           = newDOM(wrapperObj,'SPAN');        // Create the options Name element in the above container 
+                optionObj.innerHTML = attr_ctrl.options[i];             // Display the option name in the button
+                setClass(optionObj,'sysRed','on');                      // make the option name red by setting a red css style class name
 
-                docObj              = newDOM(wrapperObj,'button');      // Search Option documentation
-                docObj.innerHTML    = 'Publications';
-                setClass(docObj,'sysButton','on');
+                docObj              = newDOM(wrapperObj,'button');      // Create search Documentation button in the container
+                docObj.innerHTML    = 'Publications';                   // Display 'Publications' as the button title 
+                docObj._attribute_name = attr_ctrl.options[i];          // create and set attribute name in button object as a parameter for onclick()
+                setClass(docObj,'sysButton','on');                      // make it look like a button by setting a css button style class name
+                docObj.onclick = function (e) { let obj = e.currentTarget; searchSites(obj._attribute_name, info_sites)   } // make the button call a search function
+
+                sampleObj           = newDOM(wrapperObj,'button');      // Create search Samples button in the container
+                sampleObj.innerHTML = 'Samples';                        // Display 'Samples' as the button title 
+                sampleObj._attribute_name = attr_ctrl.options[i];       // create and set attribute name in button object as a parameter for onclick()
+                setClass(sampleObj,'sysButton','on');                   // make it look like a button by setting a css button style class name
+                sampleObj.onclick       = function (e) { let obj = e.currentTarget; searchSites(obj._attribute_name, sample_sites)}// make the button call a search function
     
-                sampleObj           = newDOM(wrapperObj,'button');      // Search Option samples
-                sampleObj.innerHTML = 'Samples';
-                setClass(sampleObj,'sysButton','on');
-    
-                tutorObj            = newDOM(wrapperObj,'button');      // Search Option tutorials
-                tutorObj.innerHTML  = 'Tutors';
-                setClass(tutorObj,'sysButton','on');
+                tutorObj            = newDOM(wrapperObj,'button');      // Create search Tutorials button in the container
+                tutorObj.innerHTML  = 'Tutors';                         // Display 'Tutors' as the button title 
+                tutorObj._attribute_name = attr_ctrl.options[i];        // create and set attribute name in button object as a parameter for onclick()
+                setClass(tutorObj,'sysButton','on');                    // make it look like a button by setting a css button style class name
+                tutorObj.onclick         = function (e) { let obj = e.currentTarget; searchSites(obj._attribute_name, tutor_sites) }// make the button call a search function
                 }
             }
-        showId('attribute-popup');
+        showId('attribute-popup'); // display the attribute info popup we just filled in
         }
 
 // ==============================================================
-// popup() - display popup window - future TBD
+// searchSites(arg, sites) onclick - search  site:github.com OR site:gitlab.com OR site:bitbucket.org after:2018-01-01
 
-// ==============================================================
-// searchSites(arg, sites) - search  site:github.com OR site:gitlab.com OR site:bitbucket.org after:2018-01-01
+    const search_prefix =   'https://www.google.com/search?q=css DOM';
 
-    const search_prefix =   'https://www.google.com/search?q=css ';
-
-    const info_sites    = [ 'developer.mozilla.org', 
-                            'caniuse.com',
+    const info_sites    = [ 'caniuse.com',        
                             'cssreference.io',
                             'getdocs.org',
-                            'github.com/JaniRefsnes/w3css/blob/master/w3.css'
+                            'github.com/JaniRefsnes/w3css/blob/master/w3.css',
+                            'www.w3.org',
+                            'developer.mozilla.org'                            
                             ]; 
     const sample_sites  = [ 'github.com/w3dotdev',
                             'css-tricks.com',
@@ -1098,18 +1167,19 @@ Sample of Future Textarea Generated Results
                             'docs.w3cub.com',
                             'www.quackit.com',
                             'www.w3docs.com',
-                            'www.tutorialrepublic.com',
                             'help.dottoro.com',
                             'www.w3schools.com',
                             'www.w3programmers.com',
-                            'codepen.io'
+                            'codepen.io',
+                            'drafts.csswg.org'
                             ]; 
     const tutor_sites   = [ 'www.csstutorial.net',
                             'w3cx.org',
                             'htmldog.com',
-                            'www.w3.org',
+                            'www.tutorialbrain.com',
                             'www.w3resource.com/css',
                             'o7planning.org',
+                            'www.tutorialrepublic.com',
                             'www.learn-html.org',
                             'www.freecodecamp.org',
                             'www.smashingmagazine.com',
@@ -1124,36 +1194,27 @@ Sample of Future Textarea Generated Results
 
     function searchSites(argument, site_list) {
         p('searchSites( '+argument+' )');
-        let sites = 'site:'+site_list[0];
-        for ( i=1; i<site_list.length; i++)        { sites += ' OR site:'+site_list[i] }
-        search_string = search_prefix+argument +' '+ sites +  ' after:2015-01-01';
+        let                                     sites =  ' site:'+site_list[0];
+        for ( i=1; i<site_list.length; i++)   { sites += ' OR site:'+site_list[i] }
+        search_string = search_prefix +' "'+ argument +'" '+ sites +' after:2015-01-01';
         p(search_string);
         window.open(search_string);
         } 
     
-// =============================================================
-// genCSS() - display all attribute variables in CSS theme format 
-//            for user cut and paste 
-
-    function genCSS() {
-
-        }
-
 // ==============================================================
-// exists() passed() - check if parameter exists          
-
-    function exist(item)  {
+// exists() passed() - check if parameter exists             
+ 
+    function exist(item)  { if (item == '0'         || item === 0)          { return true  }
                             if (item == 'undefined' || item == undefined ||
                                 item == 'NaN'       || item == NaN       ||
                                 item == 'null'      || item == null      ||
-                                item == 'false'     || item == false     ||
-                                item == ''          ) { return false} // p('..exists('+item+') param type: '+typeof item+' does not exist');
-                            else                      { return true } // p('..exists('+item+') does exist'    ); }
+                                item === 'false'    || item === false    ||
+                                item == ''          )                       { return false } // p('..exists('+item+') param type: '+typeof item+' does not exist');
+                            else                                            { return true  } // p('..exists('+item+') does exist'    ); }
                             }
     function passed(item) { return exist(item) }
-
 // ==============================================================
-// getRoot() setRoot() - :root variable access            
+// getRoot() setRoot() - :root variable access               
 
     var root = document.querySelector(':root');
 
@@ -1184,7 +1245,7 @@ Sample of Future Textarea Generated Results
         return elem;
         }
 // ==============================================================
-// SetClass() - action default = toggle                   
+// SetClass() - action default = toggle                      
 
     function setClass(obj, class_name, action)    {
         if (exist(obj) && exist(class_name) == false)   {error('setclass missing parm'); return }
@@ -1209,7 +1270,7 @@ Sample of Future Textarea Generated Results
         // TBD - update obj rec
         }
 // ==============================================================
-// show..() hide..() elements and named groups  
+// show..() hide..() elements and named groups               
 
     function showId(id) {p('show('+id+')');
             let obj; 
@@ -1219,18 +1280,6 @@ Sample of Future Textarea Generated Results
             else                        { obj.style.display = 'block' }
             }
     function hideId(id) {p('hide('+id+')'); document.getElementById(id).style.display = 'none' }
-
-    function showEdit(context) {
-
-        hideId('edit-theme');
-        showId('wait');
-
-        p('\nshowEdit('+context+')');
-
-        save();             // save current element changes stored in user object to local storage
-        showId('sysMenu');
-        genEdit(context);   // generate HTML controls for editing new context element attribute values
-        }
 
     function hideBrothers(name)          {
             p('hideBrothers() '+name);
@@ -1258,12 +1307,13 @@ Sample of Future Textarea Generated Results
         }
                                                 //  name='editThemes' 
 // ==============================================================
-// get..() put..()                                                
+// get..() put..()                                           
 
-        function getByName  (name)   { return document.getElementsByName(name) }
-
+    function getByName  (name)   { return document.getElementsByName(name) }
 // =============================================================
-// save()  read()  - local storage
+// save()  read()  - local storage,                          
+
+    // save user setting for future page load or refresh which reads and restores user settings
 
     function save() {                       // SAVE user changes for page reloads
         p(' save() - local storage');
@@ -1280,6 +1330,37 @@ Sample of Future Textarea Generated Results
             }
         return results;                                                                // return read  object
         }
+// ==============================================================
+// drag & drop - event handlers                              
+
+    var offsetX = offsetY = 0;
+
+    function dragElement(e) { e.dataTransfer.setData("text", e.target.id); p('<<< onDragStart >>> '+e.target.id);  
+                              console.clear();
+                              // e.clinetX e.clientY
+                              let obj     = e.target;
+                              let cursorX = e.clientX;
+                              let cursorY = e.clientY;
+                              let curleft = curtop = 0;
+                              p('cursor X:'+cursorX+' cursor Y:'+cursorY+' obj left:'+obj.offsetLeft+' top:'+obj.offsetTop);
+                              if (obj.offsetParent) { do { curleft   += obj.offsetLeft;
+                                                           curtop    += obj.offsetTop;
+                                                         } while (obj = obj.offsetParent)        }
+                              offsetX = Math.abs(cursorX-curleft);
+                              offsetY = Math.abs(cursorY-curtop )+document.getElementById('sysMenu').offsetHeight; // 22; 
+                              p('offset left:'+offsetX+' offset top:'+offsetY);
+                            }
+    function dropZone(e)    { e.preventDefault(); }   
+    function dropElement(e) { e.preventDefault();    
+                              let cursorX           = e.clientX;
+                              let cursorY           = e.clientY;
+                              let id                = e.dataTransfer.getData("text");
+                              let left              = cursorX-offsetX; //, 0);
+                              let top               = cursorY-offsetY; //, 0);
+                              dropObj               = document.getElementById(id);
+                              dropObj.style.left    = left+'px';
+                              dropObj.style.top     = top+'px';
+                              }
 
 // ==============================================================
 // body onLoad                                            
@@ -1289,12 +1370,12 @@ Sample of Future Textarea Generated Results
         p('bodyLoaded()')
         user = read();
         // Set Search Button event handlers
-        document.getElementById('info_documentation').onclick = function (e) { let obj = e.currentTarget; 
-                                                                               searchSites(obj._attribute_name, info_sites)   }
-        document.getElementById('info_samples').onclick       = function (e) { let obj = e.currentTarget; 
-                                                                               searchSites(obj._attribute_name, sample_sites)}
-        document.getElementById('info_tutor').onclick         = function (e) { let obj = e.currentTarget; 
-                                                                               searchSites(obj._attribute_name, tutor_sites) }
+        // document.getElementById('info_documentation').onclick = function (e) { let obj = e.currentTarget; 
+        //                                                                        searchSites(obj._attribute_name, info_sites)   }
+        // document.getElementById('info_samples').onclick       = function (e) { let obj = e.currentTarget; 
+        //                                                                        searchSites(obj._attribute_name, sample_sites)}
+        // document.getElementById('info_tutor').onclick         = function (e) { let obj = e.currentTarget; 
+        //                                                                        searchSites(obj._attribute_name, tutor_sites) }
         // Set System Theme
         document.documentElement.setAttribute(theme,'system');  // add system theme variables to root
 
@@ -1310,6 +1391,7 @@ Sample of Future Textarea Generated Results
                 // <button id='info_tutor'         class='sysButton' >
                 //                         <!-- onclick="function (e) {let undoButton = e.currentTarget; searchSites(undoButton._attribute_name, 'tutor_sites') }"--> 
         }
+
 // ==============================================================
 // p() - debug, consol.log                                                  
 
@@ -1321,8 +1403,8 @@ Sample of Future Textarea Generated Results
     function error(txt) {console.error(txt)}
     function warn(txt)  {console.warn(txt)}
 
-
-console.log('..HTML loaded');
+console.log('..HTML JavaScript loaded');
 </script>
 </body>
 </html>
+    
