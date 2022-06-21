@@ -2,12 +2,13 @@
                 /* OVERRIDDEN BY sys.root[] CUSTOMIZATIONS */
 
 
-:root   { 
+/* ########################### USER THEME ########################## */
+
+/* ROOT -------------------------- CURRENT USER THEME VARIABLES      */
+
+    :root   { 
 
     /* WARNING: Do not use color names like 'white' as the color picker only accepts Hex values */
-
-
-    /* ########################### CURRENT USER THEME VARIABLES ########################## */
                     --accent-color                      : auto;
                     --align-content                     : normal;
                     --align-items                       : normal;
@@ -187,6 +188,7 @@
                     --list-style-image                  : none;
                     --list-style-position               : outside;
                     --list-style-type                   : disc;
+                    --margin                            : 8px;       /*DIV 0px*/
                     --margin-block-end                  : 8px;       /*DIV 0px*/
                     --margin-block-start                : 8px;       /*DIV 0px*/
                     --margin-bottom                     : 8px;       /*DIV 0px*/
@@ -371,7 +373,9 @@
                     --shadow4-blur:                0px;
                     --shadow4-spread:              12px;
                     --shadow4-inset:               inset;
+    /*--------------------------- colors     */
 
+                    --yellow:                      ;
     /* CSS ATTRs for SPECIFIC TAGs or CLASSes */
 
     /*--------------------------- title      */
@@ -412,6 +416,7 @@
                     --title-shadow4-spread:        var(--text-shadow-spread);
                     --title-shadow4-inset:         var(--text-shadow-inset);
 
+                    --title-margin               : 0px;      
                     --title-margin-top:            0px;
                     --title-margin-bottom:         0px;
                     --title-margin-left:           0px;
@@ -443,6 +448,7 @@
                     --description-font-style:            normal; /* italic */
                     --description-text-align:            left;
                     --description-line-height:           var(--line-height);
+                    --description-margin               : 0px; 
                     --description-margin-top:            0px;
                     --description-margin-bottom:         0px;
                     --description-margin-left:           0px;
@@ -555,18 +561,11 @@
                     --image-sdow-inset:      var(--bdr-shadow-inset);
         }
 
-/* THEMEs       */
+/* ------------------------------- USER CLASSES & TAGS               */
 
-    html[data-theme='light'] {
+/* BODY                     */ 
 
-                  }
-    html[data-theme='dark'] {
-
-                  }
-
-/* USER CLASSES & TAGS */
-
-body                    {
+    body                    {
                           color:                       var(--color           );
                           background-color:            var(--background-color);    
                           font-family:                 var(--font-family     );    
@@ -575,6 +574,7 @@ body                    {
                           font-size:                   var(--font-size       ); 
                           text-align:                  var(--text-align      );
                           margin-top:                  var(--margin-top      );
+                          margin:                      var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
                           margin-bottom:               var(--margin-bottom   );
                           margin-left:                 var(--margin-left     );
                           margin-right:                var(--margin-right    );
@@ -594,48 +594,7 @@ body                    {
                           writing-mode:                var(--writing-mode    );
                           /*line-height:               var(--line-height);*/
                         }
-.title, h1              {
-                          font-family:                 var(--title-font-family   ); 
-                          font-size:                   var(--title-font-size     );
-                          font-weight:                 var(--title-font-weight   ); 
-                          font-style:                  var(--title-font-style    );
-                          color:                       var(--title-color         );
-                          background-color:            var(--title-background-color);
-                          text-align:                  var(--title-text-align    );
-                          margin-top:                  var(--title-margin-top    );
-                          margin-bottom:               var(--title-margin-bottom );
-                          margin-left:                 var(--title-margin-left   );
-                          margin-right:                var(--title-margin-right  );
-                          padding-top:                 var(--title-padding-top   );   
-                          padding-bottom:              var(--title-padding-bottom);   
-                          padding-left:                var(--title-padding-left  );   
-                          padding-right:               var(--title-padding-right );
-                          line-height:                 var(--title-line-height   ); 
-                        }  
-input                   { height:                      var(--ip-txt-height); }
-h1                      { color:                       var(--color);         }
-div                     { background-color:            transparent;          }
-span                    { background-color:            transparent;          }
-.desc, .description, h3 {
-                          font-family:                 var(--description-font-family   ); 
-                          font-size:                   var(--description-font-size     );
-                          font-weight:                 var(--description-font-weight   ); 
-                          font-style:                  var(--description-font-style    );
-                          color:                       var(--description-color         );
-                          background-color:            var(--description-background-color);
-                          text-align:                  var(--description-text-align    );
-                          margin-top:                  var(--description-margin-top    );
-                          margin-bottom:               var(--description-margin-bottom );
-                          margin-left:                 var(--description-margin-left   );
-                          margin-right:                var(--description-margin-right  );
-                          padding-top:                 var(--description-padding-top   );   
-                          padding-bottom:              var(--description-padding-bottom);   
-                          padding-left:                var(--description-padding-left  );   
-                          padding-right:               var(--description-padding-right );
-                          line-height:                 var(--description-line-height   ); 
-                          }  
-
-/* BUTTON */
+/* BUTTON                   */ 
 
     .button, .buttonBorder  {
                           color:                       var(--button-color);
@@ -658,24 +617,33 @@ span                    { background-color:            transparent;          }
                           border-bottom-left-radius:   var(--button-bdr-bl-radius);    
                           border-bottom-right-radius:  var(--button-bdr-br-radius);
                           }
+/* DESCRIPTION              */ 
+    .desc, .description, h3 {
+                          color:                       var(--description-color         );
+                          font-family:                 var(--description-font-family   ); 
+                          font-size:                   var(--description-font-size     );
+                          font-weight:                 var(--description-font-weight   ); 
+                          font-style:                  var(--description-font-style    );
+                          background-color:            var(--description-background-color);
+                          text-align:                  var(--description-text-align    );
+                          margin:                      var(--description-margin-top) var(--description-margin-right) var(--description-margin-bottom) var(--description-margin-left);
+                          margin-top:                  var(--description-margin-top    );
+                          margin-bottom:               var(--description-margin-bottom );
+                          margin-left:                 var(--description-margin-left   );
+                          margin-right:                var(--description-margin-right  );
+                          padding-top:                 var(--description-padding-top   );   
+                          padding-bottom:              var(--description-padding-bottom);   
+                          padding-left:                var(--description-padding-left  );   
+                          padding-right:               var(--description-padding-right );
+                          line-height:                 var(--description-line-height   ); 
+                          }  
+/* DIV                      */ 
+    
+    div                     { background-color:            transparent;          }
+/* INPUT                    */ 
 
-/* SHADOW */
-
-    .shadow                 {
-                          text-shadow:                 var(--text-shadow-color)  var(--text-shadow-h)  var(--text-shadow-v)  var(--text-shadow-blur),
-                                                       var(--text-shadow2-color) var(--text-shadow2-h) var(--text-shadow2-v) var(--text-shadow2-blur),
-                                                       var(--text-shadow3-color) var(--text-shadow3-h) var(--text-shadow3-v) var(--text-shadow3-blur),
-                                                       var(--text-shadow4-color) var(--text-shadow4-h) var(--text-shadow4-v) var(--text-shadow4-blur)
-        }
-    .boxShadow              {
-        box-shadow:                  var(--button-sdow-h) var(--button-sdow-v) var(--button-sdow-blur) var(--button-sdow-spread) var(--button-sdow-color);
-        }
-    .noShadow               {
-        text-shadow:                 none;
-        box-shadow:                  none;
-        }
-
-/* SELLECT */ 
+    input                   { height:                      var(--ip-txt-height); }
+/* SELLECT                  */ 
 
     select                  { /* SELECT options element */
         background-color:            transparent; 
@@ -702,16 +670,49 @@ span                    { background-color:            transparent;          }
    -moz-user-select: text; /* Firefox */
    -ms-user-select: text; /* Internet Explorer/Edge */
         }
+/* SHADOW                   */ 
 
-/* POSITIONing */
+    .shadow                 {
+                          text-shadow:                 var(--text-shadow-color)  var(--text-shadow-h)  var(--text-shadow-v)  var(--text-shadow-blur),
+                                                       var(--text-shadow2-color) var(--text-shadow2-h) var(--text-shadow2-v) var(--text-shadow2-blur),
+                                                       var(--text-shadow3-color) var(--text-shadow3-h) var(--text-shadow3-v) var(--text-shadow3-blur),
+                                                       var(--text-shadow4-color) var(--text-shadow4-h) var(--text-shadow4-v) var(--text-shadow4-blur)
+        }
+    .boxShadow              {
+        box-shadow:                  var(--button-sdow-h) var(--button-sdow-v) var(--button-sdow-blur) var(--button-sdow-spread) var(--button-sdow-color);
+        }
+    .noShadow               {
+        text-shadow:                 none;
+        box-shadow:                  none;
+        }
+/* SPAN                     */ 
 
-    .full                   { width: 100% }
-    .center             { text-align:    center;
-                          align-content: center;
-                          align-items:   center;
-                        }
+    span                    { background-color:            transparent;          }
+/* TITLE        H1         `*/ 
+    .title, h1              {
+                          color:                       var(--title-color         );
+                          font-family:                 var(--title-font-family   ); 
+                          font-size:                   var(--title-font-size     );
+                          font-weight:                 var(--title-font-weight   ); 
+                          font-style:                  var(--title-font-style    );
+                          background-color:            var(--title-background-color);
+                          text-align:                  var(--title-text-align    );
+                          margin:                      var(--title-margin-top) var(--title-margin-right) var(--title-margin-bottom) var(--title-margin-left);
+                          margin-top:                  var(--title-margin-top    );
+                          margin-bottom:               var(--title-margin-bottom );
+                          margin-left:                 var(--title-margin-left   );
+                          margin-right:                var(--title-margin-right  );
+                          padding-top:                 var(--title-padding-top   );   
+                          padding-bottom:              var(--title-padding-bottom);   
+                          padding-left:                var(--title-padding-left  );   
+                          padding-right:               var(--title-padding-right );
+                          line-height:                 var(--title-line-height   ); 
+                        }  
+    h1                      { color:                       var(--color);         }
 
-/* COLORS */
+/* ------------------------------- SPECIAL CLASSES                  */
+
+/* COLORS                   */ 
 
     .red,      .sysRed,      .sys-red,       red      { color:            var(--sys-red   ); }
     .green,    .sysGreen,    .sys-green,     green    { color:            var(--sys-green ); }
@@ -721,8 +722,7 @@ span                    { background-color:            transparent;          }
     .greenBg,  .sysGreenBg,  .sys-greenBg,   greenBg  { background-color: var(--sys-greenBg ); }
     .yellowBg, .sysYellowBg, .sys-yellowBg,  yellowBg { background-color: var(--sys-yellowBg); }
     .blueBg,   .sysBlueBg,   .sys-blueBg,    blueBg   { background-color: var(--sys-blueBg  ); }
-
-/* ICONS        */
+/* ICONS                    */ 
 
     .pointUp    { content: '🠝'; }
     .pointDown  { content: '🠟'; }
@@ -755,8 +755,14 @@ span                    { background-color:            transparent;          }
     . { content: '◢'; }
     . { content: ''; }
     */
+/* POSITIONing              */ 
 
-/* SAMPLE OUTPUT SCREENS */
+    .full                   { width: 100% }
+    .center             { text-align:    center;
+                          align-content: center;
+                          align-items:   center;
+                        }
+/* SAMPLE OUTPUT SCREENS    */ 
 
     .sampleSpan {
         color: ghostwhite;
@@ -780,4 +786,13 @@ span                    { background-color:            transparent;          }
         background-color: darkblue;
         margin-bottom: 40px;
         }
+
+/* THEMES ------------------------ THEMEs                           */
+
+    html[data-theme='light'] {
+
+                  }
+    html[data-theme='dark'] {
+
+                  }
 
