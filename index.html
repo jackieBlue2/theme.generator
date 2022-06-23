@@ -79,8 +79,8 @@ Main Event Handlers:
 
 Main Parameters:           
 
-    context         - a string denoting a specific class, id, or tag name i.e. button, title, innerGrid
-                    - only one context at a time.  Edit a title or a button, not both at the same time. 
+    class_name         - a string denoting a specific class, id, or tag name i.e. button, title, innerGrid
+                    - only one class_name at a time.  Edit a title or a button, not both at the same time. 
     attr_ctrl       - object containg an attributes associated attribute options list or numerical limits
     var_name        - associated attribute variable names prefix i.e. --button-background-color, --title-font-size
                                                                         -->
@@ -89,7 +89,7 @@ Main Parameters:
 <!--                      SYSTEM ELEMENTS <STYLE>                       -->
 <!-- ################################################################## -->
 
-    <link  rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="./themes.css">
 
     <style type="text/css" >
     /* ----------------------------------------------------------- intro
@@ -115,7 +115,7 @@ Main Parameters:
             /* system                   */
 
                     --sys-color:                   var(--sys-white);
-                    --sys-background-color:        var(--sys-greyBg);
+                    --sys-background-color:        var(--sys-blueBg);
                     --sys-hover-color:             var(--sys-red);
                     --sys-font-size:               18px;
                     --sys-small:                   18px;
@@ -149,9 +149,10 @@ Main Parameters:
 
                     --sys-redBg:                   #8b0000;  
                     --sys-greenBg:                 #6b8e23;
-                    --sys-blueBg:                  #1f1f72;
+                    --sys-blueBg:                  #211f41;
+                    --sys-brighter-blueBG:         #1b3369;
                     --sys-yellowBg:                #6a4520;
-                    --sys-purpleBg:                #8a2be2;
+                    --sys-purpleBg:                #2a1072;
                     --sys-greyBg:                  #0D0D20; 
             /* sys-title                */
                     --sys-title-font-family   :  var(--sys-title); 
@@ -172,7 +173,7 @@ Main Parameters:
                     --sys-title-line-height   :  1.1; 
             /* sys-header               */
 
-                    --sys-header-background-color: #492222; 
+                    --sys-header-background-color: var(--sys-brighter-blueBG); 
             /* sys-desc                 */
                     --sys-desc-font-family    :  var(--sys-desc); 
                     --sys-desc-font-size      :  20px;
@@ -195,8 +196,8 @@ Main Parameters:
                     --sys-button-font-size      :  18px;
                     --sys-button-font-weight    :  400; 
                     --sys-button-font-style     :  normal;
-                    --sys-button-color          :  var(--sys-yellow);
-                    --sys-button-background-color: var(--sys-brown);
+                    --sys-button-color          :  var(--sys-white);
+                    --sys-button-background-color: var(--sys-greyBg);
                     --sys-button-text-align     :  left;
                     --sys-button-margin-top     :  0;
                     --sys-button-margin-bottom  :  0;
@@ -234,34 +235,6 @@ Main Parameters:
 
 
         /* SYSTEM GRIDs  */
-            .infoLinksGrid   { 
-                margin-bottom:          8px; 
-                padding:                8px;
-                display:                grid;
-                grid-template-rows:     1fr;
-                grid-template-columns:  1fr 1fr 1fr 1fr;
-                grid-gap:               8px;
-                justify-items:          stretch;
-                }
-            .infoDescGrid    { 
-                margin-bottom:          8px; 
-                padding:                8px;
-                display:                grid;
-                grid-template-rows:     1fr;
-                grid-template-columns:  1fr 1fr 2fr;
-                grid-gap:               8px;
-                justify-items:          stretch;
-                }
-            .editColumnsGrid { 
-                margin-bottom:          25px; 
-                padding:                8px;
-                display:                grid;
-                grid-template-rows:     1fr;
-                grid-template-columns:  auto auto  0.6fr;
-                grid-gap:               8px;
-                justify-items:          stretch;
-                align-items:            stretch;
-                }
             .splitGrid       { 
                 width:                  100%; 
                 display:                grid;
@@ -269,8 +242,52 @@ Main Parameters:
                 grid-template-columns:  1fr 1fr;
                 grid-gap:               8px;
                 }
+            .infoGrid        { 
+                grid-template-columns: .5fr 3.5fr }
+            .infoDescGrid    { 
+                grid-template-columns:  .5fr 1.3fr  1.3fr 1.4fr; }
+            .infoUseGrid     { 
+                grid-template-columns: .5fr .75fr 2.75fr }
+            .infoLinksGrid   { 
+                grid-template-columns:  1fr 1fr  1fr 1fr; }
+            .infoDescGrid, .infoLinksGrid, .infoGrid, .infoUseGrid  { 
+                margin-bottom:          8px; 
+                padding:                8px;
+                display:                grid;
+                grid-template-rows:     1fr;
+                grid-gap:               8px;
+                justify-items:          stretch;
+                }
+            .editColumnsGrid { 
+                margin-bottom:          0px; 
+                padding:                8px;
+                display:                grid;
+                grid-template-rows:     1fr;
+                grid-template-columns:  1fr 4fr 1fr;
+                justify-items:          stretch;
+                align-items:            stretch;
+                }
 
         /* SYSTEM .CLASS */
+            .sysDesc                {
+                                  font-family    :    var(--sys-desc-font-family   ); 
+                                  font-size      :    var(--sys-desc-font-size     );
+                                  font-weight    :    var(--sys-desc-font-weight   );
+                                  font-style     :    var(--sys-desc-font-style    );
+                                  color          :    var(--sys-desc-color         );
+                                  background-color:   var(--sys-desc-background-color);
+                                  text-align     :    var(--sys-desc-text-align    );
+                                  margin-top     :    var(--sys-desc-margin-top    );
+                                  margin-bottom  :    var(--sys-desc-margin-bottom );
+                                  margin-left    :    var(--sys-desc-margin-left   );
+                                  margin-right   :    var(--sys-desc-margin-right  );
+                                  padding-top    :    var(--sys-desc-padding-top   );   
+                                  padding-bottom :    var(--sys-desc-padding-bottom);   
+                                  padding-left   :    var(--sys-desc-padding-left  );   
+                                  padding-right  :    var(--sys-desc-padding-right );
+                                  line-height    :    var(--sys-desc-line-height   ); 
+                                  justify-items :     stretch;
+                        }
             .sysFancy               { font-family:        var(--sys-fancy); }       /* remove usage */
             .sysSmall               { font-size:          var(--sys-small); }       /* used? */
             .sysText                { font-family:        var(--sys-font-family);   /* needed? used?*/
@@ -294,6 +311,14 @@ Main Parameters:
                                       font-family:        var(--sys-desc-font-family);
                                       width:              100%;
                                     }
+            .sysHover:hover         { background-color:   var(--sys-black);              
+                                      color:              var(--sys-white);  
+                                      transition:         0.1s; 
+                                      border-color:       var(--sys-white);
+                                      border-width: 1px;  
+                                      border-style: solid;         
+                                      /*font-size: calc(var(--sys-font-size) + 2px);                            */
+                                    }
             .sysTitle, .sysBack     {
                                   font-family    :    var(--sys-title-font-family   ); 
                                   font-size      :    var(--sys-title-font-size     );
@@ -312,29 +337,10 @@ Main Parameters:
                                   line-height    :    var(--sys-title-line-height   ); 
                                   background-color:   var(--sys-title-background-color);
                         }
-            .sysDesc                {
-                                  font-family    :    var(--sys-desc-font-family   ); 
-                                  font-size      :    var(--sys-desc-font-size     );
-                                  font-weight    :    var(--sys-desc-font-weight   );
-                                  font-style     :    var(--sys-desc-font-style    );
-                                  color          :    var(--sys-desc-color         );
-                                  background-color:   var(--sys-desc-background-color);
-                                  text-align     :    var(--sys-desc-text-align    );
-                                  margin-top     :    var(--sys-desc-margin-top    );
-                                  margin-bottom  :    var(--sys-desc-margin-bottom );
-                                  margin-left    :    var(--sys-desc-margin-left   );
-                                  margin-right   :    var(--sys-desc-margin-right  );
-                                  padding-top    :    var(--sys-desc-padding-top   );   
-                                  padding-bottom :    var(--sys-desc-padding-bottom);   
-                                  padding-left   :    var(--sys-desc-padding-left  );   
-                                  padding-right  :    var(--sys-desc-padding-right );
-                                  line-height    :    var(--sys-desc-line-height   ); 
-                                  justify-items :     stretch;
-                        }
             .sysLargeButton         { font-size: 32px; }
             .sysButton, .sysLargeButton               {
                                   border-style   :  var(--sys-button-border-style);
-                                  background-color: var(--sys-button-background-color);
+                                  background-color: var(--sys-blueBg);
                                   color:            var(--sys-button-color);
                                   font-weight:      var(--sys-button-font-weight);
                                   margin-top     : 0px;
@@ -352,7 +358,7 @@ Main Parameters:
             .sysSelect              {
                                   font-family    :  var(--sys-desc-font-family   );
                                   color          :  var(--sys-button-color);
-                                  background-color: var(--sys-button-background-color);
+                                  background-color: var(--sys-blueBg);
                                   font-weight    :  var(--sys-button-font-weight);
                                   border-style   :  var(--sys-button-border-style);
                                   border-width   :  var(--sys-button-borderWidth );
@@ -362,9 +368,6 @@ Main Parameters:
                                   content:            var(--sys-pointL);  
                                 }
             .sysMargin              { margin-bottom  :    25px;                          }   /* used? */
-            .sysHover:hover         { color:              var(--sys-hover-color)  ;              
-                                  transition:         0.3s;                          
-                                }
             .sysCenter              { text-align:         center;
                                   align-content: center;
                                   align-items:   center;
@@ -377,17 +380,22 @@ Main Parameters:
                                   border-left-color:  var(--sys-yellow);
                                 }
             .sticky                 { position: fixed;
-                                  top: 0;
-                                  width: 100%;
-                                }
-            .sticky + .content      { padding-top: 60px; } /* jerk prevention */
-            .userEditResult  { 
+                                      top: 0;
+                                      width: 100%;
+                                      z-index:            2;
+                                    }
+            .sticky + .content      { padding-top:        60px; } /* jerk prevention */
+            .userEditResult         { 
                 float:                  left;
                 width:                  100vw;
                 padding:                3px; 
                 border-style:           solid;
                 border-color:           var(--sys-background-color);
                 }
+            .resize                 { resize:both;
+                                      overflow:auto; } /* something other than visible */
+            .resizeH                { resize:horizontal;
+                                      overflow:auto; } /* something other than visible */
     </style>
 
 </head>
@@ -402,7 +410,7 @@ Main Parameters:
     <div class="sysBlue sysFancy center">
         <em style="font-size: 60px;">                                   Jackie.Blue logo</em>
         <br><button class='sysLargeButton' onclick="hideId('splashScreen'); 
-                                                   showEdit('');">      Show Editor</button>
+                                                    showEdit('');hideId('editStyle')">Show Editor</button>
         </div>
     </div>
 <!-- ------------------------------------------------------------------ -->
@@ -411,13 +419,13 @@ Main Parameters:
 <div id="wait">                                                         waiting
     <div class="center">
         <div style="font-size: 60px;">                                  WORKING INDICATOR...</div>
-        <button class='sysLargeButton' onclick="p('-'); hideId('wait'); showId('splashScreen')">Show Splashscreen</button>
+        <button class='sysLargeButton' onclick="log('-'); hideId('wait'); showId('splashScreen')">Show Splashscreen</button>
         </div>
     </div>
 <!-- ------------------------------------------------------------------ -->
 <!--                            SYSTEM EDIT MENU      - top left        -->
 <!-- ------------------------------------------------------------------ -->
-<div id='sysMenu' class="system" hidden>
+<div id='sysMenu' class="system sticky" hidden>
     <span style='width: 97vw;'>
         <span onclick="showId('')"              class='sysTabBorder sysRed '>                Color Palette      </span> 
         <span onclick="showId('')"              class='sysTabBorder sysRed '>                New Element        </span> 
@@ -432,65 +440,70 @@ Main Parameters:
 <!--                            EDITOR SECTION & DROP ZONE              -->
 <!-- ------------------------------------------------------------------ -->
 <div id='gui-panel' hidden class='userEditResult' ondragover="dropZone(event)" ondrop="dropElement(event)"
-                           style='position: absolute; top: 25px; left: 0; width: 50vw; height: 100vh;  z-index: 0;'>  
+                           style='position: absolute; top: 25px; left: 0; width: 99vw; height: 100% ;z-index: 0;'>  
     <!-- -------------------------------------------------------------- -->
     <!--                        POPUPS                                  -->
     <!-- -------------------------------------------------------------- -->
-    <div id='attribute-popup' class='system' draggable='true' ondragstart='dragElement(event)' hidden
-                             style=" z-index: 6; position: relative; top: 20px; left: 4vw; width: 50vw">
+    <div id='editStyle'      class='system' draggable="true" ondragstart='dragElement(event)' onmouseenter='moveToTop(event)' hidden
+                             style=" z-index: 4; position: absolute; top: 20px; left: 48vw; width: 50vw" _zoriginal=4>
+        <div class='splitGrid'>
+            <span><span class='sysTitle' id='stylize_element'>Stylize </span><span class='sysTitle' id='edit_title'></span></span>
+            <span class='close sysHover' style="text-align: right; padding-top: 12px;" onclick="hideId('editStyle')"> close ❌ </span>
+            </div>
+        <div id='edit-columns'></div>
+        </div>
+    <!-- -------------------------------------------------------------- -->
+    <div id='attribute-popup' class='system resize' draggable='true' ondragstart='dragElement(event)' onmouseenter='moveToTop(event)' hidden
+                             style=" z-index: 6; position: absolute; top: 20px; left: 4vw; width: 900px" _zoriginal=6 resizable>
                               <!-- style="z-index: 6; position: relative; width:1000px; padding:8px" >  -->
         <div class='splitGrid'>
             <span class='sysTitle' id='info_description'>Attribute Description</span>
             <span class='close sysHover' style="text-align: right; padding-top: 12px;" onclick="hideId('attribute-popup')"> close ❌ </span>
             </div>
+
         <!-- VALUES -->  <p>
-            <div class='sysHeader'>           Values   </div>
-            <div class='infoLinksGrid'><span> Undo     </span> <span id='info_undo'          class='sysRed'></span></div>
-            <div class='infoLinksGrid'><span> Default  </span> <span id='info_default'       class='sysRed'></span></div>
+            <div class='sysHeader center sysDesc'>          Values   </div>
+            <div class='infoDescGrid'><span> Current  </span>  <span id='info_current'        class='sysRed'></span></div>
+            <div class='infoDescGrid'><span> Undo     </span>  <span id='info_undo'           class='sysRed'></span></div>
+            <div class='infoDescGrid'><span>          </span>
+                                      <span> initial  </span>  <span> inherit  </span><span> unset    </span></div>
+            <span id='info_initial'>         Element Initial Values list to be filled in</span>
             </p>
-        <!-- NAMES -->   <p>
-            <div class='sysHeader'>          Attribute   </div>
-            <div class='infoDescGrid'><span> name      </span> <span id='info_attribute_name' class='sysRed'></span>
-                                                               <span id='info-name-sample'>                  </span></div>
-            <div class='infoDescGrid'><span> .style    </span> <span id='info_style_name'     class='sysRed'></span>
-                                                               <span id='info-style-sample'>                 </span></div>
-            <div class='infoDescGrid'><span> var()     </span> <span id='info_variable_name'  class='sysRed'></span>
-                                                               <span id='info-var-sample'>                   </span></div>
+        <!-- USAGE -->   <p>
+            <div class='sysHeader center sysDesc'>                                                    Usage   </div>
+            <div class='infoUseGrid'><span>                                           name    </span> 
+                                      <span id='info_attribute_name' class='sysYellow'>        </span>
+                                      <span id='info-name-sample'>                             </span></div>
+            <div class='infoUseGrid'><span                          class='sysRed'>   .style  </span> 
+                                      <span id='info_style_name'     class='sysGreen'>         </span>
+                                      <span id='info-style-sample'>                            </span></div>
+            <div class='infoUseGrid'><span                          class='sysRed'>   var()   </span> 
+                                      <span id='info_variable_name'  class='sysBlue'>          </span>
+                                      <span id='info-var-sample'>                              </span></div>
             </p>
-        <!-- SEARCH -->  <p>
-            <div class='sysHeader'>          Help     </div>    <!-- search buttons title -->
+        <!-- HELP -->    <p>
+            <div class='sysHeader center sysDesc'>          Help     </div>    <!-- search buttons title -->
             <div class="infoLinksGrid">
-                <span   id='info_name'          class="sys-red"  >              </span>
-                <button id='info_documentation' class='sysButton'> Publications </button> <!-- bodyLoaded() sets onclicks --> 
-                <button id='info_samples'       class='sysButton'> Samples      </button> 
-                <button id='info_tutor'         class='sysButton'> Tutorials    </button> </div> 
+                <span   id='info_name'          class="sys-red"  >                </span>   <!-- filled in -->
+                <button id='info_documentation' class='sysButton'> Specifications </button> <!-- bodyLoaded() sets onclicks --> 
+                <button id='info_samples'       class='sysButton'> Samples        </button> 
+                <button id='info_tutor'         class='sysButton'> Tutorials      </button> </div> 
             </p>
         <!-- OPTIONS --> <p>
-            <div class='sysHeader'>          Options  </div>    <!-- attribute options search area -->
+            <div class='sysHeader'>          Attribute Options  </div>    <!-- attribute options search area -->
             <div id='info_options'></div>
             </p>
         </div>
     <!-- -------------------------------------------------------------- -->
-    <div id='editStyle'      class='system' draggable="true" ondragstart='dragElement(event)' hidden
-                             style=" z-index: 4; position: relative; top: 20px; left: 48vw; width: 50vw">
-        <div class='splitGrid'>
-            <span class='sysTitle' id='stylize_element'>Stylize Element</span>
-            <span class='close sysHover' style="text-align: right; padding-top: 12px;" onclick="hideId('editStyle')"> close ❌ </span>
-            </div>
-        <div id='edit-columns' class='editColumnsGrid'></div>
-        </div>
-
-
-    <!-- -------------------------------------------------------------- -->
-    <div id="displayCSS"      class='system' draggable='true' ondragstart='dragElement(event)' hidden
-                             style=" z-index: 8; position: relative; top: 20px; left: 4vw; width: 50vw">
+    <div id="displayCSS"      class='system' draggable='true' ondragstart='dragElement(event)' onmouseenter='moveToTop(event)' hidden
+                             style=" z-index: 8; position: absolute; top: 20px; left: 4vw; width: 50vw"  _zoriginal=8>
                               <!-- style='z-index: 8; position: relative; color: wheat; top:20px; left:0'>  -->
         <div class='splitGrid'>
             <span class="sysTitle">CSS</span>
             <span class='close sysHover' style="text-align: right; padding-top: 12px;" onclick="hideId('displayCSS')">    close ❌ </span>
         </div>
         <div class="sysHeader">Description</div>
-        <div><p>Providing the current layout and theme settings in CSS format for saving as a file or cut and paste.</p></div>
+        <div><p>The current layout and theme settings presented in CSS format for saving as a file, or cut and paste.</p></div>
         <div class="sysHeader">Instructions</div>
         <div>
             <ol>
@@ -545,7 +558,7 @@ Main Parameters:
     <!-- -------------------------------------------------------------- -->
     <!--                       USER EDITABLE GUI ELEMENTS               -->
     <!-- -------------------------------------------------------------- -->
-    <div style='position: absolute; top: 25px; left: 0; width:  97vw; height: 100vh; z-index: 1;'>
+    <div style='position: absolute; top: 25px; left: 0; width:  97vw; height: 100%; z-index: 0;'>
                                                                                             <!-- EDITABLE ELEMENTS   -->
             <div  onclick="showEdit('title')"      class='title'>   Title       </div>      <!-- Title       -->
             <div  onclick="showEdit('description')"class='desc'  >  Description </div>      <!-- Description -->
@@ -581,7 +594,7 @@ Main Parameters:
 // ==============================================================
 // save objects - Save and restore user settings and attributes on page repoad
 
-    var   user   = { classNames: [],         // GUI input created context names  --'context'-attribute-name
+    var   user   = { classNames: [],         // GUI input created class_name names  --'class_name'-attribute-name
                      root:       [],         // attribute change records (themes.css overrides)
                      settings:   [] }        // site settings - TBD
     class PAIR     { name = '';  val = '' }  // generic name value pair for root records
@@ -590,16 +603,16 @@ Main Parameters:
 // function() PARAMETERS
 // ---------------------
 // attr_ctrl - Object having an attribute description, limits, attribute values, default value..
-// context   - Current attribute variable name prefix like 'myTitle' to represent a unique CSS .class, tag name, etc. 
-//             i.e. .title { font-size: var(--title-font-size) } | unspecified context = var(--font-size)
-// var_name  - full :root variable name composed of passed context and attribute name.  i.e. --title-font-size
+// class_name   - Current attribute variable name prefix like 'myTitle' to represent a unique CSS .class, tag name, etc. 
+//             i.e. .title { font-size: var(--title-font-size) } | unspecified class_name = var(--font-size)
+// var_name  - full :root variable name composed of passed class_name and attribute name.  i.e. --title-font-size
 //
-// Modify    - Optionally add a unique name to contexts[array] to generate --uniqueName-attribute-name variables in CSS :root
+// Modify    - Optionally add a unique name to class_names[array] to generate --uniqueName-attribute-name variables in CSS :root
 //           - Class names created using the GUI input are saved in users local storage and restored on page reload 
 //           - Use generate CSS theme option to display ALL current variables and values
 //           - The generated theme can then be copied into your CSS.  
 
-    const contexts   = ['', 'title', 'description', 'subtitle', 'button', 'input', 'radio', 'checkbox', 'textarea', 'div', 'span', 'hr' ]; // ==> --title-font-size, --desription-font-size
+    const class_names   = ['', 'title', 'description', 'subtitle', 'button', 'input', 'radio', 'checkbox', 'textarea', 'div', 'span', 'hr' ]; // ==> --title-font-size, --desription-font-size
 
     const old_attr_ctrls = [         // attr_ctrl list
 
@@ -711,60 +724,63 @@ Main Parameters:
 
     // ONCLICK EVENT HANDLER
 
-    function showEdit(context) {
+    function showEdit(class_name) {
 
         // hideId('gui-panel');
         // showId('wait');
 
-        p('\nshowEdit('+context+')');
+        log('\nshowEdit('+class_name+')');
 
         save();             // save any prior element changes to local storage in the event of page refreash and restore changes
         showId('sysMenu');  // show system menu on top
-        genEdit(context);   // generate HTML controls for editing new context element attribute values
+        genEdit(class_name);   // generate HTML controls for editing new class_name element attribute values
         showId('editStyle');
         }
 
     // GEN HEADER + LOOP ALL ATTRIBUTES
 
-    function genEdit(context) {                                 // create all edit controls and attributes for a specified element
-        p('\ngenEdit() element context: '+context);  // --font-size, OR --title-font-size, OR --footer-font-size 
+    function genEdit(class_name) {                                 // create all edit controls and attributes for a specified element
+        log('\ngenEdit() element class_name: '+class_name);           // --font-size, OR --title-font-size, OR --footer-font-size 
 
             // initialize control columns to empty
 
-        let columns = document.getElementById('edit-columns');   // clear all prior element controls including grid elements
-        columns.innerHTML = '';
-        columns.style.setProperty('color', 'var(--sys-white)', 'important');         // set title text color with important inheirit override
+        let columns = document.getElementById('edit-columns'); 
+        columns.innerHTML = '';                                 // clear all prior element controls including grid elements
+        columns.style.setProperty('color', 'var(--sys-white)', 'important'); // set title text color with important inheirit override
+
+        let header = newDOM(columns,'DIV');
+        setClass(header,'editColumnsGrid');
 
             // initialize control area headers
 
-        let header_column       = newDOM(columns,'SPAN');
-        setClass(header_column,'sysDesc', 'on');    // font
+        let header_column       = newDOM(header,'SPAN');
+        setClass(header_column,'sysDesc', 'on');    // font style
         setClass(header_column,'sysHeader', 'on');  // background color
-        header_column.style.setProperty('background-color', 'var(--sys-brown)', 'important');
-        header_column.innerHTML = 'Info';
+        header_column.style.setProperty('background-color', 'var(--sys-header-background-color)', 'important');
+        header_column.innerHTML = 'More Info';
 
-        header_column           = newDOM(columns,'SPAN');
-        setClass(header_column,'sysDesc', 'on');    // font
+        header_column           = newDOM(header,'SPAN');
+        setClass(header_column,'sysDesc', 'on');    // font style
         setClass(header_column,'sysHeader', 'on');  // background color
-        header_column.style.setProperty('background-color', 'var(--sys-brown)', 'important');
+        header_column.style.setProperty('background-color', 'var(--sys-header-background-color)', 'important');
 
-        let title               = newDOM(header_column,'SPAN');
-        title.id                = 'edit_title';
-        if (context == '')     {title.innerHTML = 'BODY edit'; context = ''}      // no unique css class or tag overide  --font-size 
-        else                   {title.innerHTML = context.toUpperCase()+' edit' } // display context {title, div, etc}   --title-font-size
-        title.style.setProperty('color', 'var(--sys-white)', 'important');        // set title text color with important inheirit override
-        title.style.setProperty('background-color', 'var(--sys-brown)', 'important');
+        let title               = document.getElementById('edit_title');
+        // let title               = newDOM(header_column,'SPAN');
+        // title.id                = 'edit_title';
+        if (class_name == '' || class_name.toUpperCase() == 'BODY') { 
+                  title.innerHTML = 'BODY' }                // no unique css class or tag overide  --font-size 
+        else    { title.innerHTML = class_name.toUpperCase() } // display class_name {title, div, etc}   --title-font-size
 
-        header_column           = newDOM(columns,'SPAN');
+        header_column           = newDOM(header,'SPAN');
         setClass(header_column,'sysDesc', 'on');  // font
         setClass(header_column,'sysHeader', 'on');  // background color
-        header_column.style.setProperty('background-color', 'var(--sys-brown)', 'important');
+        header_column.style.setProperty('background-color', 'var(--sys-header-background-color)', 'important');
         header_column.innerHTML = 'Changes';
 
-            // loop - display all attributes for editing
+            // loop - display all attribute control knobs for editing
 
         for (let attr = 0; attr < attr_ctrls.length; attr++) {     
-            genEditHTML(attr_ctrls[attr], context);         }      // call genEditAttrs for each css attribute found in attr_ctrls table
+            genEditHTML(attr_ctrls[attr], class_name);         }  // call genEditAttrs for each css attribute found in attr_ctrls table
 
         hideId('wait');
         showId('gui-panel');
@@ -772,15 +788,15 @@ Main Parameters:
 
     // ATTRIBUTE PROCESSOR
 
-    function genEditHTML(attr_ctrl, context) {                  // create edit controls and results for one css attribute
-        p('----------- loop\ngenEditAttrs('+attr_ctrl.attr+', '+context+')');
+    function genEditHTML(attr_ctrl, class_name) {                 // create edit controls and results for one css attribute
+        log('----------- loop\ngenEditAttrs('+attr_ctrl.attr+', '+class_name+')');
 
-            // construct the attribute context root variable name
+            // construct the attribute class_name root variable name
 
         let                    var_name  = '--'+attr_ctrl.attr;               // i.e. attribute var_name = '--font-size'
-        if (passed(context)) { var_name  = '--'+context+'-'+attr_ctrl.attr }  // i.e. attribute var_name = '--title-font-size'
-        p(' root variable name: '+var_name);
-        p(attr_ctrl);
+        if (passed(class_name)) { var_name  = '--'+class_name+'-'+attr_ctrl.attr }  // i.e. attribute var_name = '--title-font-size'
+        log(' root variable name: '+var_name);
+        log(attr_ctrl);
 
         // Create HTML edit control knobs, descriptions, & values 
 
@@ -788,19 +804,25 @@ Main Parameters:
 
         let columns = document.getElementById('edit-columns');
 
+        let row = newDOM(columns, 'DIV');
+        setClass(row,'editColumnsGrid');
+        setClass(row, 'sysHover', 'on');
+
         // attribute description column with info popups  ('Color', 'Background Color', 'Border Color', etc.)               col 1 INFO
 
-        description              =  newDOM(columns, 'DIV');   // create attribue descriptor as grid column 1  
-        description.innerHTML    =  attr_ctrl.description;    // display attributes description
+        description              =  newDOM(row, 'DIV');   // create attribue descriptor as grid column 1  
+        description.innerHTML    =  '<span width=100>'+attr_ctrl.description+'</span>';    // display attributes description
         description._attr_ctrl   =  attr_ctrl;
         description._var_name    =  var_name;
+        description.style.cursor =  'pointer';
+        description.style.justifyItems = 'stretch';
         description.style.setProperty('font-family', 'var(--sys-fancy)', 'important'); //  set font_family
-        setClass(description, 'sysHover', 'on');
         description.onclick      =  function (e) {
                                         let elem = e.currentTarget;
-                                        p('\nonClick() '+elem._var_name+' '+elem._attr_ctrl.attr); 
+                                        log('\nonClick() '+elem._var_name+' '+elem._attr_ctrl.attr); 
                                         attribute_info_popup(elem._var_name, elem._attr_ctrl); // desc last
                                         }
+        setClass(description, 'sysButton');
 
         // attribute edit controls column                                                                                   col 2 CONTROL KNOBS
 
@@ -809,7 +831,7 @@ Main Parameters:
 
                     // Control Knobs column
 
-                    knobs                   = newDOM(columns, 'DIV');   // create attribue edit buttons as grid column 2
+                    knobs                   = newDOM(row, 'DIV');   // create attribue edit buttons as grid column 2
 
                     // Color Picker HTML
 
@@ -818,7 +840,7 @@ Main Parameters:
                     color_picker.id         = var_name+'_color';        // set id for javascript reference
                     color_picker._attr_ctrl = attr_ctrl;                //? save attr_ctrl in color picker object for needed onchage() reference
                     color_picker._var_name  = var_name;
-                    p(' current root color: '+getRoot(var_name).replace(/\s/g,''))
+                    log(' current root color: '+getRoot(var_name).replace(/\s/g,''))
                     if (exist(getRoot(var_name).replace(/\s/g,''))) {
                         color_picker.value  = getRoot(var_name).replace(/\s/g,'');   // get current attribute value from :root --variable
                         color_picker.defaultValue = color_picker.value;            } // set picker to current color                    
@@ -832,7 +854,7 @@ Main Parameters:
                     setClass( undo_button, 'sysButton' );               // assign style as button class
                     undo_button.innerHTML   = 'undo';                   // display button name
                     undo_button._attr_ctrl  = attr_ctrl;                // save attr_ctrl in color picker object for needed onchage() reference
-                    undo_button._context    = context;
+                    undo_button._class_name = class_name;
                     undo_button._var_name   = var_name;
                     undo_button._valueName  = getRoot(var_name);        // get current attribute value from :root --variable
                     undo_button.onclick     = function(e) { 
@@ -844,21 +866,21 @@ Main Parameters:
                     setClass( trans_button, 'sysButton' );              // assign style as button class
                     trans_button.innerHTML  = 'transparent';            // display button name 
                     trans_button._attr_ctrl = attr_ctrl;                // save attr_ctrl in color picker object for needed onchage() reference
-                    trans_button._context   = context;
+                    trans_button._class_name= class_name;
                     trans_button._var_name  = var_name;
                     trans_button.onclick    = function(e) { 
                                                 let transButton = e.currentTarget; 
                                                 chgAttr( transButton._var_name,    transButton._attr_ctrl,      'save', 'transparent')  } 
                     break;
 
-            default:      p('default');
-                    ctrl_knobs      = newDOM(columns, 'DIV');     
+            default:      log('default');
+                    ctrl_knobs      = newDOM(row, 'DIV');     
                     description.style.setProperty('font-family', 'var(--sys-fancy)', 'important'); // overide font family 
                     // setClass(description, 'sysFancy');
 
                     // NUMBER VALUE PASSED
                     if (exist(attr_ctrl.min)) {                   // number - create buttons & measurement suffix 
-                        p('numeric values');
+                        log('numeric values');
                         let up_button       = newDOM(ctrl_knobs, 'SPAN');      //  for changing numeric attribute values
                         let down_button     = newDOM(ctrl_knobs, 'SPAN');
                         let undo_button     = newDOM(ctrl_knobs, 'SPAN');
@@ -875,26 +897,26 @@ Main Parameters:
                            down_button._attr_ctrl   = attr_ctrl;              //   to onClickk function below //? a standard way to pass vars?
                            undo_button._attr_ctrl   = attr_ctrl;
                         default_button._attr_ctrl   = attr_ctrl;
-                             up_button._context     = context;                // make 'context' variable accessable
-                           down_button._context     = context;                //   to onChange function below
-                           undo_button._context     = context;
-                        default_button._context     = context;
-                             up_button._var_name    = var_name;               // make context variable name accessable
+                             up_button._class_name     = class_name;                // make 'class_name' variable accessable
+                           down_button._class_name     = class_name;                //   to onChange function below
+                           undo_button._class_name     = class_name;
+                        default_button._class_name     = class_name;
+                             up_button._var_name    = var_name;               // make class_name variable name accessable
                            down_button._var_name    = var_name;               //   to onChange function below
                            undo_button._var_name    = var_name;
                         default_button._var_name    = var_name;
                            undo_button._prior_val   = getRoot(var_name).toString();
                         default_button._default_val = attr_ctrl.default;
-                        p(' attr: '+attr_ctrl.attr+', undo: '+undo_button._prior_val+', default: '+default_button._default_val);
+                        log(' attr: '+attr_ctrl.attr+', undo: '+undo_button._prior_val+', default: '+default_button._default_val);
 
                         up_button.onclick   = 
                             function(e) {                                    // DOM.attr_ctrl & 
                                             let upButton      = (e.currentTarget); //? test using 'this' 
-                                            chgAttr( upButton._var_name,      upButton._attr_ctrl,    'increment', upButton._context)      } 
+                                            chgAttr( upButton._var_name,      upButton._attr_ctrl,    'increment', upButton._class_name)      } 
                         down_button.onclick = 
                             function(e) { 
                                             let downButton    = e.currentTarget; 
-                                            chgAttr( downButton._var_name,    downButton._attr_ctrl,  'decrement', downButton._context)    } 
+                                            chgAttr( downButton._var_name,    downButton._attr_ctrl,  'decrement', downButton._class_name)    } 
                         undo_button.onclick = 
                             function(e) { 
                                             let undoButton    = e.currentTarget; 
@@ -906,18 +928,18 @@ Main Parameters:
 
                         // get current numeric suffix in use
                         let currentValue = getRoot(var_name).toString().replace(/[0-9,\s]/g,'');
-                        p(' current '+var_name+' suffix: ['+currentValue+']');
+                        log(' current '+var_name+' suffix: ['+currentValue+']');
 
                         // select
                         let suffixElem  = newDOM(ctrl_knobs, 'SELECT');
                         setClass(suffixElem, 'sysSelect' );
                         let optionElement; 
                         for (let suffixValue of attr_ctrl.suffix) {
-                            p('create suffix option: ['+suffixValue+']');
+                            log('create suffix option: ['+suffixValue+']');
                             optionElement = newDOM(suffixElem, 'OPTION');
                             optionElement.innerHTML = suffixValue;
                             setClass(optionElement, 'sysSelect'); 
-                            if (suffixValue == currentValue) { optionElement.selected = true; p(suffixValue+' < selected')}
+                            if (suffixValue == currentValue) { optionElement.selected = true; log(suffixValue+' < selected')}
                             }
                         } // if number
 
@@ -942,10 +964,10 @@ Main Parameters:
                            down_button._attr_ctrl   = attr_ctrl;                 
                            undo_button._attr_ctrl   = attr_ctrl;
                         default_button._attr_ctrl   = attr_ctrl;
-                             up_button._context     = context;                   
-                           down_button._context     = context;                   
-                           undo_button._context     = context;
-                        default_button._context     = context;
+                             up_button._class_name     = class_name;                   
+                           down_button._class_name     = class_name;                   
+                           undo_button._class_name     = class_name;
+                        default_button._class_name     = class_name;
                              up_button._var_name    = var_name;                  
                            down_button._var_name    = var_name;                  
                            undo_button._var_name    = var_name;
@@ -953,16 +975,16 @@ Main Parameters:
                            undo_button._prior_val   = getRoot(var_name).toString(); // make prior & default values accessable
                         default_button._default_val = attr_ctrl.default;
 
-                        p(' attr: '+attr_ctrl.attr+', undo: '+undo_button._prior_val+', default: '+default_button._default_val);
+                        log(' attr: '+attr_ctrl.attr+', undo: '+undo_button._prior_val+', default: '+default_button._default_val);
 
                         // set button to call chgAttr() to change an attritute value
                         up_button.onclick      = function(e) { // DOM.attr_ctrl & 
                                                     let upButton      = (e.currentTarget); //? test using 'this' as ref to currentTarget 
-                                                    p('onchange() upButton')
-                                                    chgAttr( upButton._var_name,      upButton._attr_ctrl,      'increment', upButton._context)   } 
+                                                    log('onchange() upButton')
+                                                    chgAttr( upButton._var_name,      upButton._attr_ctrl,      'increment', upButton._class_name)   } 
                         down_button.onclick    = function(e) { 
                                                     let downButton    = e.currentTarget; 
-                                                    chgAttr( downButton._var_name,    downButton._attr_ctrl,    'decrement', downButton._context) } 
+                                                    chgAttr( downButton._var_name,    downButton._attr_ctrl,    'decrement', downButton._class_name) } 
                         undo_button.onclick    = function(e) { 
                                                     let undoButton    = e.currentTarget; 
                                                     chgAttr( undoButton._var_name,    undoButton._attr_ctrl,    'save',      undoButton._prior_val) } 
@@ -984,7 +1006,7 @@ Main Parameters:
 
         // changed attribute column - display '.' as placeholder for changed attribute values                               col 3 CHANGES
 
-        values               = newDOM(columns, 'DIV');            // right side div - attribue changed value 
+        values               = newDOM(row, 'DIV');            // right side div - attribue changed value 
         output               = newDOM(values,         'SPAN');    // attribute changed value on right
         output.innerHTML     = '.';                               // empty character until changed
         output.id            = attr_ctrl.attr+'_change';          // set id for javascript reference
@@ -996,27 +1018,27 @@ Main Parameters:
         }
 
 // ==============================================================
-// chgAttr() onchange - Create or update an attribute :root --variable value 
+// chgAttr() onclick, onchange event - Create or update an attributes style :root --variable value 
 
-    function chgAttr(contextAttr, attr_ctrl, command, multiParm) {
-        // contextAttr - full attribute variable name i.e. --font-size, --title-font-size
+    function chgAttr(var_name, attr_ctrl, command, multiParm) {
+        // class_name  - full attribute variable name i.e. --font-size, --title-font-size
         // attr_ctrl   - an entry from attr_ctrls[] with create and change controls, limits, options..
         // command     - 'save' the passed value, or 'incr', 'decr' a number or option array value   
         // multiParm   - a value to save or TBD
-        p('\nchgAttr('+contextAttr+', '+attr_ctrl.attr+', '+command+', '+multiParm+')');
+        log('\nchgAttr('+var_name+', '+attr_ctrl.attr+', '+command+', '+multiParm+')');
         let val, nuVal, ix;
 
         // SAVE PASSED VALUE FOR RELOADs
         if (command == 'save')   { // SAVE PASSED VALUE,
             nuVal = multiParm;     // save value was passed in multiParm    
-            setRoot(contextAttr,nuVal);     
+            setRoot(var_name,nuVal);     
             document.getElementById(attr_ctrl.attr+'_change').innerHTML = nuVal;                 
             }
         // ELSE SAVE NEXT VALUE IN OPTION LIST
         else if (exist(attr_ctrl.options)) {
             // GET THE VALUEs POSITION INDEX IN THE PASSED OPTION LIST
-            val = getRoot(contextAttr).toString();                          // get curr value, with whitespace
-            p('chgAttr() prior value ['+val+']');
+            val = getRoot(var_name).toString();                          // get curr value, with whitespace
+            log('chgAttr() prior value ['+val+']');
             ix  = attr_ctrl.options.indexOf(val);                           //
             if (ix == -1) { ix=0; warn('current value ['+val+'] not found in list:\n '+attr_ctrl.options)    }
             // GET THE VALUEs NEXT OPTION IN THE PASSED OPTION LIST
@@ -1027,15 +1049,15 @@ Main Parameters:
             else {}
             nuVal = attr_ctrl.options[ix];
             // UPDATE :ROOT --VARIABLE & DISPLAY VALUE IN CHANGES COLUMN
-            setRoot(contextAttr,nuVal);                                     
+            setRoot(var_name,nuVal);                                     
             document.getElementById(attr_ctrl.attr+'_change').innerHTML = nuVal; 
             }
         // ELSE INCREMENT NUMBER VALUE & SAVE
         else if (exist(attr_ctrl.min)) { 
             // GET THE ATTRIBUTES s CURRENT VALUE
-            val = parseFloat(getRoot(contextAttr).toString());                       // get curr numeric value from :root (note: .replace(/\s/g,'')
+            val = parseFloat(getRoot(var_name).toString());                       // get curr numeric value from :root (note: .replace(/\s/g,'')
             suffix = 'px';                                                           // !! temp - change to get suffix from <select> !!
-            p('chgAttr() prior numeric value ['+val+']');
+            log('chgAttr() prior numeric value ['+val+']');
             // INCREMENT OR DECREMENT NUMBER
             if         (command === 'increment')  {val = val + attr_ctrl.inc}
             else if    (command === 'decrement')  {val = val - attr_ctrl.inc}
@@ -1045,28 +1067,28 @@ Main Parameters:
             // APPEND MEASUREMENT SUFFIX
             nuVal = val+suffix;
             // UPDATE :ROOT --VARIABLE & DISPLAY VALUE IN CHANGES COLUMN
-            setRoot(contextAttr,nuVal);                                     
+            setRoot(var_name,nuVal);                                     
             document.getElementById(attr_ctrl.attr+'_change').innerHTML = nuVal; 
             }
         else    {error('chgAttr() unknown request type')}
         // SET ATTRRIBUTE & VALUE IN A LOCAL STORAGE ROOT REC FOR RELOAD
-        let rec =  user.root.find(o => o.name.toString() === contextAttr.toString()); // find existing :root --variable change record
+        let rec =  user.root.find(o => o.name.toString() === var_name.toString()); // find existing :root --variable change record
         if (typeof rec === 'undefined') {                                             // create new    :root --variable change record
             rec          =  new PAIR;
-            rec.name     =  contextAttr;
+            rec.name     =  var_name;
             user.root.push(rec)          
-            p('new change record for '+contextAttr)}
+            log('new change record for '+var_name)}
         rec.val = nuVal;
 
         // setRoot(css_name, nuVal);
 
-        p('rec:  '+rec.name+': '+rec.val);
-        p('root: '+rec.name+': '+getRoot(contextAttr.toString()));
+        log('rec:  '+rec.name+': '+rec.val);
+        log('root: '+rec.name+': '+getRoot(var_name.toString()));
         
         }
 
 //===============================================================
-// attribute_info_popup() - display attribute information
+// attribute_info_popup() onclick event - display attribute information
 
     // get attribute_info_popup() elements needing to be fill in ( elements obtained once on page load )
 
@@ -1076,7 +1098,6 @@ Main Parameters:
     const infoStyleName   = document.getElementById('info_style_name');
     const infoUndo        = document.getElementById('info_undo');
     const infoName        = document.getElementById('info_name');
-    const infoDefault     = document.getElementById('info_default');
     const infoAttrOptions = document.getElementById('info_options');
     const infoDocs        = document.getElementById('info_documentation');
     const infoSamples     = document.getElementById('info_samples');
@@ -1084,24 +1105,51 @@ Main Parameters:
     const infoNameSample  = document.getElementById('info-name-sample' );
     const infoVarSample   = document.getElementById('info-var-sample'  );
     const infoStyleSample = document.getElementById('info-style-sample');
+    const infoCurrent     = document.getElementById('info_current');
+    const infoInitial     = document.getElementById('info_initial');
 
-    // Update attribute valus in the popup elements and display the popup
+    // Update the attribute valus in the popup element and display the popup
 
     function attribute_info_popup(var_name, attr_ctrl) {
-        p('attribute_info_popup('+var_name+', '+attr_ctrl.attr+')');
+        log('attribute_info_popup('+var_name+', '+attr_ctrl.attr+')');
 
-        // FILL IN UNDO & DEFAULT VALUES
-        infoUndo.innerHTML          = getRoot(var_name);        // set undo    value in html element
-        infoDefault.innerHTML       = attr_ctrl.default;        // set default value in html element
+        // FILL IN CURRENT & UNDO VALUES
+        infoCurrent.innerHTML       = getRoot(var_name);
+        infoUndo.innerHTML          = getRoot(var_name);        // set undo    value in html element   ???? not right
 
-        // FILL IN ATTRIBUTE, VAR, STYLE NAMES & SAMPLE USE
-        infoDesc.innerHTML          = attr_ctrl.description;    // set attribute description
-        infoAttrName.innerHTML      = attr_ctrl.attr;           // set attribute name
-        infoVarName.innerHTML       = var_name;                 // set attribute variable name
-        infoStyleName.innerHTML     = attr_ctrl.style;          // set attribute style name for js reference
-        infoNameSample.innerHTML    = '.myClass { <red>'+attr_ctrl.attr+'</red>: '+attr_ctrl.default+' }'
-        infoVarSample.innerHTML     = '.myClass { '+attr_ctrl.attr+': var(<red>'+var_name+'</red>) }<br>:root { <red>'+var_name+'</red>: '+attr_ctrl.default+'; }'
-        infoStyleSample.innerHTML   = 'document.getElementById(id).style.<red>'+attr_ctrl.style+'</red> = "'+attr_ctrl.default+'";'
+        // FILL IN THE BROWSERS 'INITIAL' ATTRIBUTE DEFAULT VALUES
+        let tags                    = ['DIV', 'SPAN'];          // browser may set a different initial value for different elements
+        let elements                = getByClass('class_name');    // get all HTML elements using this class
+        for (elem of elements)      { tags.push(elem.tagName) } // save the tag names in a temporary tags array
+        tags                        = [...new Set(tags)]        // remove duplicates, Set() only selects unique values
+        infoInitial.innerHTML       = '';                       // clear prior attributes displayed output
+        for (let tag of tags)       {                           // display initial values of tags using this class
+             let wrapperObj         = newDOM(infoInitial, 'DIV');
+             setClass(wrapperObj,'infoDescGrid'); 
+             let tagName            = newDOM(wrapperObj, 'SPAN');
+             tagName.innerHTML      = tag.toUpperCase()+" initial";
+             // tagName.style.textAlign= 'right';
+             let tagInitialValue    = newDOM(wrapperObj, 'SPAN');
+             setClass(tagInitialValue,'sysRed');
+             tagInitialValue.innerHTML = getStyleBySelector( attr_ctrl.attr )
+             // tagInitialValue.innerHTML = getInitialStyle(tag, attr_ctrl.attr);
+             }
+             // document.styleSheets.get(index).cssRules
+
+        // FILL IN ATTRIBUTE, VAR, STYLE NAMES & SAMPLE USAGE
+        infoDesc.innerHTML          = attr_ctrl.description;    // set attribute description                    Font Size
+        infoAttrName.innerHTML      = attr_ctrl.attr;           // set attribute name                           font-size
+        infoVarName.innerHTML       = var_name;                 // set attribute variable name                  --font-size
+        infoStyleName.innerHTML     = attr_ctrl.style;          // set attribute style name for js reference    fontSize
+        infoNameSample.innerHTML    = ".myClass { <yellow>"+attr_ctrl.attr+"</yellow>: "+attr_ctrl.default+" }"
+
+        infoVarSample.innerHTML     = ".myClass { <yellow>"+attr_ctrl.attr+"</yellow>: <red>var(</red><blue>"+var_name+"</blue><red>)</red> }"+
+                                "<br>:<em>root</em> { <blue>"+var_name+"</blue>: "+attr_ctrl.default+"; }<p>_root = document.querySelector(':root');"+
+                                "<br>"+attr_ctrl.style+" = getComputedStyle(<em>_root</em>).<b>getPropertyValue(</b>'<blue>"+var_name+"</blue>'<b>)</b>;"+
+                                "<br>getComputedStyle(<em>_root</em>).<b>setPropertyValue(</b>'<blue>"+var_name+"</blue>'<b>, '"+getRoot(var_name)+"')</b>;"
+
+        infoStyleSample.innerHTML   = "size = document.getElementById(id)<red>.style</red>.<green>"+attr_ctrl.style+"</green>;<br>"+
+                                      "document.getElementById(id)<red>.style</red>.<green>"+attr_ctrl.style+"</green> = '"+attr_ctrl.default+"';"
 
         // FILL IN ATTRIBUTE SEARCH DOCS, SAMPLES, TUTOR WALKTHROUGH BUTTONS
         infoName.innerHTML          = attr_ctrl.attr;           // set attribute name
@@ -1111,7 +1159,7 @@ Main Parameters:
  
         // ATTRIBUTE OPTIONS LOOP - CREATE SEARCH DOCS, SAMPLES, TUTOR WALKTHROUGH BUTTONS
         infoAttrOptions.innerHTML   = ''; // clear prior attribute options before appending new options
-        let wrapperObj, optionObj, docObj, sampleObj, tutorObj; // LOOP - Display Attribute Options and their search buttons
+        let optionObj, docObj, sampleObj, tutorObj; // LOOP - Display Attribute Options and their search buttons
         if (exist(attr_ctrl.options)) {                         // if the attribute has a option list
             for (let i=0; i<attr_ctrl.options.length; i++) {    //    then loop through its options
 
@@ -1145,7 +1193,7 @@ Main Parameters:
         }
 
 // ==============================================================
-// searchSites(arg, sites) onclick - search  site:github.com OR site:gitlab.com OR site:bitbucket.org after:2018-01-01
+// searchSites() onclick event - search  site:github.com OR site:gitlab.com OR site:bitbucket.org after:2018-01-01
 
     const search_prefix =   'https://www.google.com/search?q=css DOM';
 
@@ -1174,6 +1222,7 @@ Main Parameters:
                             'drafts.csswg.org'
                             ]; 
     const tutor_sites   = [ 'www.csstutorial.net',
+                            'www.javascripttutorial.net',
                             'w3cx.org',
                             'htmldog.com',
                             'www.tutorialbrain.com',
@@ -1193,14 +1242,63 @@ Main Parameters:
                             ];
 
     function searchSites(argument, site_list) {
-        p('searchSites( '+argument+' )');
+        log('searchSites( '+argument+' )');
         let                                     sites =  ' site:'+site_list[0];
         for ( i=1; i<site_list.length; i++)   { sites += ' OR site:'+site_list[i] }
         search_string = search_prefix +' "'+ argument +'" '+ sites +' after:2015-01-01';
-        p(search_string);
+        log(search_string);
         window.open(search_string);
         } 
+
+// ==============================================================
+// moveToTop() - mouse enter event - bring popup to top layer so it is not hidden behind other popups
+
+    var currTopPopup = '';
+
+    function moveToTop(e) {
+        let popupObj                  = e.currentTarget;
+        let priorTop                  = currTopPopup;
+        log( '\nmoveToTop('             + popupObj.id+')');
     
+        if (currTopPopup             != '') { // move top popup back to its original z-indes layer
+            currTopPopup.style.zIndex = currTopPopup.getAttribute('_zoriginal');
+            }
+        popupObj.style.zIndex         = '99'; // move this popup to the top popup layer of 99 as 100+ is reserved for any warning and error popups
+        currTopPopup                  = popupObj; // record new top popup for next time
+        }
+
+// ==============================================================
+// drag & drop - event handlers                              
+
+    var offsetX = offsetY = 0;
+
+    function dragElement(e) { e.dataTransfer.setData("text", e.target.id); log('<<< onDragStart >>> '+e.target.id);  
+                              console.clear();
+                              // e.clinetX e.clientY
+                              let obj     = e.target;
+                              let cursorX = e.clientX;
+                              let cursorY = e.clientY;
+                              let curleft = curtop = 0;
+                              log('cursor X:'+cursorX+' cursor Y:'+cursorY+' obj left:'+obj.offsetLeft+' top:'+obj.offsetTop);
+                              if (obj.offsetParent) { do { curleft   += obj.offsetLeft;
+                                                           curtop    += obj.offsetTop;
+                                                         } while (obj = obj.offsetParent)        }
+                              offsetX = Math.abs(cursorX-curleft);
+                              offsetY = Math.abs(cursorY-curtop )+document.getElementById('sysMenu').offsetHeight; // 22; 
+                              log('offset left:'+offsetX+' offset top:'+offsetY);
+                            }
+    function dropZone(e)    { e.preventDefault(); }   
+    function dropElement(e) { e.preventDefault();    
+                              let cursorX           = e.clientX;
+                              let cursorY           = e.clientY;
+                              let id                = e.dataTransfer.getData("text");
+                              let left              = cursorX-offsetX; //, 0);
+                              let top               = cursorY-offsetY; //, 0);
+                              dropObj               = document.getElementById(id);
+                              dropObj.style.left    = left+'px';
+                              dropObj.style.top     = top+'px';
+                              }
+
 // ==============================================================
 // exists() passed() - check if parameter exists             
  
@@ -1209,10 +1307,80 @@ Main Parameters:
                                 item == 'NaN'       || item == NaN       ||
                                 item == 'null'      || item == null      ||
                                 item === 'false'    || item === false    ||
-                                item == ''          )                       { return false } // p('..exists('+item+') param type: '+typeof item+' does not exist');
-                            else                                            { return true  } // p('..exists('+item+') does exist'    ); }
+                                item == ''          )                       { return false } // log('..exists('+item+') param type: '+typeof item+' does not exist');
+                            else                                            { return true  } // log('..exists('+item+') does exist'    ); }
                             }
     function passed(item) { return exist(item) }
+// ==============================================================
+// getInitialValue() - get the css specification or browser default value(s) of an attribute style(s)  
+
+    var temp ='';
+    // var defaultStyles = '';
+
+    function getInitialStyle(tag, prop){
+          try {
+            let   value = '';
+            const elem  = document.createElement(tag);
+            document.body.appendChild(elem);
+
+            const defaultStyles = getDefaultProperty(elem) ;
+            // const defaultStyles = window.getComputedStyle(elem) ;
+            value = defaultStyles[prop];
+            document.body.removeChild(elem);
+            log('getInitialStyle() '+tag+': '+prop+': '+value);
+
+            return value;
+          } catch(err) { return err }
+        } 
+
+    // return all 'initial' default values for a tag
+    //  reference an attribue via getInitialStyles('DIV')['attribute name']
+    function getInitialStyles(tag){
+          try {
+            log('getInitialStyles() '+tag);
+
+            const elem          = document.createElement(tag);
+            document.body.appendChild(elem);
+            defaultStyles = Object.assign({}, window.getComputedStyle(elem));
+            document.body.removeChild(elem);
+
+            // console.table(defaultStyles);
+            return defaultStyles;  
+          } catch(err) { return err }
+        }
+    // const styleSheets = Array.from(document.styleSheets).filter(
+    //   (styleSheet) => !styleSheet.href || styleSheet.href.startsWith(window.location.origin)
+    //   );
+
+    // function getStyleSheetStyle() {
+    //     for (let style of styleSheets) {
+    //         if (style instanceof CSSStyleSheet && style.cssRules) {
+    //                 ...
+    //             }
+    //         }
+    //     }
+
+    function getStyleBySelector( selector ) {
+        log('getStyleBySelector() '+selector)
+        var ruleList, i, j;
+        var sheetList = Array.from(document.styleSheets).filter(
+            (styleSheet) => !styleSheet.href || styleSheet.href.startsWith(window.location.origin) || window.location.origin == 'file');
+        log('StyleSheets: '+sheetList+' loc:'+window.location.origin);
+   
+        /* look through stylesheets in reverse order that
+           they appear in the document */
+        try {
+        for (i=sheetList.length-1; i >= 0; i--)                 {
+            ruleList = sheetList[i].cssRules;
+            log('href '+sheetList[i].href)
+            for (j=0; j<ruleList.length; j++)                   {
+                if (ruleList[j].type == CSSRule.STYLE_RULE && 
+                    ruleList[j].selectorText == selector)       {
+                    return ruleList[j].style;
+            }   }   }   }
+            catch { return "CSS Rules: Access Denied" }   
+        return null;
+        }
 // ==============================================================
 // getRoot() setRoot() - :root variable access               
 
@@ -1224,14 +1392,14 @@ Main Parameters:
         }
     function setRoot(name,val) {
         root.style.setProperty(name.toString(), val);
-        // p('setRoot("'+name+'", "'+val+'") | now = "'+getRoot(name)+'"');
+        // log('setRoot("'+name+'", "'+val+'") | now = "'+getRoot(name)+'"');
         }
 // ==============================================================
 // newDOM()  - generate new HTML element for a parent element
 
     function newDOM(parent, tag)  {
         // indent();
-        console.log('newDOM( '+parent+', '+tag+' )');
+        // console.log('newDOM( '+parent+', '+tag+' )');
         if (typeof parent == 'string') {
             try   { parent = document.getElementById(parent) }
             catch { error('Parent: '+parent+' not found in newDOM()')}
@@ -1251,8 +1419,8 @@ Main Parameters:
         if (exist(obj) && exist(class_name) == false)   {error('setclass missing parm'); return }
 
         // get obj exceptions
-        if (obj == 'body')               {p('setClass() getByTag'); obj = document.getElementsByTagName(obj)[0] } 
-        else if (typeof obj == 'string') {p('setClass() getById');  obj = document.getElementById(obj)          }
+        if (obj == 'body')               {log('setClass() getByTag'); obj = document.getElementsByTagName(obj)[0] } 
+        else if (typeof obj == 'string') {log('setClass() getById');  obj = document.getElementById(obj)          }
         else    {} // obj passed
 
         let status = 'the same as it was';
@@ -1266,41 +1434,41 @@ Main Parameters:
         else if (action == 'on' && !obj.classList.contains(class_name)) {
             obj.classList.toggle(class_name);         status = 'on';
             }
-        // p(obj.tagName+' optional object id: '+obj.id+' <- set class '+class_name+' optional action['+action+'] is now '+status);
+        // log(obj.tagName+' optional object id: '+obj.id+' <- set class '+class_name+' optional action['+action+'] is now '+status);
         // TBD - update obj rec
         }
 // ==============================================================
 // show..() hide..() elements and named groups               
 
-    function showId(id) {p('show('+id+')');
+    function showId(id) {log('show('+id+')');
             let obj; 
             try { obj = document.getElementById(id) } catch {error('!!  showId() id: '+id+' not found')}
-            p('showId('+id+') tag: '+obj.tagName);
+            log('showId('+id+') tag: '+obj.tagName);
             if (obj.tagName == 'SPAN' ) { obj.style.display = 'inline' }
             else                        { obj.style.display = 'block' }
             }
-    function hideId(id) {p('hide('+id+')'); document.getElementById(id).style.display = 'none' }
+    function hideId(id) {log('hide('+id+')'); document.getElementById(id).style.display = 'none' }
 
     function hideBrothers(name)          {
-            p('hideBrothers() '+name);
+            log('hideBrothers() '+name);
             if (exist(name)) {
                 switch (name) {
                     case 'editRoot':     coll = document.querySelectorAll('[name = "editRoot"]'    ); break;
                     case 'editThemes':   coll = document.querySelectorAll('[name = "editThemes"]'  ); break;
                     default:             warn('!! hideBrothers() '+name+' not found')                  }
-                p(coll.length+' '+typeof coll[0]+'(s) have the name of '+name);
+                log(coll.length+' '+typeof coll[0]+'(s) have the name of '+name);
                 for (let elem = 0; elem < coll.length; elem++) { coll[elem].style.display = 'none'; }
                 }
             else {warn('HideBrothers('+name+') not found')}
         }
     function showBrothers(name)          {
-            p('showBrothers() '+name);
+            log('showBrothers() '+name);
             if (exist(name)) {
                 switch (name) {
                     case 'editRoot':     coll = document.querySelectorAll('[name = editRoot'    ); break;
                     case 'editThemes':   coll = document.querySelectorAll('[name = editThemes'  ); break;
                     default:             warn('!! hideBrothers() '+name+' not found')                  }
-                p(coll.length+' '+typeof coll[0]+'(s) have the name of '+name);
+                log(coll.length+' '+typeof coll[0]+'(s) have the name of '+name);
                 for (let elem = 0; elem < coll.length; elem++) { coll[elem].style.display = 'inline'; }
                 }
             else {warn('HideBrothers('+name+') not found')}
@@ -1309,21 +1477,24 @@ Main Parameters:
 // ==============================================================
 // get..() put..()                                           
 
+    function getById    (name)   { return document.getElementsById(name) }
     function getByName  (name)   { return document.getElementsByName(name) }
+    function getByTag   (name)   { return document.getElementsByTagName(name) }
+    function getByClass (name)   { return document.getElementsByClassName(name) }
 // =============================================================
 // save()  read()  - local storage,                          
 
     // save user setting for future page load or refresh which reads and restores user settings
 
     function save() {                       // SAVE user changes for page reloads
-        p(' save() - local storage');
+        log(' save() - local storage');
         console.table(user);
         if (localStorage) { localStorage.setItem('user', JSON.stringify(user)); }
         }
 
     function read() {                       // READ user changes from storage on page load
         if (localStorage) { 
-            p(' read() - local storage');
+            log(' read() - local storage');
             try { results = JSON.parse(localStorage.getItem('user')); }
             catch                {  warn('read() - No stored user settings found'); return user } // return empty object
             if (!exist(results)) {  warn('read() - No prior user settings found' ); return user } // return empty object
@@ -1331,75 +1502,29 @@ Main Parameters:
         return results;                                                                // return read  object
         }
 // ==============================================================
-// drag & drop - event handlers                              
-
-    var offsetX = offsetY = 0;
-
-    function dragElement(e) { e.dataTransfer.setData("text", e.target.id); p('<<< onDragStart >>> '+e.target.id);  
-                              console.clear();
-                              // e.clinetX e.clientY
-                              let obj     = e.target;
-                              let cursorX = e.clientX;
-                              let cursorY = e.clientY;
-                              let curleft = curtop = 0;
-                              p('cursor X:'+cursorX+' cursor Y:'+cursorY+' obj left:'+obj.offsetLeft+' top:'+obj.offsetTop);
-                              if (obj.offsetParent) { do { curleft   += obj.offsetLeft;
-                                                           curtop    += obj.offsetTop;
-                                                         } while (obj = obj.offsetParent)        }
-                              offsetX = Math.abs(cursorX-curleft);
-                              offsetY = Math.abs(cursorY-curtop )+document.getElementById('sysMenu').offsetHeight; // 22; 
-                              p('offset left:'+offsetX+' offset top:'+offsetY);
-                            }
-    function dropZone(e)    { e.preventDefault(); }   
-    function dropElement(e) { e.preventDefault();    
-                              let cursorX           = e.clientX;
-                              let cursorY           = e.clientY;
-                              let id                = e.dataTransfer.getData("text");
-                              let left              = cursorX-offsetX; //, 0);
-                              let top               = cursorY-offsetY; //, 0);
-                              dropObj               = document.getElementById(id);
-                              dropObj.style.left    = left+'px';
-                              dropObj.style.top     = top+'px';
-                              }
-
-// ==============================================================
-// body onLoad                                            
+// body onLoad                                               
 
     function bodyLoaded() {
         console.clear();
-        p('bodyLoaded()')
+        log('bodyLoaded()');
+
+        getInitialStyle('DIV', 'display');
+        getInitialStyles('SPAN',);
+        log('span display '+getInitialStyles('SPAN',)['display'])
+
         user = read();
-        // Set Search Button event handlers
-        // document.getElementById('info_documentation').onclick = function (e) { let obj = e.currentTarget; 
-        //                                                                        searchSites(obj._attribute_name, info_sites)   }
-        // document.getElementById('info_samples').onclick       = function (e) { let obj = e.currentTarget; 
-        //                                                                        searchSites(obj._attribute_name, sample_sites)}
-        // document.getElementById('info_tutor').onclick         = function (e) { let obj = e.currentTarget; 
-        //                                                                        searchSites(obj._attribute_name, tutor_sites) }
-        // Set System Theme
         document.documentElement.setAttribute(theme,'system');  // add system theme variables to root
-
-        // Show Theme Editor Panel
-        console.log('..BODY loaded');
-
-
-
-                // <button id='info_documentation' class='sysButton' >
-                //                         <!-- onclick="function (e) {let undoButton = e.currentTarget; searchSites(undoButton._attribute_name, 'doc_sites')   }"--> Publications   </button> -->
-                // <button id='info_samples'       class='sysButton' >
-                //                         <!-- onclick="function (e) {let undoButton = e.currentTarget; searchSites(undoButton._attribute_name, 'sample_sites')}"--> Samples </button> -->
-                // <button id='info_tutor'         class='sysButton' >
-                //                         <!-- onclick="function (e) {let undoButton = e.currentTarget; searchSites(undoButton._attribute_name, 'tutor_sites') }"--> 
+        log('..HTML BODY loaded');
         }
 
 // ==============================================================
-// p() - debug, consol.log                                                  
+// log() - debug, consol.log                                                  
 
     const status = document.getElementById('status');
     function state(txt) {
         status.innerHTML = txt;
         }
-    function p(txt)     {console.log(txt)}
+    function log(txt)     {console.log(txt)}
     function error(txt) {console.error(txt)}
     function warn(txt)  {console.warn(txt)}
 
@@ -1407,4 +1532,3 @@ console.log('..HTML JavaScript loaded');
 </script>
 </body>
 </html>
-    
