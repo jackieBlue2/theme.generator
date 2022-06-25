@@ -6,9 +6,11 @@
 
 /* ROOT -------------------------- CURRENT USER THEME VARIABLES      */
 
-    :root   { 
+    :root {
+                    /*--accent-color                      : auto; }*/
 
     /* WARNING: Do not use color names like 'white' as the color picker only accepts Hex values */
+
                     --accent-color                      : auto;
                     --align-content                     : normal;
                     --align-items                       : normal;
@@ -350,7 +352,7 @@
                     --shadow-v:                    0px; /* off until changed*/
                     --shadow-h:                    var(--text-shadow-v);
                     --shadow-spread:               12px;
-                    --shadow-blur:                 5px;;
+                    --shadow-blur:                 5px;
                     --shadow-inset:                inset;
 
                     --shadow2-color:               red;                      /* shadow 2 */
