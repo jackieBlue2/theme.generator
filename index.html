@@ -89,7 +89,7 @@ Main Parameters:
 <!--                      SYSTEM ELEMENTS <STYLE>                       -->
 <!-- ################################################################## -->
 
-    <link rel="stylesheet" href="./themes.css">
+    <!-- <link rel="stylesheet" href="./themes.css"> -->
 
     <style type="text/css" >
     /* ----------------------------------------------------------- intro
@@ -263,10 +263,12 @@ Main Parameters:
                 padding:                8px;
                 display:                grid;
                 grid-template-rows:     1fr;
-                grid-template-columns:  1fr 4fr 1fr;
+                grid-template-columns:  1.1fr 3.9fr 1fr;
                 justify-items:          stretch;
                 align-items:            stretch;
                 }
+
+            .sysColumns { -webkit-column-count: 25% 4;     -moz-column-count: 25% 4;     column-count: 25% 4;} 
 
         /* SYSTEM .CLASS */
             .sysDesc                {
@@ -310,6 +312,7 @@ Main Parameters:
             .sysHeader              { background-color:   var(--sys-header-background-color);
                                       font-family:        var(--sys-desc-font-family);
                                       width:              100%;
+                                      margin-bottom:      30px;
                                     }
             .sysHover:hover         { background-color:   var(--sys-black);              
                                       color:              var(--sys-white);  
@@ -408,7 +411,7 @@ Main Parameters:
 <!-- ------------------------------------------------------------------ -->
 <div id="splashScreen" hidden>                                          splash screen
     <div class="sysBlue sysFancy center">
-        <em style="font-size: 60px;">                                   Jackie.Blue logo</em>
+        <em style="font-size: 60px;">                                   Jackie.Blue</em>
         <br><button class='sysLargeButton' onclick="hideId('splashScreen'); 
                                                     showEdit('');hideId('editStyle')">Show Editor</button>
         </div>
@@ -426,10 +429,11 @@ Main Parameters:
 <!--                            SYSTEM EDIT MENU      - top left        -->
 <!-- ------------------------------------------------------------------ -->
 <div id='sysMenu' class="system sticky" hidden>
-    <span style='width: 97vw;'>
+    <span style='width: 100%;'>
         <span onclick="showId('')"              class='sysTabBorder sysRed '>                Color Palette      </span> 
         <span onclick="showId('')"              class='sysTabBorder sysRed '>                New Element        </span> 
         <span onclick="showId('displayCSS')"    class='sysTabBorder sysRed '>                Generate CSS       </span>
+        <span onclick="showId('')"              class='sysTabBorder sysBlue'>                How to             </span> 
         <span onclick="showId('')"              class='sysTabBorder sysBlue'>                Course             </span> 
         <span onclick="showId('')"              class='sysTabBorder sysBlue'>                About              </span> 
         </span>
@@ -440,12 +444,12 @@ Main Parameters:
 <!--                            EDITOR SECTION & DROP ZONE              -->
 <!-- ------------------------------------------------------------------ -->
 <div id='gui-panel' hidden class='userEditResult' ondragover="dropZone(event)" ondrop="dropElement(event)"
-                           style='position: absolute; top: 25px; left: 0; width: 99vw; height: 100% ;z-index: 0;'>  
+                           style='position: absolute; top: 25px; left: 0; width: 98vw; height: 80% ; z-index: 0; border: none;'>  
     <!-- -------------------------------------------------------------- -->
     <!--                        POPUPS                                  -->
     <!-- -------------------------------------------------------------- -->
     <div id='editStyle'      class='system' draggable="true" ondragstart='dragElement(event)' onmouseenter='moveToTop(event)' hidden
-                             style=" z-index: 4; position: absolute; top: 20px; left: 48vw; width: 50vw" _zoriginal=4>
+                             style=" z-index: 4; position: absolute; top: 20px; left: 30vw; width: 1000px" _zoriginal=4>
         <div class='splitGrid'>
             <span><span class='sysTitle' id='stylize_element'>Stylize </span><span class='sysTitle' id='edit_title'></span></span>
             <span class='close sysHover' style="text-align: right; padding-top: 12px;" onclick="hideId('editStyle')"> close ❌ </span>
@@ -454,7 +458,7 @@ Main Parameters:
         </div>
     <!-- -------------------------------------------------------------- -->
     <div id='attribute-popup' class='system resize' draggable='true' ondragstart='dragElement(event)' onmouseenter='moveToTop(event)' hidden
-                             style=" z-index: 6; position: absolute; top: 20px; left: 4vw; width: 900px" _zoriginal=6 resizable>
+                             style="background-color: #100202; z-index: 6; position: absolute; top: 20px; left: 4vw; width: 1000px" _zoriginal=6 resizable>
                               <!-- style="z-index: 6; position: relative; width:1000px; padding:8px" >  -->
         <div class='splitGrid'>
             <span class='sysTitle' id='info_description'>Attribute Description</span>
@@ -462,15 +466,14 @@ Main Parameters:
             </div>
 
         <!-- VALUES -->  <p>
-            <div class='sysHeader center sysDesc'>          Values   </div>
+            <div class='sysHeader sysCenter sysDesc'>          Values   </div>
             <div class='infoDescGrid'><span> Current  </span>  <span id='info_current'        class='sysRed'></span></div>
             <div class='infoDescGrid'><span> Undo     </span>  <span id='info_undo'           class='sysRed'></span></div>
-            <div class='infoDescGrid'><span>          </span>
-                                      <span> initial  </span>  <span> inherit  </span><span> unset    </span></div>
-            <span id='info_initial'>         Element Initial Values list to be filled in</span>
+            <div class='infoDescGrid'><span> initial  </span>  </div>
+            <span id='info_initial'> </span>
             </p>
         <!-- USAGE -->   <p>
-            <div class='sysHeader center sysDesc'>                                                    Usage   </div>
+            <div class='sysHeader sysCenter sysDesc'>                                                    Usage   </div>
             <div class='infoUseGrid'><span>                                           name    </span> 
                                       <span id='info_attribute_name' class='sysYellow'>        </span>
                                       <span id='info-name-sample'>                             </span></div>
@@ -482,7 +485,7 @@ Main Parameters:
                                       <span id='info-var-sample'>                              </span></div>
             </p>
         <!-- HELP -->    <p>
-            <div class='sysHeader center sysDesc'>          Help     </div>    <!-- search buttons title -->
+            <div class='sysHeader sysCenter sysDesc'>          Help     </div>    <!-- search buttons title -->
             <div class="infoLinksGrid">
                 <span   id='info_name'          class="sys-red"  >                </span>   <!-- filled in -->
                 <button id='info_documentation' class='sysButton'> Specifications </button> <!-- bodyLoaded() sets onclicks --> 
@@ -490,13 +493,13 @@ Main Parameters:
                 <button id='info_tutor'         class='sysButton'> Tutorials      </button> </div> 
             </p>
         <!-- OPTIONS --> <p>
-            <div class='sysHeader'>          Attribute Options  </div>    <!-- attribute options search area -->
+            <div class='sysHeader sysCenter sysDesc'>          Attribute Options  </div>    <!-- attribute options search area -->
             <div id='info_options'></div>
             </p>
         </div>
     <!-- -------------------------------------------------------------- -->
     <div id="displayCSS"      class='system' draggable='true' ondragstart='dragElement(event)' onmouseenter='moveToTop(event)' hidden
-                             style=" z-index: 8; position: absolute; top: 20px; left: 4vw; width: 50vw"  _zoriginal=8>
+                             style=" z-index: 100; position: absolute; top: 20px; left: 10px; width: 98%"  _zoriginal=8>
                               <!-- style='z-index: 8; position: relative; color: wheat; top:20px; left:0'>  -->
         <div class='splitGrid'>
             <span class="sysTitle">CSS</span>
@@ -555,32 +558,34 @@ Main Parameters:
             </textarea>
     
         </div>
-    <!-- -------------------------------------------------------------- -->
-    <!--                       USER EDITABLE GUI ELEMENTS               -->
-    <!-- -------------------------------------------------------------- -->
-    <div style='position: absolute; top: 25px; left: 0; width:  97vw; height: 100%; z-index: 0;'>
+<!-- ------------------------------------------------------------------ -->
+<!--                           USER EDITABLE GUI ELEMENTS               -->
+<!-- ------------------------------------------------------------------ -->
+<div style='position: absolute; top: 25px; left: 0; width:  97vw; height: 100%; z-index: 0;'>
                                                                                             <!-- EDITABLE ELEMENTS   -->
             <div  onclick="showEdit('title')"      class='title'>   Title       </div>      <!-- Title       -->
             <div  onclick="showEdit('description')"class='desc'  >  Description </div>      <!-- Description -->
             <span onclick="showEdit('')">                                                   <!-- Defaults    -->
                 <hr>
-                <p>Click on an element such as 'Title' or here to edit its style.</p>
-                <p>The undo column and button describe the current values before changes.
-                Changed values become permenent when another element is edited.
-                Changed values will become the new undo values when the element is edited again. </p>
+                <ol><li>Click on an element such as 'Title' or here to edit its style.</li>  
+                    <li>Then click on More Info to research any of the style properties.</li></ol>
+                <b>Undo</b>
+                <p>The undo button describes the current values before changes.
+                Changed values become lost and permenent when another element is edited.
+                Changed values will become the new undo values when this element is edited again. </p>
                 <ul>
                     <li>ALL CAP FONT EXAMPLE                    </li>
-                    <li>all lowercase font example: qpdbgytif   </li>
+                    <li>all lowercase font example: qpdbghytjif </li>
                     <li>Number &gt; 0O  &lt; letter compare     </li>
                     <li>Number &gt; 1lL &lt; letters compare    </li>
                     <li>HEX Sample: #b6a0f5                     </li>
                 </ul>
                 <p>Let's create something nice today.  Even nicer than yesterday.  
-                Brighter, with a softer contrast.</p>
+                Perhaps lighter with an nice contrast.</p>
                 </span>
                 </div>
 
-</div> <!-- end gui-panel & Popup drop zone -->
+</div> <!-- end id=gui-panel & Popup drop zone -->
 
 <!-- ################################################################## -->
 <!--                             JAVASCRIPT                             -->
@@ -612,87 +617,202 @@ Main Parameters:
 //           - Use generate CSS theme option to display ALL current variables and values
 //           - The generated theme can then be copied into your CSS.  
 
-    const class_names   = ['', 'title', 'description', 'subtitle', 'button', 'input', 'radio', 'checkbox', 'textarea', 'div', 'span', 'hr' ]; // ==> --title-font-size, --desription-font-size
+    const class_names   = ['body', 'title', 'description', 'subtitle', 'button', 'input', 'radio', 'checkbox', 'textarea', 'div', 'span', ]; // ==> --title-font-size, --desription-font-size
 
-    const old_attr_ctrls = [         // attr_ctrl list
+                          // html5 - 'y' supported, 'n' removed in html5 , 'p' partial support
+    const tag_ctrls     = [ {tag: 'a',              html5:'y', desc: 'Hyperlink to other web pages or information' }, 
+                            {tag: 'abbr',           html5:'y', desc: 'Abbreviation style' }, 
+                            {tag: 'acronym',        html5:'n', desc: 'Acronym style' }, 
+                            {tag: 'address',        html5:'y', desc: 'Address information style' }, 
+                            {tag: 'applet',         html5:'n', desc: 'Embedded applet' }, 
+                            {tag: 'area',           html5:'y', desc: 'Define an area within an image <map>' }, 
+                            {tag: 'article',        html5:'y', desc: 'Artical styled element' }, 
+                            {tag: 'audio',          html5:'y', desc: 'Audio element' }, 
+                            {tag: 'b',              html5:'y', desc: 'Bold text' }, 
+                            {tag: 'base',           html5:'y', desc: 'Use a common base URL for links' }, 
+                            {tag: 'basefont',       html5:'n', desc: 'Set a default text font face, size, color' }, 
+                            {tag: 'bb',             html5:'p', desc: 'Browser command' }, 
+                            {tag: 'bdo',            html5:'y', desc: 'Set text dirction for various languages' }, 
+                            {tag: 'big',            html5:'n', desc: 'Larger text' }, 
+                            {tag: 'blockquote',     html5:'y', desc: 'Long quotation' }, 
+                            {tag: 'body',           html5:'y', desc: '<HTML> main section for website HTML elements' },
+                            {tag: 'br',             html5:'y', desc: 'Line Break, new line' }, 
+                            {tag: 'button',         html5:'y', desc: 'User action button' }, 
+                            {tag: 'canvas',         html5:'y', desc: 'Section for SVG graphics' }, 
+                            {tag: 'caption',        html5:'y', desc: '<table> caption' }, 
+                            {tag: 'center',         html5:'n', desc: 'Center align text' }, 
+                            {tag: 'cite',           html5:'y', desc: 'Citation reference' }, 
+                            {tag: 'code',           html5:'y', desc: 'Text styling for sample code' }, 
+                            {tag: 'col',            html5:'y', desc: 'A column within a <colgroup>' }, 
+                            {tag: 'colgroup',       html5:'y', desc: 'Table column group' }, 
+                            {tag: 'command',        html5:'y', desc: 'Command button' }, 
+                            {tag: 'datagrid',       html5:'p', desc: 'Tree or list data in <datalist>' }, 
+                            {tag: 'datalist',       html5:'y', desc: '<input> pre-defined options' }, 
+                            {tag: 'dd',             html5:'y', desc: 'Definition description' }, 
+                            {tag: 'del',            html5:'y', desc: 'Deleted text' }, 
+                            {tag: 'details',        html5:'y', desc: 'Additional details often for hide and show' }, 
+                            {tag: 'dfn',            html5:'y', desc: 'Definition team' }, 
+                            {tag: 'dialog',         html5:'p', desc: 'Chat with remote users' }, 
+                            {tag: 'dir',            html5:'n', desc: 'Directory list' }, 
+                            {tag: 'div',            html5:'y', desc: 'Element container, often having display:block taking 100% of the horizontal width' }, 
+                            {tag: 'dl',             html5:'y', desc: 'Definition list' }, 
+                            {tag: 'dt',             html5:'y', desc: 'Definition team' }, 
+                            {tag: 'em',             html5:'y', desc: 'Text Emphasize - italic, normal' }, 
+                            {tag: 'embed',          html5:'y', desc: 'Embed external application code' }, 
+                            {tag: 'eventsource',    html5:'p', desc: 'Persistant server events connection' }, 
+                            {tag: 'fieldset',       html5:'y', desc: 'Related group of <form> elements' }, 
+                            {tag: 'flgcaption',     html5:'y', desc: '<figure> caption text' }, 
+                            {tag: 'figure',         html5:'y', desc: 'Self contained <figcaption> related content' }, 
+                            {tag: 'font',           html5:'n', desc: 'Set font, font size, color' }, 
+                            {tag: 'footer',         html5:'y', desc: 'Web page footer section content holder' }, 
+                            {tag: 'form',           html5:'y', desc: 'Group (name="sameName") of user input elements used for server requests' },
+                            {tag: 'frame',          html5:'n', desc: 'Window frame' }, 
+                            {tag: 'frameset',       html5:'n', desc: 'Holds one or more <frame> elements' }, 
+                            {tag: 'h1',             html5:'y', desc: 'Heading level 1 - Largest text size' }, 
+                            {tag: 'h2',             html5:'y', desc: 'Heading level 2 - text size' }, 
+                            {tag: 'h3',             html5:'y', desc: 'Heading level 3 - text size' }, 
+                            {tag: 'h4',             html5:'y', desc: 'Heading level 4 - text size' }, 
+                            {tag: 'h5',             html5:'y', desc: 'Heading level 5 - text size' }, 
+                            {tag: 'h6',             html5:'y', desc: 'Heading level 6 - Smallest text size' }, 
+                            {tag: 'head',           html5:'y', desc: 'HTML header section' }, 
+                            {tag: 'header',         html5:'y', desc: 'Often introductuctory or menu item section' }, 
+                            {tag: 'hgroup',         html5:'p', desc: 'h1 to h6 section heading ' }, 
+                            {tag: 'hr',             html5:'y', desc: 'Horizontal rule as a visual section separator "<hr />"' }, 
+                            {tag: 'html',           html5:'y', desc: 'Hyper Text Markup Language document' }, 
+                            {tag: 'i',              html5:'y', desc: 'Italic text' }, 
+                            {tag: 'iframe',         html5:'y', desc: 'Separate web page display area' }, 
+                            {tag: 'img',            html5:'y', desc: 'Image' }, 
+                            {tag: 'input',          html5:'y', desc: 'Obtain user input' }, 
+                            {tag: 'ins',            html5:'y', desc: 'Web page inserted text' }, 
+                            {tag: 'isindex',        html5:'n', desc: 'Web document search prompt' }, 
+                            {tag: 'kbd',            html5:'y', desc: 'Keyboard input style' }, 
+                            {tag: 'keygen',         html5:'p', desc: 'Generate signed certificate for server authetication' }, 
+                            {tag: 'label',          html5:'y', desc: 'Form input lable' }, 
+                            {tag: 'legend',         html5:'y', desc: 'Form caption title' }, 
+                            {tag: 'li',             html5:'y', desc: 'Ordered or unorderder list item' }, 
+                            {tag: 'link',           html5:'y', desc: 'External stylesheet reference' }, 
+                            {tag: 'map',            html5:'y', desc: 'Clickable image map' }, 
+                            {tag: 'mark',           html5:'y', desc: 'Text highlight' }, 
+                            {tag: 'menu',           html5:'y', desc: 'Unordered menu list' }, 
+                            {tag: 'meta',           html5:'y', desc: 'Web page meta data' }, 
+                            {tag: 'meter',          html5:'y', desc: 'Measure range of information' }, 
+                            {tag: 'nav',            html5:'y', desc: 'Group of navigation links' }, 
+                            {tag: 'noframes',       html5:'n', desc: 'No frame support fallback' }, 
+                            {tag: 'noscript',       html5:'y', desc: 'No javaScript support fallback' },          
+                            {tag: 'object',         html5:'y', desc: 'Embedded object' }, 
+                            {tag: 'ol',             html5:'y', desc: 'Number ordered list' }, 
+                            {tag: 'optgroup',       html5:'y', desc: 'Drop-down selection list option group' }, 
+                            {tag: 'option',         html5:'y', desc: 'Drop-down selection list option' }, 
+                            {tag: 'output',         html5:'y', desc: 'Calculation result style' }, 
+                            {tag: 'p',              html5:'y', desc: 'Paragraph' }, 
+                            {tag: 'param',          html5:'y', desc: 'Embedded object parameters' }, 
+                            {tag: 'pre',            html5:'y', desc: 'Preformatted text' }, 
+                            {tag: 'progress',       html5:'y', desc: 'Represent task progress' }, 
+                            {tag: 'q',              html5:'y', desc: 'Quotation' }, 
+                            {tag: 'rp',             html5:'y', desc: 'No Ruby fallback content' }, 
+                            {tag: 'rt',             html5:'y', desc: 'Ruby text' }, 
+                            {tag: 'ruby',           html5:'y', desc: 'Ruby annotation' }, 
+                            {tag: 's',              html5:'y', desc: 'Text strikethrough' }, 
+                            {tag: 'samp',           html5:'y', desc: 'sample program output style' }, 
+                            {tag: 'script',         html5:'y', desc: 'client side javaScript source' }, 
+                            {tag: 'section',        html5:'y', desc: 'Document section divider' }, 
+                            {tag: 'select',         html5:'y', desc: 'Drop-down selection list' }, 
+                            {tag: 'small',          html5:'y', desc: 'Text one size smaller' }, 
+                            {tag: 'source',         html5:'y', desc: 'Media resource' }, 
+                            {tag: 'span',           html5:'y', desc: 'Inline container of more <HTML> elements' }, 
+                            {tag: 'strike',         html5:'n', desc: 'Text strikethrough' }, 
+                            {tag: 'strong',         html5:'y', desc: 'Emphasize text' }, 
+                            {tag: 'style',          html5:'y', desc: 'CSS Styles container' }, 
+                            {tag: 'sub',            html5:'y', desc: 'Subscript text' }, 
+                            {tag: 'sup',            html5:'y', desc: 'Superscript text' }, 
+                            {tag: 'table',          html5:'y', desc: 'Table' }, 
+                            {tag: 'tbody',          html5:'y', desc: 'Table body' }, 
+                            {tag: 'td',             html5:'y', desc: 'Table cell' }, 
+                            {tag: 'textarea',       html5:'y', desc: 'Multi-line text inpu' }, 
+                            {tag: 'tfoot',          html5:'y', desc: 'Table footer' }, 
+                            {tag: 'th',             html5:'y', desc: 'Table cell group header' }, 
+                            {tag: 'thead',          html5:'y', desc: 'Table header' }, 
+                            {tag: 'time',           html5:'y', desc: 'The date and/or time' },
+                            {tag: 'title',          html5:'y', desc: 'HTML document Title' }, 
+                            {tag: 'tr',             html5:'y', desc: 'A row of cells in a table' },
+                            {tag: 'track',          html5:'y', desc: 'Text tracks for both the <audio> and <video> tags' }, 
+                            {tag: 'tt',             html5:'n', desc: 'Teletype text' }, 
+                            {tag: 'u',              html5:'y', desc: 'Underlined text' }, 
+                            {tag: 'ul',             html5:'y', desc: 'An unordered bullet list of items' }, 
+                            {tag: 'var',            html5:'y', desc: 'A variable in a computer program or mathematical equation' }, 
+                            {tag: 'video',          html5:'y', desc: 'Embed video content' }, 
+                            {tag: 'wbr',            html5:'y', desc: 'Denotes a word break opportunity in a long string of text' } 
+                            ]                       
 
-        // attr_ctrl parameter table array                                                       
-        // A table entry for each attribute providing needed information and controls for: 
-        // 1. Generating HTML elements for changing attribute values      - genEdit()
-        // 2. Creating and modifying the :root attribute variable value   - chgAttr() 
 
-        // TO BE DONE - genEdit() HTML control generator currently uses the following list to generate example test controls. 
+    // TO BE DONE - genEdit() HTML control generator currently uses the following list to generate example test controls. 
         //              Each attribute control object 'attr_ctrl' is reusable for attributes having the same options or limits.
         //              Non unique control fields will be moved to a full attribute variable list for genEdit() processing
         //              The future full attribute list will reference an appropriate 'attr_ctrl' below. 
         //              Defaults are unique to a browser and may differ between elements - future resolution
 
-        { attr: 'color',           description: 'Font Color',       default: 'not specified',  type: 'color' },
-        { attr: 'background-color',description: 'Background Color', default: 'not specified',  type: 'color' },
-        { attr: 'font-size',       description: 'Font Size',        default: '16px',   min: 4, max:200,  inc: 2, suffix: 'px' },  
-        { attr: 'font-family',     description: 'Font Family',      default: 'New Times Roman', options: ['Arial', 'Microsoft Sans Serif', 
-                          'Lucida Console', 'Lucida Sans Unicode', 'monospace', 'system-ui', 
-                          'Segoe UI', 'Tahoma', 'Trebuchet MS', 'Comic Sans MS', 'cursive', 'Candara', 'Copperplate Gothic', 'Malgun Gothic', 
-                          'Helvetica', 'Corbel', 'Calibri', 'Bahnschrift', 'fantasy', 'Impact', 'Ink Free', 'Gabriola', 'Segoe Print', 
-                          'Segoe Script', 'Webdings', 'Wingdings', 'Symbol', 'Marlett', 'SimSun', 'NSimSun', 'Veranda', 'Georgia', 
-                          'ui-monospace', 'Aharoni', 'Cambria', 'Dotum',  'Aldhabi', 'Palatino', 'Calisto MT', 'David', 'ui-serif', 
-                          'ui-sans-serif', 'ui-rounded', 'Times', 'New Timmes Roman', 'OCR-A Extended', 'math', 'Cambria Math', 'emoji', 'KaiTi', 
-                          'Batang', 'Vrinda', 'Tunga', 'Simplified Arabic', 'Arabic Typesetting', 'Andalu', 'Simhe', 'Sakkai Majalla', 
-                          'MS Mincho', 'MS PMincho', 'MoolBoran', 'Microsoft MingLIU', 'Microsoft JhengHe', 'Mangai', 'lilyUPC', 'Leelawadee', 
-                          'Latha', 'KodchiangUPC', 'Khmer UI', 'IrisUPC', 'Iskoola Pota', 'JasmineUPC', 'Javanese Text', 'Gungsuh', 'Gulim', 
-                          'Gautami', 'DokChampa', 'DFKai-SB', 'DaunPenh', 'CordiaUPC', 'Cordia New', 'BrowalliaUPC', 'Browallia New', 
-                          'Angsana New', 'AngsanaUPC', 'fangsong' ] }, // fontFamily  
-        { attr: 'font-style',      description: 'Font Style',       default: 'normal', options: ['italic', 'normal'] },
-        { attr: 'font-weight',     description: 'Font Weight',      default: '400',    options: [ '100', '400', '700', '900', 'inherit' ] },
-        { attr: 'margin',          description: 'Margin',           default: '0px',    min: 0, max:1000,  inc: 2, suffix: 'px' }
-        ] // attr_ctrls
-
-
-    // attr         - HTML DOM object attribute name
-    // description  - Attribute description
-    // default      - browser or element atrribute default value
-    // style        - obj.style.attribute name for javascript reference
-    // type         - used to detect no option processing such as a color picker instead
-    // options      - attribute options list, what the attribute can be set to
-    // min,max,inc  - numeric limits and increment amount
-    // suffix       - numeric suffix options like 'px' 'fr'
-
     const attr_ctrls = [                                                                                               // unique controls 
-        { attr: 'color',           description: 'Font Color',       default: 'not specified',  style: 'color',            type: 'color' },
-        { attr: 'background-color',description: 'Background Color', default: 'not specified',  style: 'backgroundColor',  type: 'color' },
-        { attr: 'font-size',       description: 'Font Size',        default: '16px',           style: 'fontSize',         min: 4,  max:200,  inc: 2, 
-                                   suffix: ['', 'px', 'em', 'rem', 'ex', 'vh', 'vw', 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'] },
-        { attr: 'font-family',     description: 'Font Family',      default: 'New Times Roman',style: 'fontFamily',       options: [ 'monospace', 'Lucida Console', 'Lucida Sans Unicode', 
+        // attr_ctrl parameter table array                                                       
+        // A table entry for each attribute providing needed information and controls for: 
+        // 1. Generating HTML elements for changing attribute values      - genEdit()
+        // 2. Creating and modifying the :root attribute variable value   - chgAttr() 
+
+        // -------------- COLUMNS ---------------
+        // attr         - HTML DOM object attribute name
+        // description  - Attribute description
+        // default      - browser or element atrribute default value
+        // style        - obj.style.attribute name for javascript reference
+        // type         - used to detect no option processing such as a color picker instead
+        // options      - attribute options list, what the attribute can be set to
+        // min,max,inc  - numeric limits and increment amount
+        // suffix       - numeric suffix options like 'px' 'fr'
+
+        { attr: 'color',           description: 'Text, Font Color',   default: [],  style: 'color',            type: 'color' },
+        { attr: 'background-color',description: 'Background Color',   default: [],  style: 'backgoundColor',   type: 'color' },
+        { attr: 'font-size',       description: 'Text, Font Size',    default: [],  style: 'fontSize',         min: 4,  max:200,  inc: 2,    
+
+                                        suffix: ['', 'px', 'em', 'rem', 'ex', 'vh', 'vw', 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'] },
+        { attr: 'font-family',     description: 'Text, Font Family',  default: [],  style: 'fontFamily',       options: [ 'monospace', 'Lucida Console', 'Lucida Sans Unicode', 
                           'Microsoft Sans Serif','Segoe UI', 'Arial', 'Tahoma',   
                           'Candara', 'Copperplate Gothic', 'Malgun Gothic', 'system-ui', 
                           'Trebuchet MS', 'Helvetica', 'Corbel', 'Calibri', 'Bahnschrift',
                           'Gabriola', 'Segoe Print', 'Segoe Script',
                           'Comic Sans MS', 'cursive', 'Ink Free', 'Impact', 'fantasy', 'Webdings', 'Wingdings', 'Symbol' ] },
-        { attr: 'font-style',      description: 'Font Style',       default: 'normal',         style: 'fontStyle',        options: ['italic', 'normal'] },
-        { attr: 'font-weight',     description: 'Font Weight',      default: '400',            style: 'fontWeight',       options: [ '100', '400', '700', '900', 'inherit' ] },
-        { attr: 'margin',          description: 'Margin',           default: '0px',            style: 'margin',           min: 0, max:1000,  inc: 2, suffix: ['px'] }
-        // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
-        // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
-        // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
-        // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
-        // : { attr: '',           description: '',       default: '',   style: '.style.',  type: '', undo:''},
+        { attr: 'font-style',      description: 'Text, Font Style',   default: [],  style: 'fontStyle',        options: [ 'italic', 'normal'] },
+        { attr: 'font-weight',     description: 'Text, Font Weight',  default: [],  style: 'fontWeight',       options: [ '100', '400', '700', '900', 'inherit' ] },
+        { attr: 'line-height',     description: 'Text, Line Height',  default: [],  style: 'lineHeight',       min: 1, max: 999, inc: 0.2,   
+
+                                        suffix: ['', 'px', 'em', 'rem', 'ex', 'vh', [], 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'] },
+        { attr: 'margin',          description: 'Outer Margin Element Gap',default: [],  style: 'margin',      min: 0,   max:1000,  inc: 2,  
+
+                                        suffix: ['', 'px', 'em', 'rem', 'ex', 'vh', 'vw', 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'] },
+        { attr: 'text-shadow',     description: 'Text Shadow',        default: [],  style: 'textShadow',       min:-20 , max:20 ,   inc:1 ,  
+
+                                        suffix: ['', 'px', 'em', 'rem', 'ex', 'vh', 'vw', 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'] },
+        { attr: 'overflow',        description: 'Text Clip or Scroll',default: [],  style: 'overflow',         options: ['hidden', 'visable', 'scroll', 'auto'] },
+        { attr: 'overflow-wrap',   description: 'Word Break Where',   default: [],  style: 'overflowWrap',     options: ['normal', 'anywhere', 'break-word'] },
+        { attr: 'word-wrap',       description: 'Order overflow-wrap',default: [],  style: 'wordWrap',         options: ['normal', 'anywhere', 'break-word'] },
+        { attr: 'word-break',      description: 'Asian focused word breaks', default: [], style: 'wordBreak',  options: ['normal', 'break-all', 'keep-all', 'break-word'] },
+        { attr: 'writing-mode',    description: 'Page Orientationn',  default: [],  style: 'writingMode',      options: ['vertical-rl', 'horizontal-tb'] },
+        { attr: 'overflow-x',      description: 'Left Right Overflow',default: [],  style: 'overflowX',        options: ['hidden', 'visable', 'scroll', 'auto'] },
+        { attr: 'overflow-y',      description: 'Top Bottom Overflow',default: [],  style: 'overflowY',        options: ['hidden', 'visable', 'scroll', 'auto'] },
+        { attr: 'word-space',      description: 'Word Spacing',       default: [],  style: 'wordSpace',        min: 0, max: 20, inc: 1,      
+
+                                        suffix: ['', 'px', 'em', 'rem', 'ex', 'vh', 'vw', 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'] }
+        // { attr: '',           description: '',       default: '',   style: '',  type: '', min: , max: , inc: , options: ['',] },
+        // { attr: '',           description: '',       default: '',   style: '',  type: '', min: , max: , inc: , options: ['',] },
+        // { attr: '',           description: '',       default: '',   style: '',  type: '', min: , max: , inc: , options: ['',] },
+        // { attr: '',           description: '',       default: '',   style: '',  type: '', min: , max: , inc: , options: ['',] },
+        // { attr: '',           description: '',       default: '',   style: '',  type: '', min: , max: , inc: , options: ['',] },
+        // { attr: '',           description: '',       default: '',   style: '',  type: '', min: , max: , inc: , options: ['',] },
+        // { attr: '',           description: '',       default: '',   style: '',  type: '', min: , max: , inc: , options: ['',] },
+        // { attr: '',           description: '',       default: '',   style: '',  type: '', min: , max: , inc: , options: ['',] },
+        // { attr: '',           description: '',       default: '',   style: '',  type: '', min: , max: , inc: , options: ['',] },
         ]
 
-    const numberSuffix = ['', 'px', 'em', 'rem', 'ex', 'vh', 'vw', 'vmin', 'vmax', 'lh', '%', 'pt', 'pc', 'cm', 'mm', 'q', 'in', 'fr'];
-
     // OLD attr_ctrls Limits Parameters for reference
-            // const lineHeight = { min:   1, max:999, inc:0.2,suffix: 'px' }  // sp btween lines [1.1->1.2 avg.]
-            // const textMargin = { min:   0, max:250, inc: 1, suffix: 'px' }  // margin & padding
-            // const textShadow = { min: -20, max: 20, inc: 1, suffix: 'px' }  // shadow position
             // const textBlur   = { min:   0, max: 60, inc: 2, suffix: 'px' }  // blur radius
-            // const wordSpace  = { min:   0, max: 20, inc: 1, suffix: 'px' }  // word spacing
             // const textOverflow = [ 'ellipsis', ' cont...', ' ..more.. ', '', 'clip' ]            // text-overflow: 
-            // const overFlow     = [ 'hidden', 'visable', 'scroll', 'auto'];
-            // const overFlowWrap = [ 'break-word', 'anywhere', 'normal']
-            // const overFlowX    = [ 'hidden', 'visable' ];
-            // const writeMode    = [ 'vertical-rl', 'horizontal-tb'];          // writing-mode: horizontal-tb;
-            // const wordWrap     = [ 'break-word', 'anywhere', 'normal'];      // word-wrap:  normal; default; 
-            // const wordBreak    = [ 'keep-all', 'break-all'];                 // word-break:
  
 
 // ==============================================================
@@ -796,7 +916,7 @@ Main Parameters:
         let                    var_name  = '--'+attr_ctrl.attr;               // i.e. attribute var_name = '--font-size'
         if (passed(class_name)) { var_name  = '--'+class_name+'-'+attr_ctrl.attr }  // i.e. attribute var_name = '--title-font-size'
         log(' root variable name: '+var_name);
-        log(attr_ctrl);
+        // log(attr_ctrl);
 
         // Create HTML edit control knobs, descriptions, & values 
 
@@ -907,7 +1027,7 @@ Main Parameters:
                         default_button._var_name    = var_name;
                            undo_button._prior_val   = getRoot(var_name).toString();
                         default_button._default_val = attr_ctrl.default;
-                        log(' attr: '+attr_ctrl.attr+', undo: '+undo_button._prior_val+', default: '+default_button._default_val);
+                        warn('attr: '+attr_ctrl.attr+', undo: '+undo_button._prior_val+', default: switch to element default');
 
                         up_button.onclick   = 
                             function(e) {                                    // DOM.attr_ctrl & 
@@ -935,7 +1055,7 @@ Main Parameters:
                         setClass(suffixElem, 'sysSelect' );
                         let optionElement; 
                         for (let suffixValue of attr_ctrl.suffix) {
-                            log('create suffix option: ['+suffixValue+']');
+                            // log('create suffix option: ['+suffixValue+']');
                             optionElement = newDOM(suffixElem, 'OPTION');
                             optionElement.innerHTML = suffixValue;
                             setClass(optionElement, 'sysSelect'); 
@@ -1114,42 +1234,58 @@ Main Parameters:
         log('attribute_info_popup('+var_name+', '+attr_ctrl.attr+')');
 
         // FILL IN CURRENT & UNDO VALUES
-        infoCurrent.innerHTML       = getRoot(var_name);
-        infoUndo.innerHTML          = getRoot(var_name);        // set undo    value in html element   ???? not right
+        infoCurrent.innerHTML          = getRoot(var_name);
+        infoUndo.innerHTML             = getRoot(var_name);        // set undo    value in html element   ???? not right
 
-        // FILL IN THE BROWSERS 'INITIAL' ATTRIBUTE DEFAULT VALUES
-        let tags                    = ['DIV', 'SPAN'];          // browser may set a different initial value for different elements
-        let elements                = getByClass('class_name');    // get all HTML elements using this class
-        for (elem of elements)      { tags.push(elem.tagName) } // save the tag names in a temporary tags array
-        tags                        = [...new Set(tags)]        // remove duplicates, Set() only selects unique values
-        infoInitial.innerHTML       = '';                       // clear prior attributes displayed output
-        for (let tag of tags)       {                           // display initial values of tags using this class
-             let wrapperObj         = newDOM(infoInitial, 'DIV');
-             setClass(wrapperObj,'infoDescGrid'); 
-             let tagName            = newDOM(wrapperObj, 'SPAN');
-             tagName.innerHTML      = tag.toUpperCase()+" initial";
-             // tagName.style.textAlign= 'right';
-             let tagInitialValue    = newDOM(wrapperObj, 'SPAN');
-             setClass(tagInitialValue,'sysRed');
-             tagInitialValue.innerHTML = getStyleBySelector( attr_ctrl.attr )
-             // tagInitialValue.innerHTML = getInitialStyle(tag, attr_ctrl.attr);
-             }
-             // document.styleSheets.get(index).cssRules
+        // FILL IN BROWSER INITIAL DEFAULT VALUES
+        infoInitial.innerHTML = '';                                // clear prior attribute results
+        setClass(infoInitial,'infoLinksGrid', 'on');               // set 4 column grid
+        let col1                       = newDOM(infoInitial, 'DIV');
+        let col2                       = newDOM(infoInitial, 'DIV');
+        let col3                       = newDOM(infoInitial, 'DIV');
+        let col4                       = newDOM(infoInitial, 'DIV');
 
+        let maxPerColumn               = Math.floor(attr_ctrl.default.length /4)+1;
+        let start                      = 0;
+        let stop                       = maxPerColumn;
+
+        // FILL IN BROWSER INITIAL VALUES
+        for (let i =1; i <5; i++) {
+                switch (i) {
+                    case 1: col = col1; break;
+                    case 2: col = col2; break;
+                    case 3: col = col3; break;
+                    case 4: col = col4; break;
+                    default: error('case not found in attribute_info_popup()')
+                    }
+                for (let j = start; j < stop; j++)      { 
+                     let wrapperObj            = newDOM(col, 'DIV');
+                     setClass(wrapperObj,'splitGrid');
+                     let tagName               = newDOM(wrapperObj, 'SPAN');
+                     let tagInitialValue       = newDOM(wrapperObj, 'SPAN');
+                     setClass(tagInitialValue,'sysRed');
+                     tagName.innerHTML         = attr_ctrl.default[j].name; // toUpperCase()+" initial";
+                     tagInitialValue.innerHTML = attr_ctrl.default[j].value;
+                    }
+                start        += maxPerColumn;
+                stop         += maxPerColumn;
+                if (stop >= attr_ctrl.default.length) 
+                   {stop  = attr_ctrl.default.length}
+                }
         // FILL IN ATTRIBUTE, VAR, STYLE NAMES & SAMPLE USAGE
         infoDesc.innerHTML          = attr_ctrl.description;    // set attribute description                    Font Size
         infoAttrName.innerHTML      = attr_ctrl.attr;           // set attribute name                           font-size
         infoVarName.innerHTML       = var_name;                 // set attribute variable name                  --font-size
         infoStyleName.innerHTML     = attr_ctrl.style;          // set attribute style name for js reference    fontSize
-        infoNameSample.innerHTML    = ".myClass { <yellow>"+attr_ctrl.attr+"</yellow>: "+attr_ctrl.default+" }"
+        infoNameSample.innerHTML    = ".myClass { <yellow>"+attr_ctrl.attr+"</yellow>: "+attr_ctrl.default[0].value+" }"
 
         infoVarSample.innerHTML     = ".myClass { <yellow>"+attr_ctrl.attr+"</yellow>: <red>var(</red><blue>"+var_name+"</blue><red>)</red> }"+
-                                "<br>:<em>root</em> { <blue>"+var_name+"</blue>: "+attr_ctrl.default+"; }<p>_root = document.querySelector(':root');"+
+                                "<br>:<em>root</em> { <blue>"+var_name+"</blue>: "+attr_ctrl.default[0].value+"; }<p>_root = document.querySelector(':root');"+
                                 "<br>"+attr_ctrl.style+" = getComputedStyle(<em>_root</em>).<b>getPropertyValue(</b>'<blue>"+var_name+"</blue>'<b>)</b>;"+
                                 "<br>getComputedStyle(<em>_root</em>).<b>setPropertyValue(</b>'<blue>"+var_name+"</blue>'<b>, '"+getRoot(var_name)+"')</b>;"
 
         infoStyleSample.innerHTML   = "size = document.getElementById(id)<red>.style</red>.<green>"+attr_ctrl.style+"</green>;<br>"+
-                                      "document.getElementById(id)<red>.style</red>.<green>"+attr_ctrl.style+"</green> = '"+attr_ctrl.default+"';"
+                                      "document.getElementById(id)<red>.style</red>.<green>"+attr_ctrl.style+"</green> = '"+attr_ctrl.default[0].value+"';"
 
         // FILL IN ATTRIBUTE SEARCH DOCS, SAMPLES, TUTOR WALKTHROUGH BUTTONS
         infoName.innerHTML          = attr_ctrl.attr;           // set attribute name
@@ -1273,7 +1409,7 @@ Main Parameters:
     var offsetX = offsetY = 0;
 
     function dragElement(e) { e.dataTransfer.setData("text", e.target.id); log('<<< onDragStart >>> '+e.target.id);  
-                              console.clear();
+                              // console.clear();
                               // e.clinetX e.clientY
                               let obj     = e.target;
                               let cursorX = e.clientX;
@@ -1312,75 +1448,36 @@ Main Parameters:
                             }
     function passed(item) { return exist(item) }
 // ==============================================================
-// getInitialValue() - get the css specification or browser default value(s) of an attribute style(s)  
+// getInitialValue() - get the browser default attribute values for each html element before applying site theme overrides
+    
+    // For each tag name
+    //     Get all attributes and values for this tag
+    //     For all attributes in attr_ctrls
+    //          Save tags attribute default values in attr_ctrls
+    //
+    // attr_ctrls {
+    //     { attr:'font-size', style:'fontSize' defaults:{ {div:'16px'}, {span:'16px'}...}
+    // }
 
-    var temp ='';
-    // var defaultStyles = '';
+    function getBrowserDefaults()                       {
+        for (   let tag_ctrl of tag_ctrls )             { // Loop through all HTML element types
+                log('-------------tag: '  +  tag_ctrl.tag);
+                let elem     = newDOM(document.body, tag_ctrl.tag); // create a HTML DOM element using this tag
+                let defaults = Object.assign( {}, window.getComputedStyle(elem) ); // get all attributes for this tag
+                log(' ----  '+tag_ctrl.tag+' font-size: '+defaults['fontSize'])
+                for (   let attr  of attr_ctrls )       { // loop through all attr_ctrls
+                        log('tag-'+tag_ctrl.tag+' attr-'+attr.attr)
+                        let pair = {};
+                        pair.name  = tag_ctrl.tag
+                        pair.value = defaults[attr.style];                    // create name, value pair
+                        // reference defaults[] using this attributes .style name format.
+                        attr.default.push(pair);          // save tags default attribute value
+                        } // end for 
+                document.body.removeChild(elem);          // end of tag processing
+                } // end tag_ctrls loop
+        } // end getBrowserDefaults()
 
-    function getInitialStyle(tag, prop){
-          try {
-            let   value = '';
-            const elem  = document.createElement(tag);
-            document.body.appendChild(elem);
-
-            const defaultStyles = getDefaultProperty(elem) ;
-            // const defaultStyles = window.getComputedStyle(elem) ;
-            value = defaultStyles[prop];
-            document.body.removeChild(elem);
-            log('getInitialStyle() '+tag+': '+prop+': '+value);
-
-            return value;
-          } catch(err) { return err }
-        } 
-
-    // return all 'initial' default values for a tag
-    //  reference an attribue via getInitialStyles('DIV')['attribute name']
-    function getInitialStyles(tag){
-          try {
-            log('getInitialStyles() '+tag);
-
-            const elem          = document.createElement(tag);
-            document.body.appendChild(elem);
-            defaultStyles = Object.assign({}, window.getComputedStyle(elem));
-            document.body.removeChild(elem);
-
-            // console.table(defaultStyles);
-            return defaultStyles;  
-          } catch(err) { return err }
-        }
-    // const styleSheets = Array.from(document.styleSheets).filter(
-    //   (styleSheet) => !styleSheet.href || styleSheet.href.startsWith(window.location.origin)
-    //   );
-
-    // function getStyleSheetStyle() {
-    //     for (let style of styleSheets) {
-    //         if (style instanceof CSSStyleSheet && style.cssRules) {
-    //                 ...
-    //             }
-    //         }
-    //     }
-
-    function getStyleBySelector( selector ) {
-        log('getStyleBySelector() '+selector)
-        var ruleList, i, j;
-        var sheetList = Array.from(document.styleSheets).filter(
-            (styleSheet) => !styleSheet.href || styleSheet.href.startsWith(window.location.origin) || window.location.origin == 'file');
-        log('StyleSheets: '+sheetList+' loc:'+window.location.origin);
-   
-        /* look through stylesheets in reverse order that
-           they appear in the document */
-        try {
-        for (i=sheetList.length-1; i >= 0; i--)                 {
-            ruleList = sheetList[i].cssRules;
-            log('href '+sheetList[i].href)
-            for (j=0; j<ruleList.length; j++)                   {
-                if (ruleList[j].type == CSSRule.STYLE_RULE && 
-                    ruleList[j].selectorText == selector)       {
-                    return ruleList[j].style;
-            }   }   }   }
-            catch { return "CSS Rules: Access Denied" }   
-        return null;
-        }
+    
 // ==============================================================
 // getRoot() setRoot() - :root variable access               
 
@@ -1506,16 +1603,32 @@ Main Parameters:
 
     function bodyLoaded() {
         console.clear();
-        log('bodyLoaded()');
+        log('..HTML BODY loaded event');
 
-        getInitialStyle('DIV', 'display');
-        getInitialStyles('SPAN',);
-        log('span display '+getInitialStyles('SPAN',)['display'])
-
+        loadWorker();
         user = read();
-        document.documentElement.setAttribute(theme,'system');  // add system theme variables to root
-        log('..HTML BODY loaded');
+
+        log('bodyLoaded() complete')
         }
+
+    function loadWorker() {
+        let startTime = performance.now();
+          setTimeout(() => {
+                // get browsers attribute default values before adding themes 
+                getBrowserDefaults();
+                let endTime   = performance.now();
+                log('browser defaults obtained in '+(endTime-startTime)+'ms');
+                // set user and system themes after getBrowserDefaults();
+                document.documentElement.setAttribute(theme,'system');  // add system theme variables to root
+                var head = document.getElementsByTagName('HEAD')[0];    // Get HTML head element
+                var link = document.createElement('link');              // Create new stylesheet link Element
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = './themes.css';
+                head.appendChild(link);                                 // Append link element to HTML head
+                log('site themes set');
+                },                          1 );
+    }
 
 // ==============================================================
 // log() - debug, consol.log                                                  
